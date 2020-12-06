@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Box, IconButton, InputBase, Typography } from "@material-ui/core";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { makeStyles } from "@material-ui/core/styles";
+import { AppContext } from ".././context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   editableContainer: {
@@ -24,19 +25,31 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function App() {
+export default function Title({ title, listId }) {
   const [open, setOpen] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
+  const { changeListTitle } = useContext(AppContext);
   const classes = useStyles();
+
+  const handleOnChange = (e) => {
+    setNewTitle(e.target.value);
+  };
+
+  const handleOnBlur = () => {
+    changeListTitle(newTitle, listId);
+    setOpen(!open);
+  };
   return (
     <Box mt={1}>
       {open ? (
         <Box>
           <InputBase
             autoFocus
-            value="Todo"
+            value={newTitle}
             inputProps={{ className: classes.input }}
             fullWidth
-            onBlur={() => setOpen(!open)}
+            onChange={handleOnChange}
+            onBlur={handleOnBlur}
           />
         </Box>
       ) : (
@@ -45,7 +58,7 @@ export default function App() {
             className={classes.editableTitlte}
             onClick={() => setOpen(!open)}
           >
-            Todo
+            {title}
           </Typography>
           <IconButton>
             <MoreHorizIcon />

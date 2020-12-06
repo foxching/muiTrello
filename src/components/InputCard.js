@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Box, Button, IconButton, InputBase, Paper } from "@material-ui/core";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import ClearIcon from "@material-ui/icons/Clear";
+import { AppContext } from ".././context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    margin: theme.spacing(0, 1, 1, 1),
+    margin: theme.spacing(1, 1, 1, 1),
     paddingBottom: theme.spacing(4)
   },
   input: {
@@ -22,23 +23,45 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
-export default function InputCard({ setOpen }) {
+export default function InputCard({ setOpen, listId, type }) {
+  const [cardTitle, setCardTitle] = useState("");
+  const { addCard, addList } = useContext(AppContext);
   const classes = useStyles();
+
+  const handleChange = (e) => {
+    setCardTitle(e.target.value);
+  };
+
+  const handleAddtoCard = () => {
+    if (type === "list") {
+      addList(cardTitle);
+    } else {
+      addCard(cardTitle, listId);
+    }
+    setOpen(false);
+    setCardTitle("");
+  };
+
   return (
     <Box>
       <Box>
         <Paper className={classes.card}>
           <InputBase
+            onChange={handleChange}
+            onBlur={() => setOpen(false)}
             multiline
             fullWidth
             inputProps={{ className: classes.input }}
-            placeholder="Enter a text"
+            placeholder={
+              type === "list" ? "Enter list title" : "Enter card text.."
+            }
+            value={cardTitle}
           />
         </Paper>
       </Box>
       <Box className={classes.confirmContainer}>
-        <Button className={classes.confirm} onClick={() => setOpen(false)}>
-          Add Card
+        <Button className={classes.confirm} onClick={handleAddtoCard}>
+          {type === "list" ? "Add List" : "Add Card"}
         </Button>
         <IconButton onClick={() => setOpen(false)}>
           <ClearIcon />

@@ -9,11 +9,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Card() {
+export default function Card({ card }) {
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
-      <Typography>Make baby</Typography>
+      <Typography>{card.title}</Typography>
     </Paper>
   );
 }
