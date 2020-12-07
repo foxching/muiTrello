@@ -7,7 +7,7 @@ import { AppContext } from ".././context/appContext";
 const useStyles = makeStyles((theme) => ({
   editableContainer: {
     display: "flex",
-    margin: theme.spacing(2),
+    margin: theme.spacing(1),
     alignItems: "center"
   },
   editableTitlte: {
@@ -40,7 +40,7 @@ export default function Title({ title, listId }) {
     setOpen(!open);
   };
   return (
-    <Box mt={1}>
+    <Box>
       {open ? (
         <Box>
           <InputBase

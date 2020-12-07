@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core";
 import List from "./List";
 import Input from "./Input";
@@ -11,16 +12,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardList() {
-  const { data } = useContext(AppContext);
+  const { data, onDragEnd } = useContext(AppContext);
   const classes = useStyles();
+
   return (
-    <div className={classes.root}>
-      {data.listIds &&
-        data.listIds.map((listId) => {
-          const list = data.lists[listId];
-          return <List listId={listId} key={listId} list={list} />;
-        })}
-      <Input type="list" />
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="list" type="list" direction="horizontal">
+        {(provided) => (
+          <div
+            className={classes.root}
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {data.listIds.map((listId, index) => {
+              const list = data.lists[listId];
+              return (
+                <List listId={listId} key={listId} list={list} index={index} />
+              );
+            })}
+            <Input type="list" />
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 }
