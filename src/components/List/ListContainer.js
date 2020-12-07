@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core";
-import List from "./List";
-import Input from "./Input";
-import { AppContext } from ".././context/appContext";
+import ListItem from "./ListItem";
+import Input from "../Input/Input";
+import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +27,12 @@ export default function CardList() {
             {data.listIds.map((listId, index) => {
               const list = data.lists[listId];
               return (
-                <List listId={listId} key={listId} list={list} index={index} />
+                <ListItem
+                  listId={listId}
+                  key={listId}
+                  list={list}
+                  index={index}
+                />
               );
             })}
             <Input type="list" />

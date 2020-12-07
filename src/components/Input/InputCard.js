@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Box, Button, IconButton, InputBase, Paper } from "@material-ui/core";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import ClearIcon from "@material-ui/icons/Clear";
-import { AppContext } from ".././context/appContext";
+import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   card: {

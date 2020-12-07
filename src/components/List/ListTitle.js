@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Box, IconButton, InputBase, Typography } from "@material-ui/core";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppContext } from ".././context/appContext";
+import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   editableContainer: {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, makeStyles } from "@material-ui/core";
-import CardList from "./components/CardList";
+import { CssBaseline } from "@material-ui/core";
+import ListContainer from "./components/List/ListContainer";
 import AppContextProvider from "./context/appContext";
 
 const useStyles = makeStyles({
@@ -14,7 +15,8 @@ export default function App() {
   return (
     <Box className={classes.root}>
       <AppContextProvider>
-        <CardList />
+        <CssBaseline />
+        <ListContainer />
       </AppContextProvider>
     </Box>
   );
