@@ -1,10 +1,42 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-export default function TopBar() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1
+  },
+  appbar: {
+    background: "none"
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    flexGrow: 1
+  },
+  btn: {
+    color: "#fff",
+    backgroundColor: "#000"
+  }
+}));
+export default function TopBar({ open, setOpen }) {
+  const classes = useStyles();
+
   return (
-    <Box>
-      <h1>TopBar</h1>
-    </Box>
+    <AppBar position="static" className={classes.appbar} elevation={0}>
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          TRELLO
+        </Typography>
+        <Button
+          color="inherit"
+          className={classes.btn}
+          onClick={() => setOpen(!open)}
+        >
+          Change Background
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 }

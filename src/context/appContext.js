@@ -6,6 +6,7 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   const [data, setData] = useState(store);
+  const [background, setBackground] = useState("green");
 
   //handle new card
   const addCard = (title, listId) => {
@@ -109,7 +110,16 @@ const AppContextProvider = (props) => {
 
   return (
     <AppContext.Provider
-      value={{ data, setData, addCard, addList, changeListTitle, onDragEnd }}
+      value={{
+        data,
+        setData,
+        addCard,
+        addList,
+        changeListTitle,
+        onDragEnd,
+        background,
+        setBackground
+      }}
     >
       {props.children}
     </AppContext.Provider>
