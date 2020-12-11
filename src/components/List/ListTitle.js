@@ -36,9 +36,18 @@ export default function Title({ title, listId }) {
   };
 
   const handleOnBlur = () => {
-    changeListTitle(newTitle, listId);
-    setOpen(!open);
+    if (newTitle !== "") {
+      changeListTitle(newTitle, listId);
+      setOpen(!open);
+    }
   };
+
+  const onKeyDownHandler = (e) => {
+    if (e.keyCode === 13) {
+      handleOnBlur();
+    }
+  };
+
   return (
     <Box>
       {open ? (
@@ -50,6 +59,7 @@ export default function Title({ title, listId }) {
             fullWidth
             onChange={handleOnChange}
             onBlur={handleOnBlur}
+            onKeyDown={onKeyDownHandler}
           />
         </Box>
       ) : (

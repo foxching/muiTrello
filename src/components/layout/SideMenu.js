@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Drawer, Grow } from "@material-ui/core";
+import { Button, Drawer, Divider, Grow, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Clear from "@material-ui/icons/Clear";
 import colors from "../../utils/colors";
 import { getImages } from "../../utils/imageApi";
 import { AppContext } from "../../context/appContext";
@@ -9,10 +10,21 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "400px"
   },
+  titleContainer: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    justifyContent: "space-around",
+    marginBottom: theme.spacing(2)
+  },
+  title: {
+    fontSize: "1.2rem",
+    fontWeight: "bold"
+  },
   menu: {
     display: "flex",
     justifyContent: "space-around",
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
+    flexWrap: "wrap"
   },
   optionContainer: {
     display: "flex",
@@ -21,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2)
   },
   box: {
-    backgroundColor: "blue",
     borderRadius: "9px",
     marginBottom: theme.spacing(2),
     cursor: "pointer",
@@ -49,6 +60,11 @@ export default function SideMenu({ open, setOpen }) {
   return (
     <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
       <div className={classes.root}>
+        <div className={classes.titleContainer}>
+          <Typography className={classes.title}>Change Background</Typography>
+          <Clear onClick={() => setOpen(false)} />
+        </div>
+        <Divider />
         <div className={classes.menu}>
           <div
             className={classes.box}
@@ -62,7 +78,9 @@ export default function SideMenu({ open, setOpen }) {
               setOptionImage(true);
               setOptionColor(false);
             }}
-          ></div>
+          >
+            <span style={{ color: "#fff" }}>Images</span>
+          </div>
           <div
             className={classes.box}
             style={{
@@ -75,7 +93,13 @@ export default function SideMenu({ open, setOpen }) {
               setOptionColor(true);
               setOptionImage(false);
             }}
-          ></div>
+          >
+            <span
+              style={{ color: "#fff", display: "flex", alignContent: "center" }}
+            >
+              Color
+            </span>
+          </div>
         </div>
 
         {/*  Option Area */}

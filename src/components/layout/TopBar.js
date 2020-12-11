@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1
   },
   appbar: {
-    background: "none"
+    height: "55px",
+    backgroundColor: "rgba(0, 0, 0, 0.15)"
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -17,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
   },
   btn: {
     color: "#fff",
-    backgroundColor: "#000"
+    backgroundColor: "#000",
+    margin: 0
   }
 }));
 export default function TopBar({ open, setOpen }) {

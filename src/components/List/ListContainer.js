@@ -35,8 +35,8 @@ export default function CardList() {
                 />
               );
             })}
-            <Input type="list" />
             {provided.placeholder}
+            <Input type="list" />
           </div>
         )}
       </Droppable>
