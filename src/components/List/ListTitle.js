@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Box, IconButton, InputBase, Typography } from "@material-ui/core";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import { Box, InputBase, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppContext } from "../../context/appContext";
+import MenuOption from "../../components/Modal/MenuOption";
 
 const useStyles = makeStyles((theme) => ({
   editableContainer: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Title({ title, listId }) {
+export default function ListTitle({ title, listId }) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const { changeListTitle } = useContext(AppContext);
@@ -70,9 +70,7 @@ export default function Title({ title, listId }) {
           >
             {title}
           </Typography>
-          <IconButton>
-            <MoreHorizIcon />
-          </IconButton>
+          <MenuOption listId={listId} />
         </Box>
       )}
     </Box>

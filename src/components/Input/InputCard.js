@@ -47,6 +47,7 @@ export default function InputCard({ setOpen, listId, type }) {
       <Box>
         <Paper className={classes.card}>
           <InputBase
+            autoFocus
             onChange={handleChange}
             onBlur={() => setOpen(false)}
             multiline

@@ -63,6 +63,17 @@ const AppContextProvider = (props) => {
     setData(newCardState);
   };
 
+  const deleteList = (listId) => {
+    const listsIds = [...data.listIds.filter((Id) => Id !== listId)];
+    const lists = { ...data.lists };
+    delete lists[listId];
+    const newCardState = {
+      listIds: listsIds,
+      lists
+    };
+    setData(newCardState);
+  };
+
   //handle drag and drop
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -116,6 +127,7 @@ const AppContextProvider = (props) => {
         addCard,
         addList,
         changeListTitle,
+        deleteList,
         onDragEnd,
         background,
         setBackground
