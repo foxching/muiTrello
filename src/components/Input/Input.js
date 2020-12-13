@@ -15,7 +15,8 @@ export default function Input({ listId, type }) {
       margin: theme.spacing(1),
       backgroundColor: "#EBECF0",
       "&:hover": {
-        background: fade("#000", 0.25)
+        background: fade("#424242", 0.25),
+        cursor: "pointer"
       }
     }
   }));
@@ -33,9 +34,12 @@ export default function Input({ listId, type }) {
           elevation={0}
           onClick={() => setOpen(!open)}
         >
-          <Typography>
+          <Typography
+            variant="subtitle1"
+            style={{ fontWeight: "400", color: "#9e9e9e" }}
+          >
             {" "}
-            + {type === "list" ? "Add List" : "Add Card"}
+            + {type === "list" ? "Add Another List" : "Add More Card"}
           </Typography>
         </Paper>
       </Collapse>

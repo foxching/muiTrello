@@ -62,7 +62,7 @@ export default function SideMenu({ open, setOpen }) {
       <div className={classes.root}>
         <div className={classes.titleContainer}>
           <Typography className={classes.title}>Change Background</Typography>
-          <Clear onClick={() => setOpen(false)} />
+          <Clear onClick={() => setOpen(false)} style={{ cursor: "pointer" }} />
         </div>
         <Divider />
         <div className={classes.menu}>

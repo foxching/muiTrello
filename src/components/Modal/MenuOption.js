@@ -80,7 +80,13 @@ export default function MenuOption({ listId }) {
             List Actions
           </Typography>
           <Clear
-            style={{ fontSize: "20px", color: "#9e9e9e", marginRight: "15px" }}
+            style={{
+              fontSize: "20px",
+              color: "#9e9e9e",
+              marginRight: "15px",
+              cursor: "pointer"
+            }}
+            onClick={handleClose}
           />
         </Box>
         <Divider />
