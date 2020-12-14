@@ -1,19 +1,42 @@
 import React from "react";
-//mui
+import Box from "@material-ui/core/Box";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-//context
+import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
+//icons
+import CloseIcon from "@material-ui/icons/Close";
+//component
+import CardTitle from "../CardTitle";
 
-export default function CardDetailed({ open, setOpenCard }) {
+const useStyles = makeStyles((theme) => ({
+  dialog: {
+    position: "absolute",
+    top: theme.spacing(5),
+    backgroundColor: "#EBECF0"
+  }
+}));
+
+export default function CardDetailed({ card, closeModal, children }) {
+  const classes = useStyles();
   return (
     <Dialog
-      open={open}
-      style={{ minWidth: "60vw" }}
-      onClose={() => setOpenCard(false)}
+      open={!!Object.keys(card).length}
+      style={{ minWidth: "80vw" }}
+      onClose={closeModal}
+      fullWidth
+      classes={{ paper: classes.dialog }}
     >
-      <DialogTitle>Card Detail</DialogTitle>
-      <DialogContent>Fuck</DialogContent>
+      <DialogTitle style={{ textAlign: "center", marginTop: "10px" }}>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <CardTitle title={card.title} />
+          <IconButton onClick={closeModal}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+      </DialogTitle>
+      <DialogContent>{children}</DialogContent>
     </Dialog>
   );
 }

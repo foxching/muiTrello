@@ -6,6 +6,8 @@ import CardDetailed from "../components/Modal/CardDetailed";
 import AccessAlarmsIcon from "@material-ui/icons/AccessAlarms";
 import CommentIcon from "@material-ui/icons/Comment";
 
+import CardContent from "../components/Modal/CardContent";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(1, 1, 1, 1),
@@ -19,16 +21,36 @@ const useStyles = makeStyles((theme) => ({
     "&:hover .button": {
       opacity: 2
     }
+  },
+  label: {
+    background: "#ef5350",
+    color: "white",
+    padding: "3px"
+  },
+  title: {
+    fontWeight: "400",
+    marginTop: "10px"
+  },
+  boxContainer: {
+    display: "flex",
+    alignItems: "center"
+  },
+  icon: {
+    fontSize: "18px",
+    color: "#9e9e9e",
+    marginBottom: "3px"
+  },
+  caption: {
+    fontWeight: "500",
+    color: "#9e9e9e",
+    margin: "8px"
   }
 }));
 
 export default function Card({ card, index }) {
-  const [openCard, setOpenCard] = useState(false);
+  const [viewCard, setViewCard] = useState({});
 
-  const openCardDialog = () => {
-    setOpenCard(true);
-  };
-
+  //style
   const classes = useStyles();
   return (
     <>
@@ -39,27 +61,19 @@ export default function Card({ card, index }) {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <Paper className={classes.root} onClick={openCardDialog}>
-              <Grid container>
+            <Paper className={classes.root} onClick={() => setViewCard(card)}>
+              <Grid container direction="column">
+                {/* Label  */}
                 <Grid item>
-                  <span
-                    style={{
-                      background: "#ef5350",
-                      color: "white",
-                      padding: "3px"
-                    }}
-                  >
+                  <Box component="span" className={classes.label}>
                     Urgent
-                  </span>
-                  <Typography
-                    style={{
-                      fontWeight: "400",
-                      marginTop: "10px"
-                    }}
-                  >
+                  </Box>
+                  <Typography className={classes.title}>
                     {card.title}
                   </Typography>
                 </Grid>
+
+                {/* Card Add on */}
                 <Grid
                   container
                   item
@@ -67,52 +81,16 @@ export default function Card({ card, index }) {
                   justify="flex-start"
                   alignItems="center"
                 >
-                  <Box
-                    style={{
-                      display: "flex",
-                      alignItems: "center"
-                    }}
-                  >
-                    <AccessAlarmsIcon
-                      style={{
-                        fontSize: "18px",
-                        color: "#9e9e9e",
-                        marginBottom: "3px"
-                      }}
-                    />
-                    <Typography
-                      variant="body2"
-                      style={{
-                        fontWeight: "500",
-                        color: "#9e9e9e",
-                        margin: "8px"
-                      }}
-                    >
+                  <Box className={classes.boxContainer}>
+                    <AccessAlarmsIcon className={classes.icon} />
+                    <Typography variant="body2" className={classes.caption}>
                       Mar 24
                     </Typography>
                   </Box>
 
-                  <Box
-                    style={{
-                      display: "flex",
-                      alignItems: "center"
-                    }}
-                  >
-                    <CommentIcon
-                      style={{
-                        fontSize: "18px",
-                        color: "#9e9e9e",
-                        marginBottom: "3px"
-                      }}
-                    />
-                    <Typography
-                      variant="body2"
-                      style={{
-                        fontWeight: "500",
-                        color: "#9e9e9e",
-                        margin: "8px"
-                      }}
-                    >
+                  <Box className={classes.boxContainer}>
+                    <CommentIcon className={classes.icon} />
+                    <Typography variant="body2" className={classes.option}>
                       100
                     </Typography>
                   </Box>
@@ -122,7 +100,9 @@ export default function Card({ card, index }) {
           </Box>
         )}
       </Draggable>
-      <CardDetailed open={openCard} setOpenCard={setOpenCard} />
+      <CardDetailed card={viewCard} closeModal={() => setViewCard({})}>
+        <CardContent />
+      </CardDetailed>
     </>
   );
 }
