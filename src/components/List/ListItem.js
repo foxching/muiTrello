@@ -30,7 +30,12 @@ export default function ListItem({ list, listId, index }) {
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   {list.cards.map((card, index) => (
-                    <Card key={card.id} card={card} index={index} />
+                    <Card
+                      key={card.id}
+                      listId={listId}
+                      card={card}
+                      index={index}
+                    />
                   ))}
                   {provided.placeholder}
                 </div>

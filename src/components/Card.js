@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Card({ card, index }) {
+export default function Card({ card, listId, index }) {
   const [viewCard, setViewCard] = useState({});
 
   //style
@@ -100,7 +100,11 @@ export default function Card({ card, index }) {
           </Box>
         )}
       </Draggable>
-      <CardDetailed card={viewCard} closeModal={() => setViewCard({})}>
+      <CardDetailed
+        card={viewCard}
+        listId={listId}
+        closeModal={() => setViewCard({})}
+      >
         <CardContent />
       </CardDetailed>
     </>

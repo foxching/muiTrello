@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "./ListItem";
@@ -11,9 +11,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CardList() {
+export default function ListContainer() {
   const { data, onDragEnd } = useContext(AppContext);
   const classes = useStyles();
+
+  useEffect(() => {}, [data]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>

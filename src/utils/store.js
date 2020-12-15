@@ -1,7 +1,7 @@
 const cards = [
   {
     id: "card-1",
-    title: "Learning how to cook"
+    title: "Learning how to cook "
   }
 ];
 
