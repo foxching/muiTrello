@@ -5,46 +5,49 @@ import {
   InputBase,
   IconButton,
   Typography,
-  Paper
+  Paper,
+  Grid
 } from "@material-ui/core";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import ComputerIcon from "@material-ui/icons/Computer";
 import ClearIcon from "@material-ui/icons/Clear";
-import { AppContext } from "../context/appContext";
+import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    margin: theme.spacing(1, 1, 1, 1),
-    paddingBottom: theme.spacing(4),
+    margin: theme.spacing(1, 1, 1, 0),
+    paddingBottom: theme.spacing(3),
     background: fade("#424242", 0.25),
-    width: "36vw"
+    width: "50vw"
   },
-  editableContainer: {
-    display: "flex",
-    margin: theme.spacing(1),
-    alignItems: "center"
-  },
-  editableTitlte: {
-    flexGrow: 1,
-    fontSize: "1.1rem",
-    fontWeight: "500",
-    color: "#9e9e9e",
-    marginLeft: "10px"
+  cardTitle: {
+    fontSize: "18px",
+    fontWeight: "bold",
+    color: "#000"
   },
   input: {
-    fontSize: "1.2rem",
-    fontWeight: "500",
+    fontSize: "18px",
+    fontWeight: "400",
     margin: theme.spacing(1)
   },
-  confirmContainer: {
-    margin: theme.spacing(1, 1, 1, 1)
-  },
-  confirm: {
+  confirmBtn: {
     background: "#5AAC44",
     color: "$fff",
     "&:hover": {
       background: fade("#5AAC44", 0.25)
     }
+  },
+  icon: {
+    marginRight: "10px",
+    color: "#9e9e9e"
+  },
+  closeBtn: {
+    marginLeft: "10px"
+  },
+  cardTitleHeading: {
+    fontSize: "10px",
+    marginLeft: "12px",
+    color: theme.palette.grey[500]
   }
 }));
 
@@ -71,15 +74,10 @@ export default function CardTitle({ title, listId, cardId }) {
   }, [title]);
 
   return (
-    <Box display="flex" mt={1}>
-      <ComputerIcon style={{ marginRight: "10px", color: "#000" }} />
+    <Box display="flex">
+      <ComputerIcon className={classes.icon} />
       {open ? (
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="flex-start"
-          alignItems=""
-        >
+        <Box display="flex" flexDirection="column">
           <Paper className={classes.card}>
             <InputBase
               autoFocus
@@ -91,15 +89,15 @@ export default function CardTitle({ title, listId, cardId }) {
             />
           </Paper>
 
-          <Box
-            display="flex"
-            justifyContent="flex-start"
-            style={{ height: 30, marginLeft: "10px" }}
-          >
-            <Button className={classes.confirm} onClick={handleSave}>
+          <Box>
+            <Button
+              size="small"
+              className={classes.confirmBtn}
+              onClick={handleSave}
+            >
               Save
             </Button>
-            <IconButton>
+            <IconButton size="small" className={classes.closeBtn}>
               <ClearIcon onClick={() => setOpen(!open)} />
             </IconButton>
           </Box>
@@ -107,10 +105,13 @@ export default function CardTitle({ title, listId, cardId }) {
       ) : (
         <Box>
           <Typography
-            className={classes.editableTitlte}
+            className={classes.cardTitle}
             onClick={() => setOpen(!open)}
           >
             {title}
+            <Box component="span" className={classes.cardTitleHeading}>
+              in list Todo
+            </Box>
           </Typography>
         </Box>
       )}

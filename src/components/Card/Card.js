@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Box, Paper, Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import CardDetailed from "../components/Modal/CardDetailed";
 import AccessAlarmsIcon from "@material-ui/icons/AccessAlarms";
 import CommentIcon from "@material-ui/icons/Comment";
-
-import CardContent from "../components/Modal/CardContent";
+import CardModal from "./CardModal";
+import CardContent from "./CardContent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,13 +99,13 @@ export default function Card({ card, listId, index }) {
           </Box>
         )}
       </Draggable>
-      <CardDetailed
+      <CardModal
         card={viewCard}
         listId={listId}
         closeModal={() => setViewCard({})}
       >
-        <CardContent />
-      </CardDetailed>
+        <CardContent title={card.title} cardId={card.id} listId={listId} />
+      </CardModal>
     </>
   );
 }
