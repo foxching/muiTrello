@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  Box,
-  Button,
-  InputBase,
-  IconButton,
-  Typography,
-  Paper,
-  Grid
-} from "@material-ui/core";
 import { makeStyles, fade } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 import ComputerIcon from "@material-ui/icons/Computer";
 import ClearIcon from "@material-ui/icons/Clear";
 import { AppContext } from "../../context/appContext";
@@ -44,14 +41,14 @@ const useStyles = makeStyles((theme) => ({
   closeBtn: {
     marginLeft: "10px"
   },
-  cardTitleHeading: {
+  listTitle: {
     fontSize: "10px",
     marginLeft: "12px",
     color: theme.palette.grey[500]
   }
 }));
 
-export default function CardTitle({ title, listId, cardId }) {
+export default function CardTitle({ title, listId, listTitle, cardId }) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const { editCardTitle } = useContext(AppContext);
@@ -109,8 +106,8 @@ export default function CardTitle({ title, listId, cardId }) {
             onClick={() => setOpen(!open)}
           >
             {title}
-            <Box component="span" className={classes.cardTitleHeading}>
-              in list Todo
+            <Box component="span" className={classes.listTitle}>
+              in list {listTitle}
             </Box>
           </Typography>
         </Box>

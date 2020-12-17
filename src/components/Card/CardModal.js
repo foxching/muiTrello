@@ -1,14 +1,12 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
-//icons
 import CloseIcon from "@material-ui/icons/Close";
-//component
-import CardTitle from "./CardTitle";
+import CardModalTitle from "./CardModalTitle";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -31,7 +29,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CardDetailed({ card, listId, closeModal, children }) {
+export default function CardModal({
+  card,
+  listId,
+  listTitle,
+  closeModal,
+  children
+}) {
   const classes = useStyles();
   return (
     <Dialog
@@ -42,7 +46,12 @@ export default function CardDetailed({ card, listId, closeModal, children }) {
     >
       <DialogTitle style={{ width: "90%", position: "relative" }}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <CardTitle title={card.title} cardId={card.id} listId={listId} />
+          <CardModalTitle
+            listTitle={listTitle}
+            title={card.title}
+            cardId={card.id}
+            listId={listId}
+          />
           <IconButton onClick={closeModal} className={classes.closeButton}>
             <CloseIcon />
           </IconButton>
