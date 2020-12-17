@@ -1,9 +1,9 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { Draggable } from "react-beautiful-dnd";
-import { Box, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-//component
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
 import ListTitle from "./ListTitle";
 import Card from ".././Card/Card";
 import Input from "../Input/Input";

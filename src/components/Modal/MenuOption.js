@@ -5,7 +5,6 @@ import Box from "@material-ui/core/Box";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
-//icons
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Clear from "@material-ui/icons/Clear";
 import { AppContext } from "../../context/appContext";

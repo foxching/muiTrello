@@ -1,17 +1,14 @@
 import React from "react";
-import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
   appbar: {
     height: "55px",
     backgroundColor: "rgba(0, 0, 0, 0.15)"
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
   },
   title: {
     flexGrow: 1

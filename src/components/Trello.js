@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Box } from "@material-ui/core";
-import { CssBaseline } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import ListContainer from "../components/List/ListContainer";
 import Navbar from "../components/layout/Navbar";
 import { AppContext } from "../context/appContext";

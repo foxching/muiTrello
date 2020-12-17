@@ -1,6 +1,10 @@
 import React, { useState, useContext } from "react";
-import { Box, Button, IconButton, InputBase, Paper } from "@material-ui/core";
 import { makeStyles, fade } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import Paper from "@material-ui/core/Paper";
 import ClearIcon from "@material-ui/icons/Clear";
 import { AppContext } from "../../context/appContext";
 

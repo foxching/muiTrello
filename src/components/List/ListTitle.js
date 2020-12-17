@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Box, InputBase, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import InputBase from "@material-ui/core/InputBase";
+import Typography from "@material-ui/core/Typography";
 import { AppContext } from "../../context/appContext";
 import MenuOption from "../../components/Modal/MenuOption";
 
@@ -10,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     alignItems: "center"
   },
-  editableTitlte: {
+  editableTitle: {
     flexGrow: 1,
     fontSize: "1.2rem",
     fontWeight: "bold"
@@ -65,7 +67,7 @@ export default function ListTitle({ title, listId }) {
       ) : (
         <Box className={classes.editableContainer}>
           <Typography
-            className={classes.editableTitlte}
+            className={classes.editableTitle}
             onClick={() => setOpen(!open)}
           >
             {title}
