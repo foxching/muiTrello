@@ -64,6 +64,26 @@ const AppContextProvider = (props) => {
     //console.log(state);
   };
 
+  //delete card
+  const deleteCard = (cardId, listId) => {
+    const list = data.lists[listId];
+    const cards = list.cards.filter((card) => card.id !== cardId);
+
+    const newList = {
+      ...list,
+      cards
+    };
+
+    const newCardState = {
+      ...data,
+      lists: {
+        ...data.lists,
+        [listId]: newList
+      }
+    };
+    setData(newCardState);
+  };
+
   //handle adding new list
   const addList = (title) => {
     const newListId = uuidv4();
@@ -165,6 +185,7 @@ const AppContextProvider = (props) => {
         deleteList,
         addCard,
         editCardProps,
+        deleteCard,
         onDragEnd,
         background,
         setBackground

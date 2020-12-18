@@ -17,7 +17,7 @@ export default function CardContent({ card, listId }) {
           />
         </Grid>
         <Grid item xs={3}>
-          <CardModalSideMenu />
+          <CardModalSideMenu cardId={card.id} listId={listId} />
         </Grid>
       </Grid>
     </>

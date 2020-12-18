@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import AccessAlarmsIcon from "@material-ui/icons/AccessAlarms";
 import CommentIcon from "@material-ui/icons/Comment";
 import CardModal from "./CardModal";
-import CardModalContent from "./CardModalContent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Card({ card, listTitle, listId, index }) {
-  const [viewCard, setViewCard] = useState({});
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   return (
@@ -107,9 +105,7 @@ export default function Card({ card, listTitle, listId, index }) {
         listId={listId}
         listTitle={listTitle}
         closeModal={() => setOpen(false)}
-      >
-        <CardModalContent card={card} listId={listId} />
-      </CardModal>
+      />
     </>
   );
 }

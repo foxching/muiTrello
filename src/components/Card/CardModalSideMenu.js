@@ -21,7 +21,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CardModalSideMenu() {
+export default function CardModalSideMenu({
+  cardId,
+  listId,
+  handleDeleteCard
+}) {
   const classes = useStyles();
   return (
     <>
@@ -81,6 +85,7 @@ export default function CardModalSideMenu() {
           startIcon={<DeleteIcon />}
           className={classes.btn}
           fullWidth
+          onClick={handleDeleteCard}
         >
           Delete
         </Button>
