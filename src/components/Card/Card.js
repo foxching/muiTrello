@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Card({ card, listTitle, listId, index }) {
   const [viewCard, setViewCard] = useState({});
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   return (
     <>
@@ -61,7 +62,7 @@ export default function Card({ card, listTitle, listId, index }) {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <Paper className={classes.root} onClick={() => setViewCard(card)}>
+            <Paper className={classes.root} onClick={() => setOpen(true)}>
               <Grid container direction="column">
                 {/* Label  */}
                 <Grid item>
@@ -101,10 +102,11 @@ export default function Card({ card, listTitle, listId, index }) {
         )}
       </Draggable>
       <CardModal
-        card={viewCard}
+        open={open}
+        card={card}
         listId={listId}
         listTitle={listTitle}
-        closeModal={() => setViewCard({})}
+        closeModal={() => setOpen(false)}
       >
         <CardModalContent card={card} listId={listId} />
       </CardModal>

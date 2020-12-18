@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CardTitle({ title, listId, listTitle, cardId }) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
-  const { editCardTitle } = useContext(AppContext);
+  const { editCardProps } = useContext(AppContext);
   const classes = useStyles();
 
   const handleOnChange = (e) => {
@@ -59,8 +59,7 @@ export default function CardTitle({ title, listId, listTitle, cardId }) {
   };
 
   const handleSave = () => {
-    console.log(newTitle);
-    editCardTitle(newTitle, listId, cardId);
+    editCardProps(newTitle, listId, cardId, "title");
     setOpen(false);
   };
 

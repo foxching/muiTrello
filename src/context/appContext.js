@@ -27,13 +27,17 @@ const AppContextProvider = (props) => {
     setData(newCardState);
   };
 
-  const editCardTitle = (title, listId, cardId) => {
+  const editCardProps = (value, listId, cardId, type) => {
     const list = data.lists[listId];
     const card = list.cards.find((card) => card.id === cardId);
-    card.title = title;
-    const l = [...list.cards];
 
-    const newCard = l.map((oldCard) => {
+    if (type === "title") {
+      card.title = value;
+    } else {
+      card.description = value;
+    }
+    const cards = [...list.cards];
+    const newCard = cards.map((oldCard) => {
       if (oldCard.id === cardId) {
         return {
           ...oldCard,
@@ -160,7 +164,7 @@ const AppContextProvider = (props) => {
         changeListTitle,
         deleteList,
         addCard,
-        editCardTitle,
+        editCardProps,
         onDragEnd,
         background,
         setBackground

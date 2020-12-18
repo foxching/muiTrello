@@ -10,7 +10,11 @@ export default function CardContent({ card, listId }) {
       <Grid container justify="space-between">
         <Grid item xs={8}>
           <CardModalLabels />
-          <CardModalDescription description={card.description} />
+          <CardModalDescription
+            description={card.description}
+            cardId={card.id}
+            listId={listId}
+          />
         </Grid>
         <Grid item xs={3}>
           <CardModalSideMenu />

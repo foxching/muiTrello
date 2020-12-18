@@ -34,12 +34,13 @@ export default function CardModal({
   listId,
   listTitle,
   closeModal,
-  children
+  children,
+  open
 }) {
   const classes = useStyles();
   return (
     <Dialog
-      open={!!Object.keys(card).length}
+      open={open}
       onClose={closeModal}
       fullWidth
       classes={{ paper: classes.dialog }}
