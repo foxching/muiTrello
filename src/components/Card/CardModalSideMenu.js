@@ -76,6 +76,7 @@ export default function CardModalSideMenu({
           startIcon={<ArrowForwardIcon />}
           className={classes.btn}
           fullWidth
+          disabled
         >
           Move
         </Button>
