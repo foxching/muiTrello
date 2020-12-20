@@ -71,7 +71,7 @@ export default function CardModal({
       <DialogContent style={{ marginTop: "-10px" }}>
         <Grid container justify="space-between">
           <Grid item xs={8}>
-            <CardModalLabels />
+            <CardModalLabels cardLabels={card.labels} />
             <CardModalDescription
               description={card.description}
               cardId={card.id}
@@ -81,6 +81,7 @@ export default function CardModal({
           <Grid item xs={3}>
             <CardModalSideMenu
               handleDeleteCard={handleDeleteCard}
+              cardLabels={card.labels}
               cardId={card.id}
               listId={listId}
             />

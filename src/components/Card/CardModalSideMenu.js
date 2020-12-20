@@ -7,6 +7,8 @@ import LabelIcon from "@material-ui/icons/Label";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
+import CardModalAddLabels from "./CardModalAddLabels";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CardModalSideMenu({
   cardId,
   listId,
+  cardLabels,
   handleDeleteCard
 }) {
   const classes = useStyles();
@@ -42,12 +45,17 @@ export default function CardModalSideMenu({
         <Button
           color="default"
           variant="contained"
-          startIcon={<LabelIcon />}
+          startIcon={<PeopleOutlineIcon />}
           className={classes.btn}
           fullWidth
         >
-          Add Label
+          Members
         </Button>
+        <CardModalAddLabels
+          cardId={cardId}
+          listId={listId}
+          cardLabels={cardLabels}
+        />
 
         <Button
           color="default"
