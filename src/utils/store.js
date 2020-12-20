@@ -3,7 +3,11 @@ const cards = [
     id: "card-1",
     title: "Learning how to cook ",
     description:
-      "This is the most challenging project that i have ever been developed, so this is it."
+      "This is the most challenging project that i have ever been developed, so this is it.",
+    labels: [
+      { label: "New", color: "green" },
+      { label: "Urgent", color: "red" }
+    ]
   }
 ];
 

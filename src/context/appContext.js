@@ -12,7 +12,9 @@ const AppContextProvider = (props) => {
   const addCard = (title, listId) => {
     const newCard = {
       title,
-      id: uuidv4()
+      id: uuidv4(),
+      description: "",
+      labels: []
     };
     const list = data.lists[listId];
     list.cards = [...list.cards, newCard];
@@ -31,11 +33,26 @@ const AppContextProvider = (props) => {
     const list = data.lists[listId];
     const card = list.cards.find((card) => card.id === cardId);
 
+    //logic to add/remove labels
+    const labels = [...card.labels];
+    const label = labels.find((lbl) => lbl.label === value.label);
+    let newLabels;
+    if (label) {
+      newLabels = labels.filter((oldlbl) => oldlbl.label !== value.label);
+    } else {
+      newLabels = [...labels, value];
+    }
+
+    //filtering type of actions
     if (type === "title") {
       card.title = value;
-    } else {
+    } else if (type === "description") {
       card.description = value;
+    } else {
+      card.labels = newLabels;
     }
+
+    //logic to add new card values to state
     const cards = [...list.cards];
     const newCard = cards.map((oldCard) => {
       if (oldCard.id === cardId) {
@@ -48,6 +65,7 @@ const AppContextProvider = (props) => {
       }
     });
 
+    //new card
     const newList = {
       ...list,
       cards: newCard
@@ -61,7 +79,6 @@ const AppContextProvider = (props) => {
       }
     };
     setData(newCardState);
-    //console.log(state);
   };
 
   //delete card
