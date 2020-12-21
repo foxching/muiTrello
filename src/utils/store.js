@@ -7,7 +7,8 @@ const cards = [
     labels: [
       { label: "New", color: "green" },
       { label: "Urgent", color: "red" }
-    ]
+    ],
+    dueDate: "2020/12/21 12:00"
   }
 ];
 

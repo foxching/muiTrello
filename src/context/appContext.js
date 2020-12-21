@@ -30,6 +30,7 @@ const AppContextProvider = (props) => {
   };
 
   const editCardProps = (value, listId, cardId, type) => {
+    console.log(value, listId, cardId, type);
     const list = data.lists[listId];
     const card = list.cards.find((card) => card.id === cardId);
 
@@ -48,8 +49,10 @@ const AppContextProvider = (props) => {
       card.title = value;
     } else if (type === "description") {
       card.description = value;
-    } else {
+    } else if (type === "labels") {
       card.labels = newLabels;
+    } else {
+      card.dueDate = value;
     }
 
     //logic to add new card values to state
