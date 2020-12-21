@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   label: {
-    background: "#ef5350",
     color: "white",
+    marginRight: "10px",
     padding: "3px"
   },
   title: {
@@ -64,9 +64,19 @@ export default function Card({ card, listTitle, listId, index }) {
               <Grid container direction="column">
                 {/* Label  */}
                 <Grid item>
-                  <Box component="span" className={classes.label}>
-                    Urgent
+                  <Box display="flex" flexDirection="row">
+                    {card.labels.map((label) => (
+                      <Box
+                        component="span"
+                        bgcolor={label.color}
+                        className={classes.label}
+                      >
+                        {label.label}
+                      </Box>
+                    ))}
                   </Box>
+                </Grid>
+                <Grid item>
                   <Typography className={classes.title}>
                     {card.title}
                   </Typography>

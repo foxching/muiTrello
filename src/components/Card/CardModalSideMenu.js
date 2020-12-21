@@ -3,12 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import LabelIcon from "@material-ui/icons/Label";
-import ScheduleIcon from "@material-ui/icons/Schedule";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import CardModalAddLabels from "./CardModalAddLabels";
+import CardModalAddDate from "./CardModalAddDate";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -56,16 +55,7 @@ export default function CardModalSideMenu({
           listId={listId}
           cardLabels={cardLabels}
         />
-
-        <Button
-          color="default"
-          variant="contained"
-          startIcon={<ScheduleIcon />}
-          className={classes.btn}
-          fullWidth
-        >
-          Due Date
-        </Button>
+        <CardModalAddDate />
       </Box>
       {/* Action Area */}
       <Box
