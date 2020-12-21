@@ -1,4 +1,5 @@
 import React from "react";
+import { format } from "date-fns";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
@@ -6,9 +7,6 @@ import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // display: "flex",
-    // justifyContent: "space-between",
-    // flexWrap: "wrap",
     marginLeft: "35px",
     marginTop: "10px",
     marginBottom: "10px"
@@ -28,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CardModalLabels({ cardLabels }) {
+export default function CardModalLabels({ cardLabels, cardDueDate }) {
   const classes = useStyles();
   return (
     <>
@@ -73,7 +71,7 @@ export default function CardModalLabels({ cardLabels }) {
         <Box>
           <Typography className={classes.label}>Due Date</Typography>
           <Box className={classes.chip} bgcolor="gray">
-            Mar 20 at 12:00am
+            {format(new Date(cardDueDate), "MMM dd 'at' h aaaa")}
           </Box>
         </Box>
       </Box>

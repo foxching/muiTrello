@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Calendar from "react-calendar";
 import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
@@ -9,7 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
 import Clear from "@material-ui/icons/Clear";
 import ScheduleIcon from "@material-ui/icons/Schedule";
-import Calendar from "react-calendar";
+import { AppContext } from "../../context/appContext";
 import "react-calendar/dist/Calendar.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,12 +23,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CardModalAddDate({ cardId, listId, cardLabels }) {
+export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [date, setDate] = React.useState(new Date());
-  const [textDate, setTextDate] = React.useState("2020-12-21");
-  const [textTime, setTextTime] = React.useState();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const [textDate, setTextDate] = useState("");
+  const [textTime, setTextTime] = useState("");
+  const { editCardProps } = useContext(AppContext);
 
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
@@ -42,13 +44,21 @@ export default function CardModalAddDate({ cardId, listId, cardLabels }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(textDate);
-    console.log(textTime);
+    const dueDate = textDate + " " + textTime;
+    //console.log(dueDate);
+    editCardProps(dueDate, listId, cardId, "date");
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    if (cardDueDate) {
+      setTextDate(cardDueDate.split(" ")[0]);
+      setTextTime(cardDueDate.split(" ")[1]);
+    }
+  }, [cardDueDate]);
 
   return (
     <>
@@ -84,7 +94,7 @@ export default function CardModalAddDate({ cardId, listId, cardLabels }) {
             variant="subtitle2"
             style={{ fontWeight: "400", color: "#9e9e9e", marginLeft: "15px" }}
           >
-            Labels
+            Due Date
           </Typography>
           <Clear
             style={{

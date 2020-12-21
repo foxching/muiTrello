@@ -26,6 +26,7 @@ export default function CardModalSideMenu({
   cardId,
   listId,
   cardLabels,
+  cardDueDate,
   handleDeleteCard
 }) {
   const classes = useStyles();
@@ -55,7 +56,11 @@ export default function CardModalSideMenu({
           listId={listId}
           cardLabels={cardLabels}
         />
-        <CardModalAddDate />
+        <CardModalAddDate
+          cardId={cardId}
+          listId={listId}
+          cardDueDate={cardDueDate}
+        />
       </Box>
       {/* Action Area */}
       <Box

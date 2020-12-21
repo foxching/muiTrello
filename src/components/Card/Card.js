@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { format } from "date-fns";
 import { Draggable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -93,7 +94,7 @@ export default function Card({ card, listTitle, listId, index }) {
                   <Box className={classes.boxContainer}>
                     <AccessAlarmsIcon className={classes.icon} />
                     <Typography variant="body2" className={classes.caption}>
-                      Mar 24
+                      {format(new Date(card.dueDate), "MMM dd ")}
                     </Typography>
                   </Box>
 
