@@ -10,6 +10,7 @@ import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   card: {
+    width: "280px",
     margin: theme.spacing(1, 1, 1, 1),
     paddingBottom: theme.spacing(4)
   },

@@ -19,6 +19,8 @@
     "react-calendar": "3.2.1",
     "react-dom": "17.0.0",
     "react-scripts": "3.4.3",
+    "simplebar": "5.3.0",
+    "simplebar-react": "2.3.0",
     "uuid": "8.3.1"
   },
   "devDependencies": {

@@ -10,7 +10,8 @@ import InputBase from "@material-ui/core/InputBase";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    height: "40px",
+    minHeight: "6vh",
+    height: "30px",
     backgroundColor: "rgba(0, 0, 0, 0.15)"
   },
   title: {
@@ -34,7 +35,12 @@ export default function TopBar({ open, setOpen }) {
 
   return (
     <AppBar position="static" className={classes.appbar} elevation={0}>
-      <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
+      <Toolbar
+        style={{
+          display: "flex",
+          justifyContent: "space-between"
+        }}
+      >
         <Box
           id="container"
           style={{
@@ -51,7 +57,7 @@ export default function TopBar({ open, setOpen }) {
               padding: "4px 4px 0px 4px",
               border: "2px",
               borderRadius: "3px",
-              marginBottom: "6px",
+              marginBottom: "8px",
               marginRight: "9px"
             }}
           >
@@ -67,7 +73,7 @@ export default function TopBar({ open, setOpen }) {
               padding: "4px 4px 0px 4px",
               border: "2px",
               borderRadius: "3px",
-              marginBottom: "6px",
+              marginBottom: "8px",
               marginRight: "9px",
               display: "flex",
               flexDirection: "row",
@@ -88,7 +94,7 @@ export default function TopBar({ open, setOpen }) {
               padding: "4px 4px 0px 4px",
               border: "2px",
               borderRadius: "3px",
-              marginBottom: "6px",
+              marginBottom: "8px",
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-start",

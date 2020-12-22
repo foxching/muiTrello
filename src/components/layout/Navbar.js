@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TopBar from "./TopBar";
 import SideMenu from "./SideMenu";
 
-export default function NavBar() {
+export default function NavBar({ background }) {
   const [open, setOpen] = useState(false);
   return (
     <>
