@@ -91,16 +91,18 @@ export default function Card({ card, listTitle, listId, index }) {
                   justify="flex-start"
                   alignItems="center"
                 >
-                  <Box className={classes.boxContainer}>
-                    <AccessAlarmsIcon className={classes.icon} />
-                    <Typography variant="body2" className={classes.caption}>
-                      {format(new Date(card.dueDate), "MMM dd ")}
-                    </Typography>
-                  </Box>
+                  {card.dueDate && (
+                    <Box className={classes.boxContainer}>
+                      <AccessAlarmsIcon className={classes.icon} />
+                      <Typography variant="body2" className={classes.caption}>
+                        {format(new Date(card.dueDate), "MMM dd ")}
+                      </Typography>
+                    </Box>
+                  )}
 
                   <Box className={classes.boxContainer}>
                     <CommentIcon className={classes.icon} />
-                    <Typography variant="body2" className={classes.option}>
+                    <Typography variant="body2" className={classes.caption}>
                       100
                     </Typography>
                   </Box>

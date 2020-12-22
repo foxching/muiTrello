@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "10px"
   },
   descriptionContainer: {
-    marginLeft: "35px",
+    marginLeft: "40px",
     marginTop: "20px",
     width: "100%"
   },

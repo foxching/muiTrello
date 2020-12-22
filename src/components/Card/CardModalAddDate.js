@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, fade } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -20,6 +20,13 @@ const useStyles = makeStyles((theme) => ({
   btn: {
     marginBottom: "10px",
     fontSize: "13px"
+  },
+  confirmBtn: {
+    background: "#5AAC44",
+    color: "$fff",
+    "&:hover": {
+      background: fade("#5AAC44", 0.25)
+    }
   }
 }));
 
@@ -94,7 +101,7 @@ export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
             variant="subtitle2"
             style={{ fontWeight: "400", color: "#9e9e9e", marginLeft: "15px" }}
           >
-            Due Date
+            Change Due Date
           </Typography>
           <Clear
             style={{
@@ -129,6 +136,7 @@ export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
                 value={textDate}
                 type="text"
                 label="Date"
+                disabled
               />
               <TextField
                 variant="outlined"
@@ -143,18 +151,18 @@ export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
                 }}
               />
             </Box>
-
             <form onSubmit={handleSubmit}>
               <Calendar onChange={handleChange} value={date} />
-              <Button
-                style={{ marginTop: "10px" }}
-                type="submit"
-                color="secondary"
-                variant="contained"
-                size="small"
-              >
-                Save
-              </Button>
+              <Box display="flex" justifyContent="flex-end" mt={1}>
+                <div />
+                <Button
+                  className={classes.confirmBtn}
+                  type="submit"
+                  size="small"
+                >
+                  Save
+                </Button>
+              </Box>
             </form>
           </Box>
         </MenuItem>

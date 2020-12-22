@@ -11,6 +11,7 @@ import CardModalTitle from "./CardModalTitle";
 import CardModalLabels from "./CardModalLabels";
 import CardModalDescription from "./CardModalDescription";
 import CardModalSideMenu from "./CardModalSideMenu";
+import CardModalActivity from "./CardModalActivity";
 import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
   },
   closeButton: {
     position: "absolute",
-    right: "-60px",
-    top: "-10px",
+    right: "-100px",
+    top: "-20px",
     color: theme.palette.grey[500],
     [theme.breakpoints.down("md")]: {
       right: "-40px"
@@ -56,7 +57,12 @@ export default function CardModal({
       classes={{ paper: classes.dialog }}
     >
       <DialogTitle style={{ width: "90%", position: "relative" }}>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          style={{ position: "relative" }}
+        >
           <CardModalTitle
             listTitle={listTitle}
             title={card.title}
@@ -80,6 +86,7 @@ export default function CardModal({
               cardId={card.id}
               listId={listId}
             />
+            <CardModalActivity />
           </Grid>
           <Grid item xs={3}>
             <CardModalSideMenu

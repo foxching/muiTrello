@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   icon: {
-    marginRight: "10px",
+    marginRight: "15px",
     color: "#9e9e9e"
   },
   closeBtn: {

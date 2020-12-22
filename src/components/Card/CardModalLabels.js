@@ -7,7 +7,7 @@ import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginLeft: "35px",
+    marginLeft: "40px",
     marginTop: "10px",
     marginBottom: "10px"
   },
@@ -34,7 +34,9 @@ export default function CardModalLabels({ cardLabels, cardDueDate }) {
         className={classes.root}
         display="flex"
         flexWrap="wrap"
-        justifyContent={cardLabels.length > 0 ? "space-between" : "flex-start"}
+        justifyContent={
+          cardDueDate && cardLabels.length > 0 ? "space-between" : "flex-start"
+        }
       >
         <Box style={{ marginRight: "30px" }}>
           <Typography className={classes.label}>Members</Typography>
@@ -68,12 +70,14 @@ export default function CardModalLabels({ cardLabels, cardDueDate }) {
           </Box>
         )}
 
-        <Box>
-          <Typography className={classes.label}>Due Date</Typography>
-          <Box className={classes.chip} bgcolor="gray">
-            {format(new Date(cardDueDate), "MMM dd 'at' h aaaa")}
+        {cardDueDate && (
+          <Box>
+            <Typography className={classes.label}>Due Date</Typography>
+            <Box className={classes.chip} bgcolor="gray">
+              {format(new Date(cardDueDate), "MMM dd 'at' h:m aaaa")}
+            </Box>
           </Box>
-        </Box>
+        )}
       </Box>
     </>
   );

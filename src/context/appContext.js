@@ -14,7 +14,8 @@ const AppContextProvider = (props) => {
       title,
       id: uuidv4(),
       description: "",
-      labels: []
+      labels: [],
+      dueDate: ""
     };
     const list = data.lists[listId];
     list.cards = [...list.cards, newCard];
