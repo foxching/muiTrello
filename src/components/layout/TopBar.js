@@ -1,11 +1,11 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, fade } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
-//import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
+import Hidden from "@material-ui/core/Hidden";
 import Toolbar from "@material-ui/core/Toolbar";
-//import Typography from "@material-ui/core/Typography";
+import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,20 +14,45 @@ const useStyles = makeStyles((theme) => ({
     height: "30px",
     backgroundColor: "rgba(0, 0, 0, 0.15)"
   },
-  title: {
-    flexGrow: 1
-  },
-  btn: {
-    marginTop: "-20px",
-    color: "#fff",
-    backgroundColor: "#000"
-  },
-  input: {
-    fontSize: "1 rem",
-    fontWeight: "bold",
-    "&:focus": {
-      background: "#ddd"
+  iconContainer: {
+    background: "rgb(255,255,255, 0.4)",
+    padding: "6px 6px 6px 6px",
+    borderRadius: "3px",
+    marginTop: "5px",
+    marginBottom: "16px",
+    marginLeft: "5px",
+    "&:hover": {
+      background: fade("#fff", 0.25)
     }
+  },
+  icon: {
+    color: "#fff",
+    fontSize: "20px",
+    cursor: "pointer",
+    display: "inline-flex",
+    verticalAlign: "top"
+  },
+  inputRoot: {
+    color: "inherit"
+  },
+  inputInput: {
+    padding: theme.spacing(0, 0, 0, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(0.5em + ${theme.spacing(0)}px)`,
+    //transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "15ch"
+      // "&:focus": {
+      //   width: "20ch"
+      // }
+    }
+  },
+  title: {
+    flexGrow: 0.4
+  },
+  title2: {
+    flexGrow: 0.6
   }
 }));
 export default function TopBar({ open, setOpen }) {
@@ -36,166 +61,82 @@ export default function TopBar({ open, setOpen }) {
   return (
     <AppBar position="static" className={classes.appbar} elevation={0}>
       <Toolbar
-        style={{
-          display: "flex",
-          justifyContent: "space-between"
-        }}
+        component="nav"
+        style={{ height: "10px" }}
+        variant="dense"
+        disableGutters="true"
       >
-        <Box
-          id="container"
+        <Box className={classes.iconContainer}>
+          <Icon className={classes.icon}>drag_indicator</Icon>
+        </Box>
+        <Hidden xsDown>
+          <Box className={classes.iconContainer}>
+            <Icon className={classes.icon}>home</Icon>
+          </Box>
+        </Hidden>
+        <Box className={classes.iconContainer}>
+          <Icon className={classes.icon}>dashboard</Icon>
+          <Hidden xsDown>
+            <span style={{ margin: "5px", lineHeight: "15px" }}>Boards</span>
+          </Hidden>
+        </Box>
+        <Box className={classes.iconContainer}>
+          <Icon className={classes.icon}>search</Icon>
+          <Hidden xsDown>
+            <InputBase
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput
+              }}
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Hidden>
+        </Box>
+        <div className={classes.title} />
+        <div
           style={{
             display: "flex",
-            justifyContent: "flex-start",
-            marginTop: "-20px",
-            width: "30%",
-            marginLeft: "-20px"
+            justifyContent: "center",
+            alignItems: "center"
           }}
         >
-          <Box
+          <Icon
             style={{
-              background: "rgb(255,255,255, 0.4)",
-              padding: "4px 4px 0px 4px",
-              border: "2px",
-              borderRadius: "3px",
-              marginBottom: "8px",
-              marginRight: "9px"
+              color: "#fff",
+              fontSize: "30px",
+              cursor: "pointer",
+              marginBottom: "10px"
             }}
           >
-            <Icon
-              style={{ color: "#fff", fontSize: "24px", cursor: "pointer" }}
-            >
-              home
-            </Icon>
-          </Box>
-          <Box
+            dashboard
+          </Icon>
+          <Typography
             style={{
-              background: "rgb(255,255,255, 0.4)",
-              padding: "4px 4px 0px 4px",
-              border: "2px",
-              borderRadius: "3px",
-              marginBottom: "8px",
-              marginRight: "9px",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center"
+              fontFamily: "'Lobster', cursive",
+              fontSize: "24px",
+              color: "#fff",
+              marginTop: "5px",
+              marginBottom: "12px"
             }}
           >
-            <Icon
-              style={{ color: "#fff", fontSize: "24px", cursor: "pointer" }}
-            >
-              list_alt
-            </Icon>
-            <Box style={{ color: "#fff", marginTop: 0 }}>Boards</Box>
-          </Box>
-          <Box
-            style={{
-              background: "rgb(255,255,255, 0.4)",
-              padding: "4px 4px 0px 4px",
-              border: "2px",
-              borderRadius: "3px",
-              marginBottom: "8px",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              width: "50%"
-            }}
-          >
-            <InputBase className={classes.input} />
-            <Icon
-              style={{ color: "#fff", fontSize: "24px", cursor: "pointer" }}
-            >
-              search
-            </Icon>
-          </Box>
-        </Box>
+            Trello
+          </Typography>
+        </div>
 
-        <Box
-          style={{
-            fontFamily: "'Lobster', cursive",
-            fontSize: "30px",
-            marginTop: "-30px",
-            color: "#fff"
-          }}
-        >
-          Trello
+        <div className={classes.title2} />
+        <Box className={classes.iconContainer}>
+          <Icon className={classes.icon}>add</Icon>
         </Box>
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            marginTop: "-20px",
-            width: "10%",
-            marginLeft: "-20px"
-          }}
-        >
-          <Box
-            style={{
-              background: "rgb(255,255,255, 0.4)",
-              padding: "4px 4px 0px 4px",
-              border: "2px",
-              borderRadius: "3px",
-              marginBottom: "6px",
-              marginRight: "9px"
-            }}
-          >
-            <Icon
-              style={{ color: "#fff", fontSize: "24px", cursor: "pointer" }}
-            >
-              add
-            </Icon>
+        <Hidden xsDown>
+          <Box className={classes.iconContainer}>
+            <Icon className={classes.icon}>info</Icon>
           </Box>
-          <Box
-            style={{
-              background: "rgb(255,255,255, 0.4)",
-              padding: "4px 4px 0px 4px",
-              border: "2px",
-              borderRadius: "3px",
-              marginBottom: "6px",
-              marginRight: "9px"
-            }}
-          >
-            <Icon
-              style={{ color: "#fff", fontSize: "24px", cursor: "pointer" }}
-            >
-              info
-            </Icon>
-          </Box>
-
-          <Box
-            style={{
-              background: "rgb(255,255,255, 0.4)",
-              padding: "4px 4px 0px 4px",
-              border: "2px",
-              borderRadius: "3px",
-              marginBottom: "6px",
-              marginRight: "9px"
-            }}
-          >
-            <Icon
-              style={{ color: "#fff", fontSize: "24px", cursor: "pointer" }}
-            >
-              notifications
-            </Icon>
-          </Box>
-          <Box
-            style={{
-              background: "rgb(255,255,255, 0.4)",
-              padding: "4px 4px 0px 4px",
-              border: "2px",
-              borderRadius: "3px",
-              marginBottom: "6px",
-              marginRight: "9px"
-            }}
-          >
-            <Icon
-              style={{ color: "#fff", fontSize: "24px", cursor: "pointer" }}
-              onClick={() => setOpen(!open)}
-            >
-              face
-            </Icon>
-          </Box>
+        </Hidden>
+        <Box className={classes.iconContainer}>
+          <Icon className={classes.icon}>notifications</Icon>
+        </Box>
+        <Box className={classes.iconContainer} style={{ marginRight: "3px" }}>
+          <Icon className={classes.icon}>face</Icon>
         </Box>
       </Toolbar>
     </AppBar>
