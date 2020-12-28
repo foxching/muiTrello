@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
@@ -10,8 +11,8 @@ import InputBase from "@material-ui/core/InputBase";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    minHeight: "6vh",
-    height: "30px",
+    // minHeight: "6vh",
+    height: "39px",
     backgroundColor: "rgba(0, 0, 0, 0.15)"
   },
   iconContainer: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "6px 6px 6px 6px",
     borderRadius: "3px",
     marginTop: "5px",
-    marginBottom: "16px",
+    marginBottom: "12px",
     marginLeft: "5px",
     "&:hover": {
       background: fade("#fff", 0.25)
@@ -59,86 +60,111 @@ export default function TopBar({ open, setOpen }) {
   const classes = useStyles();
 
   return (
-    <AppBar position="static" className={classes.appbar} elevation={0}>
-      <Toolbar
-        component="nav"
-        style={{ height: "10px" }}
-        variant="dense"
-        disableGutters="true"
-      >
-        <Box className={classes.iconContainer}>
-          <Icon className={classes.icon}>drag_indicator</Icon>
-        </Box>
-        <Hidden xsDown>
-          <Box className={classes.iconContainer}>
-            <Icon className={classes.icon}>home</Icon>
-          </Box>
-        </Hidden>
-        <Box className={classes.iconContainer}>
-          <Icon className={classes.icon}>dashboard</Icon>
-          <Hidden xsDown>
-            <span style={{ margin: "5px", lineHeight: "15px" }}>Boards</span>
-          </Hidden>
-        </Box>
-        <Box className={classes.iconContainer}>
-          <Icon className={classes.icon}>search</Icon>
-          <Hidden xsDown>
-            <InputBase
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Hidden>
-        </Box>
-        <div className={classes.title} />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
+    <div>
+      <AppBar position="static" className={classes.appbar} elevation={0}>
+        <Toolbar
+          component="nav"
+          style={{ height: "10px" }}
+          variant="dense"
+          disableGutters="true"
         >
-          <Icon
-            style={{
-              color: "#fff",
-              fontSize: "30px",
-              cursor: "pointer",
-              marginBottom: "10px"
-            }}
-          >
-            dashboard
-          </Icon>
-          <Typography
-            style={{
-              fontFamily: "'Lobster', cursive",
-              fontSize: "24px",
-              color: "#fff",
-              marginTop: "5px",
-              marginBottom: "12px"
-            }}
-          >
-            Trello
-          </Typography>
-        </div>
-
-        <div className={classes.title2} />
-        <Box className={classes.iconContainer}>
-          <Icon className={classes.icon}>add</Icon>
-        </Box>
-        <Hidden xsDown>
           <Box className={classes.iconContainer}>
-            <Icon className={classes.icon}>info</Icon>
+            <Icon className={classes.icon}>drag_indicator</Icon>
           </Box>
-        </Hidden>
-        <Box className={classes.iconContainer}>
-          <Icon className={classes.icon}>notifications</Icon>
-        </Box>
-        <Box className={classes.iconContainer} style={{ marginRight: "3px" }}>
-          <Icon className={classes.icon}>face</Icon>
-        </Box>
-      </Toolbar>
-    </AppBar>
+          <Hidden xsDown>
+            <Box className={classes.iconContainer}>
+              <Link to="/boards">
+                <Icon className={classes.icon}>home</Icon>
+              </Link>
+            </Box>
+          </Hidden>
+          <Box className={classes.iconContainer}>
+            <Link
+              to="/sss"
+              style={{
+                textDecoration: "none",
+                fontWeight: "bold"
+              }}
+            >
+              <Icon className={classes.icon}>dashboard</Icon>
+              <Hidden xsDown>
+                <span
+                  style={{
+                    margin: "5px",
+                    lineHeight: "15px",
+                    color: "#fff",
+                    textDecoration: "none"
+                  }}
+                >
+                  Boards
+                </span>
+              </Hidden>
+            </Link>
+          </Box>
+          <Box className={classes.iconContainer}>
+            <Icon className={classes.icon}>search</Icon>
+            <Hidden xsDown>
+              <InputBase
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Hidden>
+          </Box>
+          <div className={classes.title} />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Icon
+              style={{
+                color: "#fff",
+                fontSize: "30px",
+                cursor: "pointer",
+                marginBottom: "10px"
+              }}
+            >
+              dashboard
+            </Icon>
+            <Typography
+              style={{
+                fontFamily: "'Lobster', cursive",
+                fontSize: "24px",
+                color: "#fff",
+                marginTop: "5px",
+                marginBottom: "12px"
+              }}
+            >
+              Trello
+            </Typography>
+          </div>
+
+          <div className={classes.title2} />
+          <Box className={classes.iconContainer}>
+            <Icon className={classes.icon}>add</Icon>
+          </Box>
+          <Hidden xsDown>
+            <Box className={classes.iconContainer}>
+              <Icon className={classes.icon}>info</Icon>
+            </Box>
+          </Hidden>
+          <Box className={classes.iconContainer}>
+            <Icon className={classes.icon}>notifications</Icon>
+          </Box>
+          <Box
+            className={classes.iconContainer}
+            style={{ marginRight: "3px" }}
+            onClick={() => setOpen(true)}
+          >
+            <Icon className={classes.icon}>face</Icon>
+          </Box>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }

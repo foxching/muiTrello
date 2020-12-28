@@ -7,30 +7,30 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "300px"
-  },
   addCard: {
-    padding: theme.spacing(1, 1, 1, 2),
+    padding: theme.spacing(1, 1, 1, 1),
     margin: theme.spacing(1),
-    backgroundColor: "#EBECF0",
+    backgroundColor: (props) =>
+      props.type === "list" ? "rgb(255,255,255, 0.15)" : "#EBECF0",
     "&:hover": {
-      background: fade("#424242", 0.25),
+      background: (props) =>
+        props.type === "list" ? fade("#FFFFFF", 0.5) : fade("#424242", 0.25),
       cursor: "pointer"
     }
   },
   inputName: {
     fontWeight: "400",
-    color: theme.palette.grey[500]
+    color: (props) => (props.type === "list" ? "#fff" : theme.palette.grey[500])
   }
 }));
 
-export default function Input({ listId, type }) {
+export default function Input(props) {
   const [open, setOpen] = useState(false);
-  const classes = useStyles();
+  const { listId, type } = props;
+  const classes = useStyles(props);
 
   return (
-    <Box className={classes.root}>
+    <Box>
       <Collapse in={open}>
         <InputCard setOpen={setOpen} listId={listId} type={type} />
       </Collapse>

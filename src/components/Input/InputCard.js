@@ -10,15 +10,18 @@ import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    width: "280px",
-    margin: theme.spacing(1, 1, 1, 1),
-    paddingBottom: theme.spacing(4)
+    padding: theme.spacing(1, 1, 1, 0),
+    margin: theme.spacing(1),
+    alignItems: "center",
+    display: "flex",
+    width: "300px",
+    justifyContent: "space-between"
   },
   input: {
     margin: theme.spacing(1)
   },
   confirmContainer: {
-    margin: theme.spacing(0, 1, 1, 1)
+    margin: theme.spacing(1, 1, 1, 1)
   },
   confirm: {
     background: "#5AAC44",
@@ -28,10 +31,11 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
-export default function InputCard({ setOpen, listId, type }) {
+export default function InputCard(props) {
   const [cardTitle, setCardTitle] = useState("");
+  const { setOpen, listId, type } = props;
   const { addCard, addList } = useContext(AppContext);
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   const handleChange = (e) => {
     setCardTitle(e.target.value);
@@ -48,31 +52,33 @@ export default function InputCard({ setOpen, listId, type }) {
   };
 
   return (
-    <Box>
-      <Box>
-        <Paper className={classes.card}>
-          <InputBase
-            autoFocus
-            onChange={handleChange}
-            onBlur={() => setOpen(false)}
-            multiline
-            fullWidth
-            inputProps={{ className: classes.input }}
-            placeholder={
-              type === "list" ? "Enter list title" : "Enter card text.."
-            }
-            value={cardTitle}
-          />
-        </Paper>
-      </Box>
+    <>
+      <Paper className={classes.card}>
+        <InputBase
+          autoFocus
+          onChange={handleChange}
+          onBlur={() => setOpen(false)}
+          multiline
+          inputProps={{ className: classes.input }}
+          placeholder={
+            type === "list" ? "Enter list title" : "Enter card text.."
+          }
+          value={cardTitle}
+        />
+      </Paper>
+
       <Box className={classes.confirmContainer}>
-        <Button className={classes.confirm} onClick={handleAddtoCard}>
+        <Button
+          size="small"
+          className={classes.confirm}
+          onClick={handleAddtoCard}
+        >
           {type === "list" ? "Add List" : "Add Card"}
         </Button>
         <IconButton onClick={() => setOpen(false)}>
           <ClearIcon />
         </IconButton>
       </Box>
-    </Box>
+    </>
   );
 }

@@ -7,22 +7,15 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import AccessAlarmsIcon from "@material-ui/icons/AccessAlarms";
-import CommentIcon from "@material-ui/icons/Comment";
 import CardModal from "./CardModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(1, 1, 1, 1),
+    padding: theme.spacing(0.5, 1, 0.5, 1),
     margin: theme.spacing(1),
     alignItems: "center",
     display: "flex",
-    justifyContent: "space-between",
-    "& .button": {
-      opacity: 0
-    },
-    "&:hover .button": {
-      opacity: 2
-    }
+    justifyContent: "space-between"
   },
   label: {
     color: "white",
@@ -100,12 +93,12 @@ export default function Card({ card, listTitle, listId, index }) {
                     </Box>
                   )}
 
-                  <Box className={classes.boxContainer}>
+                  {/* <Box className={classes.boxContainer}>
                     <CommentIcon className={classes.icon} />
                     <Typography variant="body2" className={classes.caption}>
                       100
                     </Typography>
-                  </Box>
+                  </Box> */}
                 </Grid>
               </Grid>
             </Paper>

@@ -7,13 +7,21 @@ import Paper from "@material-ui/core/Paper";
 import ListTitle from "./ListTitle";
 import Card from ".././Card/Card";
 import Input from "../Input/Input";
+import "simplebar/dist/simplebar.min.css";
+//import SimpleBar from "simplebar-react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#EBECF0",
-    width: "300px",
     marginLeft: theme.spacing(1),
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    overflowX: "auto"
+  },
+  mainroot: {
+    maxHeight: "340px",
+    minHeight: "120px",
+    margin: "2px",
+    scrollMarginTop: "10px"
   }
 }));
 
@@ -38,11 +46,10 @@ export default function ListItem({ list, listId, index }) {
                     />
                   ))}
                   {provided.placeholder}
+                  <Input type="card" listId={listId} />
                 </div>
               )}
             </Droppable>
-
-            <Input listId={listId} />
           </Paper>
         </Box>
       )}
