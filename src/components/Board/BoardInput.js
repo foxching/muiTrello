@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, fade } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme, props) => ({
   root: {
@@ -10,23 +9,25 @@ const useStyles = makeStyles((theme, props) => ({
     margin: theme.spacing(1),
     width: "180px",
     height: "100px",
-    backgroundColor: (props) => props.color
+    backgroundColor: fade("#EBECF0", 0.25),
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center"
   },
   name: {
-    fontWeight: "500",
-    color: "#fff",
-    textDecoration: "none"
+    fontWeight: "bold",
+    fontSize: "12px",
+    color: "#000"
   }
 }));
 
-export default function Board(props) {
-  const { name, id } = props;
+export default function BoardInput(props) {
   const classes = useStyles(props);
   return (
     <Paper className={classes.root}>
-      <Typography component={Link} to={`/board/${id}`} className={classes.name}>
-        {name}
-      </Typography>
+      <div />
+      <Typography className={classes.name}>Create new Board</Typography>
     </Paper>
   );
 }

@@ -10,7 +10,7 @@ export default function Trello() {
         style={{
           overflowY: "auto",
           overflowX: "auto",
-          minHeight: "94vh",
+          minHeight: "93vh",
           maxHeight: 300
         }}
       >

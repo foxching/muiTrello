@@ -12,7 +12,7 @@ import InputBase from "@material-ui/core/InputBase";
 const useStyles = makeStyles((theme) => ({
   appbar: {
     // minHeight: "6vh",
-    height: "39px",
+    height: "44px",
     backgroundColor: "rgba(0, 0, 0, 0.15)"
   },
   iconContainer: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "6px 6px 6px 6px",
     borderRadius: "3px",
     marginTop: "5px",
-    marginBottom: "12px",
+    marginBottom: "10px",
     marginLeft: "5px",
     "&:hover": {
       background: fade("#fff", 0.25)
@@ -134,10 +134,10 @@ export default function TopBar({ open, setOpen }) {
             <Typography
               style={{
                 fontFamily: "'Lobster', cursive",
-                fontSize: "24px",
+                fontSize: "26px",
                 color: "#fff",
                 marginTop: "5px",
-                marginBottom: "12px"
+                marginBottom: "10px"
               }}
             >
               Trello

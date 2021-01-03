@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@material-ui/core/Icon";
 import Grid from "@material-ui/core/Grid";
@@ -7,6 +7,7 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import BoardContainer from "../components/Board/BoardContainer";
+import BoardInput from "../components/Board/BoardInput";
 
 const boards = [
   { id: "board1", name: "Board 1", color: "pink" },
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TrelloBoard() {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
   return (
     <Box className={classes.root}>
       <Container maxWidth="md">
@@ -43,6 +45,7 @@ export default function TrelloBoard() {
               />
             </Grid>
           ))}
+          <BoardInput />
         </Grid>
       </Container>
     </Box>
