@@ -11,11 +11,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ListContainer() {
+export default function ListContainer({ id }) {
   const { data, onDragEnd } = useContext(AppContext);
   const classes = useStyles();
 
   useEffect(() => {}, [data]);
+  const board = data.boards[id];
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -26,8 +27,9 @@ export default function ListContainer() {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {data.listIds.map((listId, index) => {
-              const list = data.lists[listId];
+            {board.listIds.map((listId, index) => {
+              const list = board.lists[listId];
+              console.log(list);
               return (
                 <ListItem
                   listId={listId}
@@ -37,6 +39,7 @@ export default function ListContainer() {
                 />
               );
             })}
+
             {provided.placeholder}
             <Input type="list" />
           </div>

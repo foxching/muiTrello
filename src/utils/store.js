@@ -13,25 +13,37 @@ const cards = [
 ];
 
 const data = {
-  lists: {
-    "list-1": {
-      id: "list-1",
-      title: "Todo",
-      cards
+  boards: {
+    "board-1": {
+      id: "board-1",
+      title: "board 1",
+      color: "pink",
+      listIds: ["list-1"],
+      lists: {
+        "list-1": {
+          id: "list-1",
+          cards,
+          title: "My List",
+          boardId: "board-1"
+        }
+      }
+    },
+    "board-2": {
+      id: "board-2",
+      title: "board 2",
+      color: "brown",
+      listIds: ["list-2"],
+      lists: {
+        "list-2": {
+          id: "list-2",
+          cards,
+          title: "Todo",
+          boardId: "board-2"
+        }
+      }
     }
   },
-  listIds: ["list-1"]
+  boardIds: ["board-1", "board-2"]
 };
-
-//other data format
-// const dataTwo = {
-//   "board-0": {
-//     id: "board-0",
-//     lists: ["list-0"],
-//     title: "myboard"
-//   },
-//   listIds: ["list-1"],
-//   boardIds: ["board-1"]
-// };
 
 export default data;

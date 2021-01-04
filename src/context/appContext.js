@@ -126,18 +126,23 @@ const AppContextProvider = (props) => {
   };
 
   //handle update title of list
-  const changeListTitle = (newTitle, listId) => {
-    const list = data.lists[listId];
+  const changeListTitle = (newTitle, listId, boardId) => {
+    const board = data.boards[boardId];
+    const list = board.lists[listId];
     list.title = newTitle;
 
     const newCardState = {
       ...data,
-      lists: {
-        ...data.lists,
-        [listId]: list
+      boards: {
+        ...data.boards,
+        [boardId]: {
+          ...board,
+          lists: {
+            [listId]: list
+          }
+        }
       }
     };
-
     setData(newCardState);
   };
 

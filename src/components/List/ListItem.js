@@ -32,7 +32,11 @@ export default function ListItem({ list, listId, index }) {
       {(provided) => (
         <Box ref={provided.innerRef} {...provided.draggableProps}>
           <Paper className={classes.root} {...provided.dragHandleProps}>
-            <ListTitle title={list.title} listId={listId} />
+            <ListTitle
+              title={list.title}
+              listId={listId}
+              boardId={list.boardId}
+            />
             <Droppable droppableId={list.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>

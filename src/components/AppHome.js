@@ -20,9 +20,8 @@ export default function AppHome() {
       >
         <Navbar />
         <Switch>
-          <Route path="/" component={Home} exact={true} />
-          <Route path="/boards" component={TrelloBoards} />
-          <Route path="/board/:id" component={TrelloList} />
+          <Route exact path="/" component={TrelloBoards} />
+          <Route path="/:id" component={TrelloList} />
         </Switch>
       </div>
     </BrowserRouter>

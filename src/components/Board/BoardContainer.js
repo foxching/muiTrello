@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme, props) => ({
   }
 }));
 
-export default function Board(props) {
+export default function BoardContainer(props) {
   const { name, id } = props;
   const classes = useStyles(props);
   return (
     <Paper className={classes.root}>
-      <Typography component={Link} to={`/board/${id}`} className={classes.name}>
+      <Typography component={Link} to={`/${id}`} className={classes.name}>
         {name}
       </Typography>
     </Paper>

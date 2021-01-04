@@ -27,7 +27,12 @@ export default function BoardInput(props) {
   return (
     <Paper className={classes.root}>
       <div />
-      <Typography className={classes.name}>Create new Board</Typography>
+      <Typography
+        className={classes.name}
+        onClick={() => props.handleClickOpen(true)}
+      >
+        Create new Board
+      </Typography>
     </Paper>
   );
 }
