@@ -106,20 +106,29 @@ const AppContextProvider = (props) => {
   };
 
   //handle adding new list
-  const addList = (title) => {
+  const addList = (title, boardId) => {
+    const board = data.boards[boardId];
     const newListId = uuidv4();
 
     const newList = {
       id: newListId,
       title,
-      cards: []
+      cards: [],
+      boardId: boardId
     };
 
     const newCardState = {
-      listIds: [...data.listIds, newListId],
-      lists: {
-        ...data.lists,
-        [newListId]: newList
+      ...data,
+      boards: {
+        ...data.boards,
+        [boardId]: {
+          ...board,
+          listIds: [...board.listIds, newListId],
+          lists: {
+            ...board.lists,
+            [newListId]: newList
+          }
+        }
       }
     };
     setData(newCardState);

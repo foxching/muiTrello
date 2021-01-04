@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function InputCard(props) {
   const [cardTitle, setCardTitle] = useState("");
-  const { setOpen, listId, type } = props;
+  const { setOpen, listId, type, boardId } = props;
   const { addCard, addList } = useContext(AppContext);
   const classes = useStyles(props);
 
@@ -43,7 +43,7 @@ export default function InputCard(props) {
 
   const handleAddtoCard = () => {
     if (type === "list") {
-      addList(cardTitle);
+      addList(cardTitle, boardId);
     } else {
       addCard(cardTitle, listId);
     }
