@@ -155,13 +155,23 @@ const AppContextProvider = (props) => {
     setData(newCardState);
   };
 
-  const deleteList = (listId) => {
-    const listsIds = [...data.listIds.filter((Id) => Id !== listId)];
-    const lists = { ...data.lists };
+  const deleteList = (listId, boardId) => {
+    const board = data.boards[boardId];
+    const listsIds = [...board.listIds.filter((Id) => Id !== listId)];
+    const lists = { ...board.lists };
     delete lists[listId];
     const newCardState = {
-      listIds: listsIds,
-      lists
+      ...data,
+      boards: {
+        ...data.boards,
+        [boardId]: {
+          ...board,
+          listIds: listsIds,
+          lists: {
+            ...lists
+          }
+        }
+      }
     };
     setData(newCardState);
   };

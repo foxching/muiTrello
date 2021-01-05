@@ -72,7 +72,7 @@ export default function ListTitle({ title, listId, boardId }) {
           >
             {title}
           </Typography>
-          <MenuOption listId={listId} />
+          <MenuOption listId={listId} boardId={boardId} />
         </Box>
       )}
     </Box>

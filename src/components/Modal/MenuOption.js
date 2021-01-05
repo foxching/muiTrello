@@ -13,7 +13,7 @@ const options = ["Add Card...", "Delete this List..", "Move List.."];
 
 const ITEM_HEIGHT = 48;
 
-export default function MenuOption({ listId }) {
+export default function MenuOption({ listId, boardId }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { deleteList } = useContext(AppContext);
@@ -28,7 +28,7 @@ export default function MenuOption({ listId }) {
 
   const handleClick = (option) => {
     if (option === "Delete this List..") {
-      deleteList(listId);
+      deleteList(listId, boardId);
     }
     setAnchorEl(null);
   };
