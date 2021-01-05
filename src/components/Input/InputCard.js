@@ -45,7 +45,7 @@ export default function InputCard(props) {
     if (type === "list") {
       addList(cardTitle, boardId);
     } else {
-      addCard(cardTitle, listId);
+      addCard(cardTitle, listId, boardId);
     }
     setOpen(false);
     setCardTitle("");

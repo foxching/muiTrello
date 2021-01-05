@@ -50,7 +50,7 @@ export default function ListItem({ list, listId, index }) {
                     />
                   ))}
                   {provided.placeholder}
-                  <Input type="card" listId={listId} />
+                  <Input type="card" listId={listId} boardId={list.boardId} />
                 </div>
               )}
             </Droppable>

@@ -9,7 +9,7 @@ const AppContextProvider = (props) => {
   const [background, setBackground] = useState("green");
 
   //handle new card
-  const addCard = (title, listId) => {
+  const addCard = (title, listId, boardId) => {
     const newCard = {
       title,
       id: uuidv4(),
@@ -17,14 +17,20 @@ const AppContextProvider = (props) => {
       labels: [],
       dueDate: ""
     };
-    const list = data.lists[listId];
+    const board = data.boards[boardId];
+    const list = board.lists[listId];
     list.cards = [...list.cards, newCard];
-
     const newCardState = {
       ...data,
-      lists: {
-        ...data.lists,
-        [listId]: list
+      boards: {
+        ...data.boards,
+        [boardId]: {
+          ...board,
+          lists: {
+            ...board.lists,
+            [listId]: list
+          }
+        }
       }
     };
     setData(newCardState);
