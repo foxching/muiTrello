@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme, props) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(1, 1, 1, 1),
     margin: theme.spacing(1),
@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme, props) => ({
   }
 }));
 
-export default function BoardContainer(props) {
-  const { name, id } = props;
+export default function BoardThumbnail(props) {
+  const { title, id } = props;
   const classes = useStyles(props);
   return (
     <Paper className={classes.root}>
       <Typography component={Link} to={`/${id}`} className={classes.name}>
-        {name}
+        {title}
       </Typography>
     </Paper>
   );

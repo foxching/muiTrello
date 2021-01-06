@@ -21,7 +21,7 @@ export default function AppHome() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={TrelloBoards} />
-          <Route path="/:id" component={TrelloList} />
+          <Route path="/:boardId" component={TrelloList} />
         </Switch>
       </div>
     </BrowserRouter>

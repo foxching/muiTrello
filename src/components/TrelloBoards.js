@@ -6,16 +6,9 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import BoardContainer from "../components/Board/BoardContainer";
-// import BoardInput from "../components/Board/BoardInput";
+import BoardThumbnail from "../components/Board/BoardThumbnail";
 import BoardInputModal from "../components/Board/BoardInputModal";
 import { AppContext } from ".././context/appContext";
-
-// const boards = [
-//   { id: "board1", name: "Board 1", color: "pink" },
-//   { id: "board2", name: "Board 2", color: "green" },
-//   { id: "board3", name: "Board 3", color: "brown" }
-// ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TrelloBoard() {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const { data } = useContext(AppContext);
 
   return (
@@ -43,10 +35,10 @@ export default function TrelloBoard() {
           {data.boardIds.map((boardId) => {
             const board = data.boards[boardId];
             return (
-              <Grid item xs={6} lg={3} md={3}>
-                <BoardContainer
+              <Grid key={boardId} item xs={6} lg={3} md={3}>
+                <BoardThumbnail
                   color={board.color}
-                  name={board.title}
+                  title={board.title}
                   id={board.id}
                 />
               </Grid>

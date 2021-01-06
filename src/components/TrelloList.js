@@ -14,7 +14,7 @@ export default function Trello(props) {
           maxHeight: 300
         }}
       >
-        <ListContainer id={props.match.params.id} />
+        <ListContainer boardId={props.match.params.boardId} />
       </SimpleBar>
     </>
   );
