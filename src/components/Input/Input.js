@@ -26,18 +26,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Input(props) {
   const [open, setOpen] = useState(false);
-  const { listId, type, boardId } = props;
+  const { listId, type } = props;
   const classes = useStyles(props);
 
   return (
     <Box>
       <Collapse in={open}>
-        <InputCard
-          setOpen={setOpen}
-          listId={listId}
-          type={type}
-          boardId={boardId}
-        />
+        <InputCard setOpen={setOpen} listId={listId} type={type} />
       </Collapse>
       <Collapse in={!open}>
         <Paper

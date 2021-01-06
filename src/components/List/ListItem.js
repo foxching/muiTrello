@@ -25,32 +25,28 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ListItem({ list, listId, index }) {
+export default function ListItem({ list, index }) {
   const classes = useStyles();
   return (
     <Draggable draggableId={list.id} index={index}>
       {(provided) => (
         <Box ref={provided.innerRef} {...provided.draggableProps}>
           <Paper className={classes.root} {...provided.dragHandleProps}>
-            <ListTitle
-              title={list.title}
-              listId={listId}
-              boardId={list.boardId}
-            />
+            <ListTitle title={list.title} listId={list.id} />
             <Droppable droppableId={list.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   {list.cards.map((card, index) => (
                     <Card
                       key={card.id}
-                      listId={listId}
+                      listId={list.id}
                       listTitle={list.title}
                       card={card}
                       index={index}
                     />
                   ))}
                   {provided.placeholder}
-                  <Input type="card" listId={listId} boardId={list.boardId} />
+                  <Input type="card" listId={list.id} />
                 </div>
               )}
             </Droppable>

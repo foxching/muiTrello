@@ -1,6 +1,7 @@
 const cards = [
   {
     id: "card-1",
+    listId: "list-1",
     title: "Learning how to cook ",
     description:
       "This is the most challenging project that i have ever been developed, so this is it.",
@@ -27,23 +28,9 @@ const data = {
           boardId: "board-1"
         }
       }
-    },
-    "board-2": {
-      id: "board-2",
-      title: "board 2",
-      color: "brown",
-      listIds: ["list-2"],
-      lists: {
-        "list-2": {
-          id: "list-2",
-          cards,
-          title: "Todo",
-          boardId: "board-2"
-        }
-      }
     }
   },
-  boardIds: ["board-1", "board-2"]
+  boardIds: ["board-1"]
 };
 
 export default data;

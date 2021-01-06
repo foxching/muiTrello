@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ListTitle({ title, listId, boardId }) {
+export default function ListTitle({ title, listId }) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const { changeListTitle } = useContext(AppContext);
@@ -39,7 +39,7 @@ export default function ListTitle({ title, listId, boardId }) {
 
   const handleOnBlur = () => {
     if (newTitle !== "") {
-      changeListTitle(newTitle, listId, boardId);
+      changeListTitle(newTitle, listId);
       setOpen(!open);
     }
   };
@@ -72,7 +72,7 @@ export default function ListTitle({ title, listId, boardId }) {
           >
             {title}
           </Typography>
-          <MenuOption listId={listId} boardId={boardId} />
+          <MenuOption listId={listId} />
         </Box>
       )}
     </Box>

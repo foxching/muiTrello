@@ -11,12 +11,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ListContainer({ id }) {
-  const { data, onDragEnd } = useContext(AppContext);
+export default function ListContainer({ boardId }) {
+  const { data, onDragEnd, setActiveBoard } = useContext(AppContext);
   const classes = useStyles();
 
-  useEffect(() => {}, [data]);
-  const board = data.boards[id];
+  useEffect(() => {
+    setActiveBoard(boardId);
+  }, [setActiveBoard, boardId]);
+
+  const board = data.boards[boardId];
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -29,19 +32,11 @@ export default function ListContainer({ id }) {
           >
             {board.listIds.map((listId, index) => {
               const list = board.lists[listId];
-              console.log(list);
-              return (
-                <ListItem
-                  listId={listId}
-                  key={listId}
-                  list={list}
-                  index={index}
-                />
-              );
+              return <ListItem key={listId} list={list} index={index} />;
             })}
 
             {provided.placeholder}
-            <Input type="list" boardId={id} />
+            <Input type="list" />
           </div>
         )}
       </Droppable>

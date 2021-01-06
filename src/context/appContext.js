@@ -6,10 +6,11 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   const [data, setData] = useState(store);
+  const [activeBoard, setActiveBoard] = useState("");
   const [background, setBackground] = useState("green");
 
   //handle new card
-  const addCard = (title, listId, boardId) => {
+  const addCard = (title, listId) => {
     const newCard = {
       title,
       id: uuidv4(),
@@ -17,14 +18,14 @@ const AppContextProvider = (props) => {
       labels: [],
       dueDate: ""
     };
-    const board = data.boards[boardId];
+    const board = data.boards[activeBoard];
     const list = board.lists[listId];
     list.cards = [...list.cards, newCard];
     const newCardState = {
       ...data,
       boards: {
         ...data.boards,
-        [boardId]: {
+        [activeBoard]: {
           ...board,
           lists: {
             ...board.lists,
@@ -37,8 +38,8 @@ const AppContextProvider = (props) => {
   };
 
   const editCardProps = (value, listId, cardId, type) => {
-    console.log(value, listId, cardId, type);
-    const list = data.lists[listId];
+    const board = data.boards[activeBoard];
+    const list = board.lists[listId];
     const card = list.cards.find((card) => card.id === cardId);
 
     //logic to add/remove labels
@@ -83,9 +84,15 @@ const AppContextProvider = (props) => {
 
     const newCardState = {
       ...data,
-      lists: {
-        ...data.lists,
-        [listId]: newList
+      boards: {
+        ...data.boards,
+        [activeBoard]: {
+          ...board,
+          lists: {
+            ...board.lists,
+            [listId]: newList
+          }
+        }
       }
     };
     setData(newCardState);
@@ -93,7 +100,8 @@ const AppContextProvider = (props) => {
 
   //delete card
   const deleteCard = (cardId, listId) => {
-    const list = data.lists[listId];
+    const board = data.boards[activeBoard];
+    const list = board.lists[listId];
     const cards = list.cards.filter((card) => card.id !== cardId);
 
     const newList = {
@@ -103,31 +111,37 @@ const AppContextProvider = (props) => {
 
     const newCardState = {
       ...data,
-      lists: {
-        ...data.lists,
-        [listId]: newList
+      boards: {
+        ...data.boards,
+        [activeBoard]: {
+          ...board,
+          lists: {
+            ...board.lists,
+            [listId]: newList
+          }
+        }
       }
     };
     setData(newCardState);
   };
 
   //handle adding new list
-  const addList = (title, boardId) => {
-    const board = data.boards[boardId];
+  const addList = (title) => {
+    const board = data.boards[activeBoard];
     const newListId = uuidv4();
 
     const newList = {
       id: newListId,
       title,
       cards: [],
-      boardId: boardId
+      boardId: activeBoard
     };
 
     const newCardState = {
       ...data,
       boards: {
         ...data.boards,
-        [boardId]: {
+        [activeBoard]: {
           ...board,
           listIds: [...board.listIds, newListId],
           lists: {
@@ -141,8 +155,8 @@ const AppContextProvider = (props) => {
   };
 
   //handle update title of list
-  const changeListTitle = (newTitle, listId, boardId) => {
-    const board = data.boards[boardId];
+  const changeListTitle = (newTitle, listId) => {
+    const board = data.boards[activeBoard];
     const list = board.lists[listId];
     list.title = newTitle;
 
@@ -150,7 +164,7 @@ const AppContextProvider = (props) => {
       ...data,
       boards: {
         ...data.boards,
-        [boardId]: {
+        [activeBoard]: {
           ...board,
           lists: {
             [listId]: list
@@ -161,8 +175,8 @@ const AppContextProvider = (props) => {
     setData(newCardState);
   };
 
-  const deleteList = (listId, boardId) => {
-    const board = data.boards[boardId];
+  const deleteList = (listId) => {
+    const board = data.boards[activeBoard];
     const listsIds = [...board.listIds.filter((Id) => Id !== listId)];
     const lists = { ...board.lists };
     delete lists[listId];
@@ -170,7 +184,7 @@ const AppContextProvider = (props) => {
       ...data,
       boards: {
         ...data.boards,
-        [boardId]: {
+        [activeBoard]: {
           ...board,
           listIds: listsIds,
           lists: {
@@ -185,18 +199,19 @@ const AppContextProvider = (props) => {
   //handle drag and drop
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
+    const board = data.boards[activeBoard];
 
     if (!destination) return;
 
     if (type === "list") {
-      const newListIds = data.listIds;
+      const newListIds = board.listIds;
       newListIds.splice(source.index, 1);
       newListIds.splice(destination.index, 0, draggableId);
       return;
     }
 
-    const sourceList = data.lists[source.droppableId];
-    const destinationList = data.lists[destination.droppableId];
+    const sourceList = board.lists[source.droppableId];
+    const destinationList = board.lists[destination.droppableId];
     const draggingCard = sourceList.cards.filter(
       (card) => card.id === draggableId
     )[0];
@@ -239,7 +254,8 @@ const AppContextProvider = (props) => {
         deleteCard,
         onDragEnd,
         background,
-        setBackground
+        setBackground,
+        setActiveBoard
       }}
     >
       {props.children}

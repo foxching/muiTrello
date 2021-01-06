@@ -32,23 +32,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 export default function InputCard(props) {
-  const [cardTitle, setCardTitle] = useState("");
-  const { setOpen, listId, type, boardId } = props;
+  const [text, setText] = useState("");
+  const { setOpen, listId, type } = props;
   const { addCard, addList } = useContext(AppContext);
-  const classes = useStyles(props);
+  const classes = useStyles();
 
   const handleChange = (e) => {
-    setCardTitle(e.target.value);
+    setText(e.target.value);
   };
 
   const handleAddtoCard = () => {
     if (type === "list") {
-      addList(cardTitle, boardId);
+      addList(text);
     } else {
-      addCard(cardTitle, listId, boardId);
+      addCard(text, listId);
     }
     setOpen(false);
-    setCardTitle("");
+    setText("");
   };
 
   return (
@@ -63,7 +63,7 @@ export default function InputCard(props) {
           placeholder={
             type === "list" ? "Enter list title" : "Enter card text.."
           }
-          value={cardTitle}
+          value={text}
         />
       </Paper>
 
