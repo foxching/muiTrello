@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme, props) => ({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    cursor: "pointer"
   },
   name: {
     fontWeight: "bold",
