@@ -47,7 +47,7 @@ export default function ListItem(props) {
                     />
                   ))}
                   {provided.placeholder}
-                  <Input type="card" listId={list.id} />
+                  <Input type="card"  listId={listId} />
                 </div>
               )}
             </Droppable>

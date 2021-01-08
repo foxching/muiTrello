@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
 import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
 import { AppContext } from "../../context/appContext";
@@ -10,7 +9,9 @@ const useStyles = makeStyles((theme) => ({
   editableContainer: {
     display: "flex",
     margin: theme.spacing(1),
-    alignItems: "center"
+    justifyContent: "space-between",
+    alignItems: "center",
+    position: "relative"
   },
   editableTitle: {
     flexGrow: 1,
@@ -51,21 +52,19 @@ export default function ListTitle({ title, listId }) {
   };
 
   return (
-    <Box>
+    <>
       {open ? (
-        <Box>
-          <InputBase
-            autoFocus
-            value={newTitle}
-            inputProps={{ className: classes.input }}
-            fullWidth
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            onKeyDown={onKeyDownHandler}
-          />
-        </Box>
+        <InputBase
+          autoFocus
+          value={newTitle}
+          inputProps={{ className: classes.input }}
+          fullWidth
+          onChange={handleOnChange}
+          onBlur={handleOnBlur}
+          onKeyDown={onKeyDownHandler}
+        />
       ) : (
-        <Box className={classes.editableContainer}>
+        <div className={classes.editableContainer}>
           <Typography
             className={classes.editableTitle}
             onClick={() => setOpen(!open)}
@@ -73,8 +72,8 @@ export default function ListTitle({ title, listId }) {
             {title}
           </Typography>
           <MenuOption listId={listId} />
-        </Box>
+        </div>
       )}
-    </Box>
+    </>
   );
 }

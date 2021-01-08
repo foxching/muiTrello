@@ -41,9 +41,8 @@ export default function ListContainer({ boardId }) {
                 />
               );
             })}
-
             {provided.placeholder}
-            <Input type="list" />
+            <Input type="list" listId={null} />
           </div>
         )}
       </Droppable>
