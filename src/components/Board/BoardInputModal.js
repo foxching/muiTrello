@@ -38,14 +38,14 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer"
   },
   input: {
-    backgroundColor: "rgba(0, 0, 0, 0.005)",
+    backgroundColor: "rgba(0, 0, 0, 0.15)",
     color: "#fff",
     border: "2px",
     borderRadius: "3px",
     fontWeight: "bold",
     margin: theme.spacing(0, 1, 1, 1),
     "&:hover": {
-      background: fade("#ddd", 0.2)
+      background: fade("rgba(0, 0, 0, 0.2)", 0.2)
     }
   },
   select: {
@@ -61,6 +61,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "transparent",
     display: "flex",
     flexDirection: "column"
+  },
+  submitBtn: {
+    background: "#5AAC44",
+    color: "#fff",
+    "&:hover": {
+      background: fade("#5AAC44", 0.9)
+    }
   }
 }));
 
@@ -96,6 +103,7 @@ export default function BoardInputModal() {
     };
     addBoard(data);
     setBoardValue({ name: "", team: "rechie", color: "blue" });
+    setOpen(false);
   };
 
   return (
@@ -140,7 +148,13 @@ export default function BoardInputModal() {
                 marginTop: "10px"
               }}
             >
-              <Button type="submit" size="small" variant="contained">
+              <Button
+                type="submit"
+                size="small"
+                variant="contained"
+                disabled={boardValue.name === ""}
+                className={classes.submitBtn}
+              >
                 Create Board
               </Button>
             </div>

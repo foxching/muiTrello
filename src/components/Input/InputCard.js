@@ -45,7 +45,9 @@ export default function InputCard(props) {
     if (type === "list") {
       addList(text);
     } else {
-      addCard(text, listId);
+      if (text.length > 0) {
+        addCard(text, listId);
+      }
     }
     setOpen(false);
     setText("");
