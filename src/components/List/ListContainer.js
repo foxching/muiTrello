@@ -32,7 +32,14 @@ export default function ListContainer({ boardId }) {
           >
             {board.listIds.map((listId, index) => {
               const list = board.lists[listId];
-              return <ListItem key={listId} list={list} index={index} />;
+              return (
+                <ListItem
+                  key={listId}
+                  list={list}
+                  listId={listId}
+                  index={index}
+                />
+              );
             })}
 
             {provided.placeholder}

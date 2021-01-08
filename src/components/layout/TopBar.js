@@ -66,7 +66,7 @@ export default function TopBar({ open, setOpen }) {
           component="nav"
           style={{ height: "10px" }}
           variant="dense"
-          disableGutters="true"
+          disableGutters={true}
         >
           <Box className={classes.iconContainer}>
             <Icon className={classes.icon}>drag_indicator</Icon>

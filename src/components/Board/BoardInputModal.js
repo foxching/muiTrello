@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
@@ -11,6 +11,7 @@ import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import boxColors from "../../utils/boxcolors";
+import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -72,6 +73,7 @@ export default function BoardInputModal() {
   const [open, setOpen] = useState(false);
   const [activeBoxColor, setActiveBoxColor] = useState("blue");
   const classes = useStyles();
+  const { addBoard } = useContext(AppContext);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -92,7 +94,7 @@ export default function BoardInputModal() {
       team: boardValue.team,
       color: activeBoxColor
     };
-    console.log(data);
+    addBoard(data);
     setBoardValue({ name: "", team: "rechie", color: "blue" });
   };
 
@@ -102,7 +104,6 @@ export default function BoardInputModal() {
       <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="form-dialog-title"
         classes={{ paper: classes.dialog }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>

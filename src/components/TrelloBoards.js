@@ -36,11 +36,7 @@ export default function TrelloBoard() {
             const board = data.boards[boardId];
             return (
               <Grid key={boardId} item xs={6} lg={3} md={3}>
-                <BoardThumbnail
-                  color={board.color}
-                  title={board.title}
-                  id={board.id}
-                />
+                <BoardThumbnail board={board} />
               </Grid>
             );
           })}

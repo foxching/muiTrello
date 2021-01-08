@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     width: "180px",
     height: "100px",
-    backgroundColor: (props) => props.color
+    backgroundColor: ({ color }) => color
   },
   name: {
     fontWeight: "500",
@@ -20,12 +20,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BoardThumbnail(props) {
-  const { title, id } = props;
-  const classes = useStyles(props);
+  const { name, id } = props.board;
+  const classes = useStyles(props.board);
   return (
     <Paper className={classes.root}>
       <Typography component={Link} to={`/${id}`} className={classes.name}>
-        {title}
+        {name}
       </Typography>
     </Paper>
   );

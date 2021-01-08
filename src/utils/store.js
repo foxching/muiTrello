@@ -17,8 +17,9 @@ const data = {
   boards: {
     "board-1": {
       id: "board-1",
-      title: "board 1",
+      name: "board 1",
       color: "pink",
+      team: "rechie",
       listIds: ["list-1"],
       lists: {
         "list-1": {

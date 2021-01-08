@@ -25,14 +25,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ListItem({ list, index }) {
+export default function ListItem(props) {
+  const { list, listId, index } = props;
   const classes = useStyles();
   return (
-    <Draggable draggableId={list.id} index={index}>
+    <Draggable draggableId={listId} index={index}>
       {(provided) => (
         <Box ref={provided.innerRef} {...provided.draggableProps}>
           <Paper className={classes.root} {...provided.dragHandleProps}>
-            <ListTitle title={list.title} listId={list.id} />
+            <ListTitle title={list.title} listId={listId} />
             <Droppable droppableId={list.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
