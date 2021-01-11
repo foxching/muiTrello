@@ -71,9 +71,7 @@ export default function Card({ card, listTitle, listId, index }) {
                   </Box>
                 </Grid>
                 <Grid item>
-                  <Typography className={classes.title}>
-                    {card.title}
-                  </Typography>
+                  <Typography className={classes.title}>{card.text}</Typography>
                 </Grid>
 
                 {/* Card Add on */}

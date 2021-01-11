@@ -11,6 +11,7 @@ import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import boxColors from "../../utils/boxcolors";
+import { v4 as uuidv4 } from "uuid";
 import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -96,12 +97,13 @@ export default function BoardInputModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
+    const board = {
+      id: uuidv4(),
       name: boardValue.name,
       team: boardValue.team,
       color: activeBoxColor
     };
-    addBoard(data);
+    addBoard(board);
     setBoardValue({ name: "", team: "rechie", color: "blue" });
     setOpen(false);
   };

@@ -1,303 +1,108 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useReducer } from "react";
 import { v4 as uuidv4 } from "uuid";
-import store from "../utils/store";
+import boardsReducer from "./reducers/boardsReducer";
+import listsReducer from "./reducers/listsReducers";
+import cardsReducer from "./reducers/cardsReducer";
+import activeBoardReducer from "./reducers/activeBoardReducer";
+import boardOrderReducer from "./reducers/boardOrderReducer";
+import { boardState } from "./initialState/boardState";
+import { listState } from "./initialState/listState";
+import { cardState } from "./initialState/cardState";
+import { activeBoardState } from "./initialState/activeBoardState";
+import { boardOrderState } from "./initialState/boardOrderState";
+
+import { CONSTANTS } from "./types";
 
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
-  const [data, setData] = useState(store);
-  const [activeBoard, setActiveBoard] = useState("");
   const [background, setBackground] = useState("green");
+  const [boards, dispatchBoard] = useReducer(boardsReducer, boardState);
+  const [lists, dispatchList] = useReducer(listsReducer, listState);
+  const [cards, dispatchCard] = useReducer(cardsReducer, cardState);
+  const [activeBoard, dispatchActiveBoard] = useReducer(
+    activeBoardReducer,
+    activeBoardState
+  );
+  const [boardOrder, dispatchBoardOrder] = useReducer(
+    boardOrderReducer,
+    boardOrderState
+  );
 
-  //handle adding new board
+  //handle adding board
   const addBoard = (board) => {
-    const newBoardId = uuidv4();
-    const newBoard = {
-      id: newBoardId,
-      name: board.name,
-      color: board.color,
-      team: board.team,
-      listIds: [],
-      lists: {}
-    };
-
-    const newState = {
-      boardIds: [...data.boardIds, newBoardId],
-      boards: {
-        ...data.boards,
-        [newBoardId]: {
-          ...newBoard
-        }
-      }
-    };
-    setData(newState);
+    dispatchBoard({
+      type: CONSTANTS.ADD_BOARD,
+      payload: board
+    });
+    dispatchBoardOrder({
+      type: CONSTANTS.ADD_BOARD,
+      payload: board
+    });
   };
 
   //handle adding new list
   const addList = (title) => {
-    const board = data.boards[activeBoard];
-    const newListId = uuidv4();
-
-    const newList = {
-      id: newListId,
-      title,
-      cards: [],
-      boardId: activeBoard
-    };
-
-    const newState = {
-      ...data,
-      boards: {
-        ...data.boards,
-        [activeBoard]: {
-          ...board,
-          listIds: [...board.listIds, newListId],
-          lists: {
-            ...board.lists,
-            [newListId]: newList
-          }
-        }
-      }
-    };
-    setData(newState);
-  };
-
-  //handle update title of list
-  const changeListTitle = (newTitle, listId) => {
-    const board = data.boards[activeBoard];
-    const list = board.lists[listId];
-    list.title = newTitle;
-
-    const newState = {
-      ...data,
-      boards: {
-        ...data.boards,
-        [activeBoard]: {
-          ...board,
-          lists: {
-            ...board.lists,
-            [listId]: list
-          }
-        }
-      }
-    };
-    setData(newState);
-  };
-
-  //handle deleting list
-  const deleteList = (listId) => {
-    const board = data.boards[activeBoard];
-    const listsIds = [...board.listIds.filter((Id) => Id !== listId)];
-    const lists = { ...board.lists };
-    delete lists[listId];
-
-    const newState = {
-      ...data,
-      boards: {
-        ...data.boards,
-        [activeBoard]: {
-          ...board,
-          listIds: listsIds,
-          lists: {
-            ...lists
-          }
-        }
-      }
-    };
-    setData(newState);
-  };
-
-  //handle add new card
-  const addCard = (title, listId) => {
-    const newCard = {
-      title,
-      id: uuidv4(),
-      description: "",
-      labels: [],
-      dueDate: ""
-    };
-    const board = data.boards[activeBoard];
-    const list = board.lists[listId];
-    list.cards = [...list.cards, newCard];
-
-    const newState = {
-      ...data,
-      boards: {
-        ...data.boards,
-        [activeBoard]: {
-          ...board,
-          lists: {
-            ...board.lists,
-            [listId]: list
-          }
-        }
-      }
-    };
-    setData(newState);
-  };
-
-  //handle edit card props
-  const editCardProps = (value, listId, cardId, type) => {
-    const board = data.boards[activeBoard];
-    const list = board.lists[listId];
-    const card = list.cards.find((card) => card.id === cardId);
-
-    //logic to add/remove labels
-    const labels = [...card.labels];
-    const label = labels.find((lbl) => lbl.label === value.label);
-    let newLabels;
-    if (label) {
-      newLabels = labels.filter((oldlbl) => oldlbl.label !== value.label);
-    } else {
-      newLabels = [...labels, value];
-    }
-
-    //filtering type of actions
-    if (type === "title") {
-      card.title = value;
-    } else if (type === "description") {
-      card.description = value;
-    } else if (type === "labels") {
-      card.labels = newLabels;
-    } else {
-      card.dueDate = value;
-    }
-
-    //logic to add new card values to state
-    const cards = [...list.cards];
-    const newCard = cards.map((oldCard) => {
-      if (oldCard.id === cardId) {
-        return {
-          ...oldCard,
-          ...card
-        };
-      } else {
-        return oldCard;
-      }
+    const boardId = activeBoard.id;
+    const id = uuidv4();
+    dispatchBoard({
+      type: CONSTANTS.ADD_LIST,
+      payload: { title, boardId, id }
     });
-
-    //new card
-    const newList = {
-      ...list,
-      cards: newCard
-    };
-
-    const newState = {
-      ...data,
-      boards: {
-        ...data.boards,
-        [activeBoard]: {
-          ...board,
-          lists: {
-            ...board.lists,
-            [listId]: newList
-          }
-        }
-      }
-    };
-    setData(newState);
+    dispatchList({
+      type: CONSTANTS.ADD_LIST,
+      payload: { title, boardId, id }
+    });
   };
 
-  //handle delete card
-  const deleteCard = (cardId, listId) => {
-    const board = data.boards[activeBoard];
-    const list = board.lists[listId];
-    const cards = list.cards.filter((card) => card.id !== cardId);
-
-    const newList = {
-      ...list,
-      cards
-    };
-
-    const newState = {
-      ...data,
-      boards: {
-        ...data.boards,
-        [activeBoard]: {
-          ...board,
-          lists: {
-            ...board.lists,
-            [listId]: newList
-          }
-        }
-      }
-    };
-    setData(newState);
+  const changeListTitle = (newTitle, listId) => {
+    dispatchList({
+      type: CONSTANTS.UPDATE_LIST_TITLE,
+      payload: { newTitle, listId }
+    });
   };
 
-  //handle drag and drop
-  const onDragEnd = (result) => {
-    const { destination, source, draggableId, type } = result;
-    const board = data.boards[activeBoard];
+  const deleteList = (listId) => {
+    const boardId = activeBoard.id;
+    dispatchBoard({
+      type: CONSTANTS.DELETE_LIST,
+      payload: { listId, boardId }
+    });
+    dispatchList({
+      type: CONSTANTS.DELETE_LIST,
+      payload: { listId }
+    });
+  };
 
-    if (!destination) return;
-
-    if (type === "list") {
-      const newListIds = board.listIds;
-      newListIds.splice(source.index, 1);
-      newListIds.splice(destination.index, 0, draggableId);
-      return;
-    }
-
-    const sourceList = board.lists[source.droppableId];
-    const destinationList = board.lists[destination.droppableId];
-    const draggingCard = sourceList.cards.filter(
-      (card) => card.id === draggableId
-    )[0];
-
-    if (source.droppableId === destination.droppableId) {
-      sourceList.cards.splice(source.index, 1);
-      destinationList.cards.splice(destination.index, 0, draggingCard);
-      const newSate = {
-        ...data,
-        boards: {
-          ...data.boards,
-          [activeBoard]: {
-            ...board,
-            lists: {
-              ...board.lists,
-              [sourceList.id]: destinationList
-            }
-          }
-        }
-      };
-      setData(newSate);
-    } else {
-      sourceList.cards.splice(source.index, 1);
-      destinationList.cards.splice(destination.index, 0, draggingCard);
-      const newSate = {
-        ...data,
-        boards: {
-          ...data.boards,
-          [activeBoard]: {
-            ...board,
-            lists: {
-              ...board.lists,
-              [sourceList.id]: sourceList,
-              [destinationList.id]: destinationList
-            }
-          }
-        }
-      };
-      setData(newSate);
-    }
+  const addCard = (title, listId) => {
+    const newCardId = uuidv4();
+    dispatchList({
+      type: CONSTANTS.ADD_CARD,
+      payload: { listId, newCardId }
+    });
+    dispatchCard({
+      type: CONSTANTS.ADD_CARD,
+      payload: { title, newCardId, listId }
+    });
   };
 
   return (
     <AppContext.Provider
       value={{
-        data,
+        boards,
+        dispatchBoard,
         addBoard,
+        dispatchActiveBoard,
+        lists,
         addList,
         changeListTitle,
         deleteList,
+        cards,
         addCard,
-        editCardProps,
-        deleteCard,
-        onDragEnd,
+        activeBoard,
+        boardOrder,
         background,
-        setBackground,
-        setActiveBoard
+        setBackground
       }}
     >
       {props.children}

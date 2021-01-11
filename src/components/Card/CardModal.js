@@ -65,7 +65,7 @@ export default function CardModal({
         >
           <CardModalTitle
             listTitle={listTitle}
-            title={card.title}
+            text={card.text}
             cardId={card.id}
             listId={listId}
           />

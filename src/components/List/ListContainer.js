@@ -3,6 +3,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "./ListItem";
 import Input from "../Input/Input";
+import { CONSTANTS } from "../../context/types";
 import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -12,14 +13,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ListContainer({ boardId }) {
-  const { data, onDragEnd, setActiveBoard } = useContext(AppContext);
+  const { boards, dispatchActiveBoard, lists, onDragEnd } = useContext(
+    AppContext
+  );
   const classes = useStyles();
 
-  useEffect(() => {
-    setActiveBoard(boardId);
-  }, [setActiveBoard, boardId]);
+  const board = boards[boardId];
+  //console.log(board);
 
-  const board = data.boards[boardId];
+  useEffect(() => {
+    dispatchActiveBoard({ type: CONSTANTS.SET_ACTIVE_BOARD, payload: board });
+  }, [dispatchActiveBoard, board]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -30,8 +34,8 @@ export default function ListContainer({ boardId }) {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {board.listIds.map((listId, index) => {
-              const list = board.lists[listId];
+            {board.listsIds.map((listId, index) => {
+              const list = lists[listId];
               return (
                 <ListItem
                   key={listId}

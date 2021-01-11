@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { Draggable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import ListTitle from "./ListTitle";
 import Card from ".././Card/Card";
 import Input from "../Input/Input";
+import { AppContext } from "../../context/appContext";
 import "simplebar/dist/simplebar.min.css";
 //import SimpleBar from "simplebar-react";
 
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ListItem(props) {
+  const { cards } = useContext(AppContext);
   const { list, listId, index } = props;
   const classes = useStyles();
   return (
@@ -37,17 +39,20 @@ export default function ListItem(props) {
             <Droppable droppableId={list.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {list.cards.map((card, index) => (
-                    <Card
-                      key={card.id}
-                      listId={list.id}
-                      listTitle={list.title}
-                      card={card}
-                      index={index}
-                    />
-                  ))}
+                  {list.cards.map((cardId) => {
+                    const card = cards[cardId];
+                    return (
+                      <Card
+                        key={cardId}
+                        listId={listId}
+                        listTitle={list.title}
+                        card={card}
+                        index={index}
+                      />
+                    );
+                  })}
                   {provided.placeholder}
-                  <Input type="card"  listId={listId} />
+                  <Input type="card" listId={listId} />
                 </div>
               )}
             </Droppable>

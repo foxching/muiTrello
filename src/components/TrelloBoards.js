@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TrelloBoard() {
   const classes = useStyles();
-  const { data } = useContext(AppContext);
+  const { boards, boardOrder } = useContext(AppContext);
 
   return (
     <Box className={classes.root}>
@@ -32,8 +32,8 @@ export default function TrelloBoard() {
           </Typography>
         </Box>
         <Grid container spacing={1}>
-          {data.boardIds.map((boardId) => {
-            const board = data.boards[boardId];
+          {boardOrder.map((boardId) => {
+            const board = boards[boardId];
             return (
               <Grid key={boardId} item xs={6} lg={3} md={3}>
                 <BoardThumbnail board={board} />

@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CardTitle({ title, listId, listTitle, cardId }) {
+export default function CardTitle({ text, listId, listTitle, cardId }) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const { editCardProps } = useContext(AppContext);
@@ -64,10 +64,10 @@ export default function CardTitle({ title, listId, listTitle, cardId }) {
   };
 
   useEffect(() => {
-    if (title) {
-      setNewTitle(title);
+    if (text) {
+      setNewTitle(text);
     }
-  }, [title]);
+  }, [text]);
 
   return (
     <Box display="flex">
@@ -104,7 +104,7 @@ export default function CardTitle({ title, listId, listTitle, cardId }) {
             className={classes.cardTitle}
             onClick={() => setOpen(!open)}
           >
-            {title}
+            {text}
             <Box component="span" className={classes.listTitle}>
               in list {listTitle}
             </Box>
