@@ -6,6 +6,6 @@ export const CONSTANTS = {
   DELETE_LIST: "delete_list",
   ADD_CARD: "add_card",
   DELETE_CARD: "delete_card",
-  CARD_PROPS: "edit_card",
+  EDIT_CARD_PROPS: "edit_card",
   DRAG_HAPPENED: "drag_happened"
 };

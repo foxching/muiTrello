@@ -28,10 +28,9 @@ const updateListTitle = (list, state) => {
 
 const deleteList = (list, state) => {
   const { listId } = list;
-  const currentList = { ...state.lists };
-  delete currentList[listId];
+  delete state[listId];
   return {
-    ...currentList
+    ...state
   };
 };
 
@@ -47,6 +46,18 @@ const addCard = (card, state) => {
   };
 };
 
+const deleteCard = (card, state) => {
+  const { cardId, listId } = card;
+  const list = state[listId];
+  return {
+    ...state,
+    [listId]: {
+      ...list,
+      cards: [...list.cards.filter((id) => id !== cardId)]
+    }
+  };
+};
+
 export default (state, action) => {
   switch (action.type) {
     case CONSTANTS.ADD_LIST:
@@ -57,6 +68,8 @@ export default (state, action) => {
       return deleteList(action.payload, state);
     case CONSTANTS.ADD_CARD:
       return addCard(action.payload, state);
+    case CONSTANTS.DELETE_CARD:
+      return deleteCard(action.payload, state);
     default:
       return state;
   }

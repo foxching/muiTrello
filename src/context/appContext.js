@@ -72,6 +72,10 @@ const AppContextProvider = (props) => {
       type: CONSTANTS.DELETE_LIST,
       payload: { listId }
     });
+    dispatchCard({
+      type: CONSTANTS.DELETE_LIST,
+      payload: { listId }
+    });
   };
 
   const addCard = (title, listId) => {
@@ -83,6 +87,24 @@ const AppContextProvider = (props) => {
     dispatchCard({
       type: CONSTANTS.ADD_CARD,
       payload: { title, newCardId, listId }
+    });
+  };
+
+  const deleteCard = (cardId, listId) => {
+    dispatchList({
+      type: CONSTANTS.DELETE_CARD,
+      payload: { cardId, listId }
+    });
+    dispatchCard({
+      type: CONSTANTS.DELETE_CARD,
+      payload: { cardId, listId }
+    });
+  };
+
+  const editCardProps = (value, listId, cardId, type) => {
+    dispatchCard({
+      type: CONSTANTS.EDIT_CARD_PROPS,
+      payload: { value, listId, cardId, type }
     });
   };
 
@@ -99,6 +121,8 @@ const AppContextProvider = (props) => {
         deleteList,
         cards,
         addCard,
+        deleteCard,
+        editCardProps,
         activeBoard,
         boardOrder,
         background,
