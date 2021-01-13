@@ -2,25 +2,16 @@ import { CONSTANTS } from "../types";
 
 const deleteList = (list, state) => {
   const { listId } = list;
-  const initialState = {
-    "card-0": {
-      text: "Last Episode",
-      id: `card-0`,
-      list: "list-0"
-    },
-    "card-1": {
-      text: "2nd Episode",
-      id: `card-1`,
-      list: "list-1"
-    }
-  };
   let x = "";
+  let y = [];
   for (const [key, value] of Object.entries(state)) {
     if (value.listId === listId) {
+      console.log(key);
       x = `${key}`;
+      y.push(x);
     }
   }
-  delete state[x];
+  y.map((yy) => delete state[yy]);
   return {
     ...state
   };
