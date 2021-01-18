@@ -108,6 +108,21 @@ const AppContextProvider = (props) => {
     });
   };
 
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId, type } = result;
+    const boardId = activeBoard.id;
+    if (!destination) return;
+    
+    dispatchBoard({
+      type: CONSTANTS.DRAG_HAPPENED,
+      payload: { destination, source, draggableId, type, boardId }
+    });
+    dispatchList({
+      type: CONSTANTS.DRAG_HAPPENED,
+      payload: { destination, source, draggableId, type, boardId }
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -123,6 +138,7 @@ const AppContextProvider = (props) => {
         addCard,
         deleteCard,
         editCardProps,
+        onDragEnd,
         activeBoard,
         boardOrder,
         background,

@@ -48,6 +48,19 @@ const editCardProps = (card, state) => {
     currentCard.text = value;
   } else if (type === "description") {
     currentCard.description = value;
+  } else if (type === "labels") {
+    const label = currentCard.labels.find((lbl) => lbl.label === value.label);
+    let newLabels;
+    if (label) {
+      newLabels = currentCard.labels.filter(
+        (oldlbl) => oldlbl.label !== value.label
+      );
+    } else {
+      newLabels = [...currentCard.labels, value];
+    }
+    currentCard.labels = newLabels;
+  } else {
+    currentCard.dueDate = value;
   }
 
   return {

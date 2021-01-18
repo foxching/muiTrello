@@ -36,10 +36,10 @@ export default function ListItem(props) {
         <Box ref={provided.innerRef} {...provided.draggableProps}>
           <Paper className={classes.root} {...provided.dragHandleProps}>
             <ListTitle title={list.title} listId={listId} />
-            <Droppable droppableId={list.id}>
+            <Droppable droppableId={listId} type="card">
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {list.cards.map((cardId) => {
+                  {list.cards.map((cardId, index) => {
                     const card = cards[cardId];
                     return (
                       <Card

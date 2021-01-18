@@ -33,6 +33,21 @@ const deleteList = (list, state) => {
   };
 };
 
+//handle drag and drop
+const onDragEnd = (result, state) => {
+  const { destination, source, type, boardId } = result;
+  const board = state[boardId];
+  const lists = board.listsIds;
+
+  if (type === "list") {
+    const pulledOutList = lists.splice(source.index, 1);
+    lists.splice(destination.index, 0, ...pulledOutList);
+    board.listsIds = lists;
+    return { ...state, [boardId]: board };
+  }
+  return state;
+};
+
 export default (state, action) => {
   switch (action.type) {
     case CONSTANTS.ADD_BOARD:
@@ -41,6 +56,8 @@ export default (state, action) => {
       return addList(action.payload, state);
     case CONSTANTS.DELETE_LIST:
       return deleteList(action.payload, state);
+    case CONSTANTS.DRAG_HAPPENED:
+      return onDragEnd(action.payload, state);
     default:
       return state;
   }

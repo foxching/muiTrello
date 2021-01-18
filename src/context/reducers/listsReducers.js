@@ -58,6 +58,47 @@ const deleteCard = (card, state) => {
   };
 };
 
+//handle drag and drop
+const onDragEnd = (result, state) => {
+  const { destination, source, draggableId, type } = result;
+
+  if (!destination) return;
+
+  console.log(source.droppableId);
+  console.log(destination.droppableId);
+  console.log(source.index);
+  console.log(destination.index);
+
+  if (type === "list") {
+    return state;
+  }
+
+  if (source.droppableId === destination.droppableId) {
+    const list = state[source.droppableId];
+    // console.log(list);
+    const card = list.cards.splice(source.index, 1);
+    console.log(card);
+    list.cards.splice(destination.index, 0, ...card);
+    return {
+      ...state,
+      [source.droppableId]: list
+    };
+  }
+
+  if (source.droppableId !== destination.droppableId) {
+    const listStart = state[source.droppableId];
+    const card = listStart.cards.splice(source.index, 1);
+    const listEnd = state[destination.droppableId];
+    listEnd.cards.splice(destination.index, 0, ...card);
+    return {
+      ...state,
+      [source.droppableId]: listStart,
+      [destination.droppableId]: listEnd
+    };
+  }
+  return state;
+};
+
 export default (state, action) => {
   switch (action.type) {
     case CONSTANTS.ADD_LIST:
@@ -70,6 +111,8 @@ export default (state, action) => {
       return addCard(action.payload, state);
     case CONSTANTS.DELETE_CARD:
       return deleteCard(action.payload, state);
+    case CONSTANTS.DRAG_HAPPENED:
+      return onDragEnd(action.payload, state);
     default:
       return state;
   }
