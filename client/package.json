@@ -1,0 +1,43 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "React example starter project",
+  "keywords": [
+    "react",
+    "starter"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@material-ui/core": "4.11.2",
+    "@material-ui/icons": "4.11.2",
+    "@material-ui/pickers": "3.2.10",
+    "axios": "0.21.0",
+    "date-fns": "2.16.1",
+    "moment": "2.29.1",
+    "react": "17.0.0",
+    "react-beautiful-dnd": "13.0.0",
+    "react-calendar": "3.2.1",
+    "react-dom": "17.0.0",
+    "react-router": "5.2.0",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "3.4.3",
+    "simplebar": "5.3.0",
+    "simplebar-react": "2.3.0",
+    "uuid": "8.3.1"
+  },
+  "devDependencies": {
+    "typescript": "3.8.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
