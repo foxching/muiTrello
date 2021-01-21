@@ -1,5 +1,5 @@
 {
-  "name": "muiTrello",
+  "name": "merntrello",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,6 +18,13 @@
   },
   "homepage": "https://github.com/foxching/muiTrello#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^5.3.0",
+    "config": "^3.3.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.13"
   }
 }

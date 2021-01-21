@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb://rechie:iloveRuthy123@mern-trello-shard-00-00.b5pw1.mongodb.net:27017,mern-trello-shard-00-01.b5pw1.mongodb.net:27017,mern-trello-shard-00-02.b5pw1.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-148tpm-shard-0&authSource=admin&retryWrites=true&w=majority",
+    "jwtSecret": "todo_myJwtSecret"
+}
