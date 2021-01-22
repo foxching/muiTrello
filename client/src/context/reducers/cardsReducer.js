@@ -42,7 +42,7 @@ const deleteCard = (card, state) => {
 };
 
 const editCardProps = (card, state) => {
-  const { value, listId, cardId, type } = card;
+  const { value, cardId, type } = card;
   const currentCard = state[cardId];
   if (type === "title") {
     currentCard.text = value;

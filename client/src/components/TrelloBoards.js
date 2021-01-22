@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 import Icon from "@material-ui/core/Icon";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -17,27 +16,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// const initialState = {
-//   "card-0": {
-//     text: "Last Episode",
-//     id: `card-0`,
-//     list: "list-0"
-//   },
-//   "card-1": {
-//     text: "Last Episode",
-//     id: `card-1`,
-//     list: "list-1"
-//   }
-// };
-
-const objectToArray = (obj) => {
-  if (obj) {
-    return Object.entries(obj).map((key) =>
-      Object.assign(key[1], { id: key[0] })
-    );
-  }
-  console.log(obj);
-};
 
 export default function TrelloBoard() {
   const classes = useStyles();

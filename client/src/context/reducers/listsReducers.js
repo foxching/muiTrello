@@ -60,7 +60,7 @@ const deleteCard = (card, state) => {
 
 //handle drag and drop
 const onDragEnd = (result, state) => {
-  const { destination, source, draggableId, type } = result;
+  const { destination, source, type } = result;
 
   if (!destination) return;
 

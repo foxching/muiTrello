@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-//const colors = ["green", "blue", "yellow", "pink"];
+
 const labels = [
   { label: "New", color: "green" },
   { label: "Urgent", color: "red" },
@@ -32,7 +32,6 @@ const labels = [
 export default function CardModalAddLabels({ cardId, listId, cardLabels }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedValue, setSelectedValue] = React.useState(null);
   const { editCardProps } = useContext(AppContext);
 
   const handleClickListItem = (event) => {
@@ -40,9 +39,7 @@ export default function CardModalAddLabels({ cardId, listId, cardLabels }) {
   };
 
   const handleMenuItemClick = (label) => {
-    //console.log(label);
     editCardProps(label, listId, cardId, "labels");
-    setSelectedValue(label);
   };
 
   const handleClose = () => {
@@ -118,14 +115,14 @@ export default function CardModalAddLabels({ cardId, listId, cardLabels }) {
               {cardLabels.some(
                 (cardLabel) => cardLabel.label === label.label
               ) ? (
-                <Icon
-                  style={{ color: "#fff", fontSize: "16px", cursor: "pointer" }}
-                >
-                  check
+                  <Icon
+                    style={{ color: "#fff", fontSize: "16px", cursor: "pointer" }}
+                  >
+                    check
                 </Icon>
-              ) : (
-                <span></span>
-              )}
+                ) : (
+                  <span></span>
+                )}
             </Box>
           </MenuItem>
         ))}

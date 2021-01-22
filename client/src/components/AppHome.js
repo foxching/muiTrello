@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Home from "./Home";
 import TrelloList from "./TrelloList";
 import TrelloBoards from "./TrelloBoards";
 import Navbar from "./layout/Navbar";
