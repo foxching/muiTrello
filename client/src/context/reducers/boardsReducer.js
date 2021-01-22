@@ -1,5 +1,7 @@
 import { CONSTANTS } from "../types";
 
+
+
 const addBoard = (board, state) => {
   const { name, color, id } = board;
   const newBoard = {

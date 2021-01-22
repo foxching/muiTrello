@@ -1,0 +1,21 @@
+export const SET_ACTIVE_BOARD = " SET_ACTIVE_BOARD";
+export const GET_BOARD = "GET_BOARD";
+export const GET_BOARDS = "GET_BOARDS";
+export const ADD_BOARD = "ADD_BOARD";
+export const ADD_LISI = "ADD_LIST";
+export const UPDATE_LIST_TITLE = "UPDATE_LIST_TITLE";
+export const ADD_CARD = "ADD_CARD";
+export const DELETE_CARD = "DELETE_CARD";
+export const EDIT_CARD_PROPS = "EDIT_CARD_PROPS";
+export const DRAG_HAPPENED = "DRAG_HAPPENED"
+
+export const USER_LOADING = "USER_LOADING";
+export const USER_LOADED = "USER_LOADED";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+export const GET_ERRORS = 'GET_ERRORS';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';

@@ -1,5 +1,6 @@
-import React, { useState, createContext, useReducer } from "react";
+import React, { useState, createContext, useReducer, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import axios from 'axios'
 import boardsReducer from "./reducers/boardsReducer";
 import listsReducer from "./reducers/listsReducers";
 import cardsReducer from "./reducers/cardsReducer";
@@ -28,6 +29,30 @@ const AppContextProvider = (props) => {
     boardOrderReducer,
     boardOrderState
   );
+
+  useEffect(() => {
+    axios
+      .get('/api/boards')
+      .then(res =>
+        res.data.map((d) => {
+          const x = {
+            [d._id]: {
+              id: d._id,
+              name: d.name,
+              color: d.color,
+              team: d.team,
+              listsIds: []
+            }
+          }
+          addBoard(x[d._id])
+        })
+      )
+      .catch(err => {
+        console.log(err)
+      });
+  }, [])
+
+
 
   //handle adding board
   const addBoard = (board) => {
@@ -112,7 +137,7 @@ const AppContextProvider = (props) => {
     const { destination, source, draggableId, type } = result;
     const boardId = activeBoard.id;
     if (!destination) return;
-    
+
     dispatchBoard({
       type: CONSTANTS.DRAG_HAPPENED,
       payload: { destination, source, draggableId, type, boardId }
