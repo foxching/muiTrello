@@ -10,7 +10,6 @@ const User = require('../../model/User');
 /**
  * @route   POST api/auth/login
  * @desc    Login user
- * @access  Public
  */
 
 router.post('/login', async (req, res) => {
@@ -54,7 +53,6 @@ router.post('/login', async (req, res) => {
 /**
  * @route   POST api/users/register
  * @desc    Register User
- * @access  Public
  */
 
 router.post('/register', async (req, res) => {
@@ -107,7 +105,6 @@ router.post('/register', async (req, res) => {
 /**
  * @route   GET api/auth/user
  * @desc    Get User Data
- * @access  Private
  */
 
 router.get('/user', auth, (req, res) => {

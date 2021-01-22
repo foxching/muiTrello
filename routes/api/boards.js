@@ -4,9 +4,23 @@ const Board = require('../../model/Board');
 
 
 /**
- * @route   POST api/board
+ * @route   GET api/boards
+ * @desc    Get All board 
+ */
+
+router.get('/', async (req, res) => {
+    try {
+        const boards = await Board.find().sort({ date: "-1" });
+        res.status(200).json(boards);
+    } catch (err) {
+        res.status(500).json({ err: err.msg });
+    }
+});
+
+
+/**
+ * @route   POST api/boards
  * @desc    Create a Board
- * @access  Private
  */
 
 router.post('/', async (req, res) => {
@@ -14,7 +28,6 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         color: req.body.color,
         team: req.body.team,
-        listsIds: []
     });
     try {
         const newBoard = await board.save();
@@ -23,5 +36,22 @@ router.post('/', async (req, res) => {
         res.status(500).json({ err: err.msg });
     }
 });
+
+
+/**
+ * @route   GET api/boards
+ * @desc    Get specific board 
+ */
+router.get('/:boardId', async (req, res) => {
+    try {
+        const board = await Board.findById(req.params.boardId)
+        res.status(200).json(board);
+    } catch (err) {
+        res.status(500).json({ err: err.msg });
+    }
+});
+
+
+
 
 module.exports = router;
