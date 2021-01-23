@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Clear from "@material-ui/icons/Clear";
-import { AppContext } from "../../context/appContext";
+
 
 const options = ["Add Card...", "Delete this List..", "Move List.."];
 
@@ -16,7 +16,6 @@ const ITEM_HEIGHT = 48;
 export default function MenuOption({ listId, boardId }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const { deleteList } = useContext(AppContext);
 
   const handleSetAnchor = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,7 +27,7 @@ export default function MenuOption({ listId, boardId }) {
 
   const handleClick = (option) => {
     if (option === "Delete this List..") {
-      deleteList(listId, boardId);
+      // deleteList(listId, boardId);
     }
     setAnchorEl(null);
   };

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ListTitle({ title, listId }) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
-  const { changeListTitle } = useContext(AppContext);
   const classes = useStyles();
 
   const handleOnChange = (e) => {
@@ -40,7 +39,7 @@ export default function ListTitle({ title, listId }) {
 
   const handleOnBlur = () => {
     if (newTitle !== "") {
-      changeListTitle(newTitle, listId);
+      //changeListTitle(newTitle, listId);
       setOpen(!open);
     }
   };
@@ -64,16 +63,16 @@ export default function ListTitle({ title, listId }) {
           onKeyDown={onKeyDownHandler}
         />
       ) : (
-        <div className={classes.editableContainer}>
-          <Typography
-            className={classes.editableTitle}
-            onClick={() => setOpen(!open)}
-          >
-            {title}
-          </Typography>
-          <MenuOption listId={listId} />
-        </div>
-      )}
+          <div className={classes.editableContainer}>
+            <Typography
+              className={classes.editableTitle}
+              onClick={() => setOpen(!open)}
+            >
+              {title}
+            </Typography>
+            <MenuOption listId={listId} />
+          </div>
+        )}
     </>
   );
 }

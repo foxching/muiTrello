@@ -1,10 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core/styles";
-import ListItem from "./ListItem";
+//import ListItem from "./ListItem";
 import Input from "../Input/Input";
-import { CONSTANTS } from "../../context/types";
-import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,20 +11,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ListContainer({ boardId }) {
-  const { boards, dispatchActiveBoard, lists, onDragEnd } = useContext(
-    AppContext
-  );
+
   const classes = useStyles();
 
-  const board = boards[boardId];
+  //const board = boards[boardId];
   //console.log(board);
 
-  useEffect(() => {
-    dispatchActiveBoard({ type: CONSTANTS.SET_ACTIVE_BOARD, payload: board });
-  }, [dispatchActiveBoard, board]);
+
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext >
       <Droppable droppableId="list" type="list" direction="horizontal">
         {(provided) => (
           <div
@@ -34,7 +28,7 @@ export default function ListContainer({ boardId }) {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {board.listsIds.map((listId, index) => {
+            {/* {board.listsIds.map((listId, index) => {
               const list = lists[listId];
               return (
                 <ListItem
@@ -44,7 +38,7 @@ export default function ListContainer({ boardId }) {
                   index={index}
                 />
               );
-            })}
+            })} */}
             {provided.placeholder}
             <Input type="list" listId={null} />
           </div>

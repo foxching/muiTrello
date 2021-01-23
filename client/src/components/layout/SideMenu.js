@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Divider from "@material-ui/core/Divider";
@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Clear from "@material-ui/icons/Clear";
 import colors from "../../utils/colors";
 import { getImages } from "../../utils/imageApi";
-import { AppContext } from "../../context/appContext";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,8 +48,6 @@ export default function SideMenu({ open, setOpen }) {
   const [optionImage, setOptionImage] = useState(false);
   const [images, setImages] = useState([]);
   const classes = useStyles();
-
-  const { setBackground } = useContext(AppContext);
 
   const getImagesFromApi = async () => {
     const imagesList = await getImages();
@@ -119,7 +117,7 @@ export default function SideMenu({ open, setOpen }) {
                     backgroundSize: "cover"
                   }}
                   onClick={() => {
-                    setBackground(img.full);
+                    //setBackground(img.full);
                     setOpen(false);
                   }}
                 ></div>
@@ -127,22 +125,22 @@ export default function SideMenu({ open, setOpen }) {
             </div>
           </Grow>
         ) : (
-          <Grow in={optionColor}>
-            <div className={classes.optionContainer}>
-              {colors.map((color, index) => (
-                <div
-                  key={index}
-                  className={classes.box}
-                  style={{ backgroundColor: color }}
-                  onClick={() => {
-                    setBackground(color);
-                    setOpen(false);
-                  }}
-                ></div>
-              ))}
-            </div>
-          </Grow>
-        )}
+            <Grow in={optionColor}>
+              <div className={classes.optionContainer}>
+                {colors.map((color, index) => (
+                  <div
+                    key={index}
+                    className={classes.box}
+                    style={{ backgroundColor: color }}
+                    onClick={() => {
+                      //setBackground(color);
+                      setOpen(false);
+                    }}
+                  ></div>
+                ))}
+              </div>
+            </Grow>
+          )}
       </div>
     </Drawer>
   );

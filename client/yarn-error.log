@@ -1,0 +1,81 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Jun\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\Jun\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;C:\Users\Jun\AppData\Roaming\npm;C:\Program Files\MongoDB\Server\3.4\bin;
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  12.18.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.2.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Users\Jun\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:130024:19)
+      at Object.onceWrapper (events.js:421:28)
+      at ClientRequest.emit (events.js:315:20)
+      at TLSSocket.emitRequestTimeout (_http_client.js:709:9)
+      at Object.onceWrapper (events.js:421:28)
+      at TLSSocket.emit (events.js:327:22)
+      at TLSSocket.Socket._onTimeout (net.js:481:8)
+      at listOnTimeout (internal/timers.js:549:17)
+      at processTimers (internal/timers.js:492:7)
+
+npm manifest: 
+  {
+    "name": "react",
+    "version": "1.0.0",
+    "description": "React example starter project",
+    "keywords": [
+      "react",
+      "starter"
+    ],
+    "main": "src/index.js",
+    "dependencies": {
+      "@material-ui/core": "4.11.2",
+      "@material-ui/icons": "4.11.2",
+      "@material-ui/pickers": "3.2.10",
+      "axios": "0.21.0",
+      "date-fns": "2.16.1",
+      "moment": "2.29.1",
+      "react": "17.0.0",
+      "react-beautiful-dnd": "13.0.0",
+      "react-calendar": "3.2.1",
+      "react-dom": "17.0.0",
+      "react-redux": "^7.2.2",
+      "react-router": "5.2.0",
+      "react-router-dom": "5.2.0",
+      "react-scripts": "3.4.3",
+      "redux": "^4.0.5",
+      "redux-thunk": "^2.3.0",
+      "simplebar": "5.3.0",
+      "simplebar-react": "2.3.0",
+      "uuid": "8.3.1"
+    },
+    "devDependencies": {
+      "typescript": "3.8.3"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test --env=jsdom",
+      "eject": "react-scripts eject"
+    },
+    "browserslist": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ],
+    "proxy": "http://localhost:5000"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

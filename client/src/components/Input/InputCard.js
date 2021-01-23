@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, } from "react";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -6,7 +6,7 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import ClearIcon from "@material-ui/icons/Clear";
-import { AppContext } from "../../context/appContext";
+
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -33,8 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function InputCard(props) {
   const [text, setText] = useState("");
-  const { setOpen, listId, type } = props;
-  const { addCard, addList } = useContext(AppContext);
+  const { setOpen, type } = props;
   const classes = useStyles();
 
   const handleChange = (e) => {
@@ -42,15 +41,15 @@ export default function InputCard(props) {
   };
 
   const handleAddtoCard = () => {
-    if (type === "list") {
-      addList(text);
-    } else {
-      if (text.length > 0) {
-        addCard(text, listId);
-      }
-    }
-    setOpen(false);
-    setText("");
+    // if (type === "list") {
+    //   addList(text);
+    // } else {
+    //   if (text.length > 0) {
+    //     addCard(text, listId);
+    //   }
+    // }
+    // setOpen(false);
+    // setText("");
   };
 
   return (

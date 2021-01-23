@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Provider } from "react-redux";
+import store from "./store";
 import { CssBaseline } from "@material-ui/core";
-import AppContextProvider from "./context/appContext";
 import AppHome from "./components/AppHome";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./theme/theme";
+import { loadUser } from './store/actions/authAction'
+
 
 export default function App() {
+  useEffect(() => {
+    store.dispatch(loadUser())
+  }, [])
+
+
   return (
     <>
-      <AppContextProvider>
+      <Provider store={store}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <AppHome />
         </ThemeProvider>
-      </AppContextProvider>
+      </Provider>
     </>
   );
 }

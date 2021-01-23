@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import Icon from "@material-ui/core/Icon";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import BoardThumbnail from "../components/Board/BoardThumbnail";
+//import BoardThumbnail from "../components/Board/BoardThumbnail";
 import BoardInputModal from "../components/Board/BoardInputModal";
-import { AppContext } from ".././context/appContext";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TrelloBoard() {
   const classes = useStyles();
-  const { boards, boardOrder } = useContext(AppContext);
 
   return (
     <Box className={classes.root}>
@@ -32,14 +31,14 @@ export default function TrelloBoard() {
           </Typography>
         </Box>
         <Grid container spacing={1}>
-          {boardOrder.map((boardId) => {
+          {/* {boardOrder.map((boardId) => {
             const board = boards[boardId];
             return (
               <Grid key={boardId} item xs={6} lg={3} md={3}>
                 <BoardThumbnail board={board} />
               </Grid>
             );
-          })}
+          })} */}
           <BoardInputModal />
         </Grid>
       </Container>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
@@ -32,14 +32,14 @@ const labels = [
 export default function CardModalAddLabels({ cardId, listId, cardLabels }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { editCardProps } = useContext(AppContext);
+
 
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleMenuItemClick = (label) => {
-    editCardProps(label, listId, cardId, "labels");
+    //editCardProps(label, listId, cardId, "labels");
   };
 
   const handleClose = () => {

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Dialog from "@material-ui/core/Dialog";
@@ -42,11 +42,10 @@ export default function CardModal({
   closeModal,
   open
 }) {
-  const { deleteCard } = useContext(AppContext);
   const classes = useStyles();
 
   const handleDeleteCard = () => {
-    deleteCard(card.id, listId);
+    // deleteCard(card.id, listId);
     closeModal();
   };
   return (

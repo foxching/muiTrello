@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
@@ -36,7 +36,7 @@ export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
   const [date, setDate] = useState(new Date());
   const [textDate, setTextDate] = useState("");
   const [textTime, setTextTime] = useState("");
-  const { editCardProps } = useContext(AppContext);
+
 
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
@@ -53,7 +53,7 @@ export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
     e.preventDefault();
     const dueDate = textDate + " " + textTime;
     //console.log(dueDate);
-    editCardProps(dueDate, listId, cardId, "date");
+    //editCardProps(dueDate, listId, cardId, "date");
   };
 
   const handleClose = () => {

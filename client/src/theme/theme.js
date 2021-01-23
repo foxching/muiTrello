@@ -4,7 +4,6 @@ export const theme = createMuiTheme({
   palette: {
     action: {
       disabledBackground: "#EBECF0"
-      //disabled: "#000"
     }
   }
 });

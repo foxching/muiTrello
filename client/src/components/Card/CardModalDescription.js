@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -7,7 +7,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import ClearIcon from "@material-ui/icons/Clear";
-import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -54,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 export default function CardModalDescription({ description, listId, cardId }) {
   const [open, setOpen] = useState(false);
   const [newDescription, setNewDescription] = useState("");
-  const { editCardProps } = useContext(AppContext);
   const classes = useStyles();
 
   const handleOnChange = (e) => {
@@ -62,7 +60,6 @@ export default function CardModalDescription({ description, listId, cardId }) {
   };
 
   const handleSave = () => {
-    editCardProps(newDescription, listId, cardId, "description");
     setOpen(false);
   };
 
@@ -105,20 +102,20 @@ export default function CardModalDescription({ description, listId, cardId }) {
           </Box>
         </Box>
       ) : (
-        <Box className={classes.descriptionContainer}>
-          <Typography className={classes.description}>
-            Description
+          <Box className={classes.descriptionContainer}>
+            <Typography className={classes.description}>
+              Description
             <Box
-              component="span"
-              className={classes.edit}
-              onClick={() => setOpen(!open)}
-            >
-              Edit
+                component="span"
+                className={classes.edit}
+                onClick={() => setOpen(!open)}
+              >
+                Edit
             </Box>
-          </Typography>
-          <Typography paragraph>{description}</Typography>
-        </Box>
-      )}
+            </Typography>
+            <Typography paragraph>{description}</Typography>
+          </Box>
+        )}
     </Box>
   );
 }
