@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import BoardThumbnail from "../components/Board/BoardThumbnail";
 import BoardInputModal from "../components/Board/BoardInputModal";
-import { addBoards } from './../store/actions/boardsAction'
+import { loadBoards } from './../store/actions/boardsAction'
 import { CLEAR_BOARDS } from "../store/actions/types";
 
 
@@ -42,13 +42,13 @@ export default function TrelloBoard() {
               listsIds: []
             }
           }
-          dispatch(addBoards(x[d._id]))
+          dispatch(loadBoards(x[d._id]))
         })
       )
       .catch(err => {
         console.log(err)
       });
-  }, [])
+  }, [dispatch])
 
 
   return (

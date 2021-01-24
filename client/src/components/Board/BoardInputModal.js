@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
@@ -11,6 +12,7 @@ import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import boxColors from "../../utils/boxcolors";
+import { addBoard } from "../../store/actions/boardsAction"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -79,6 +81,8 @@ export default function BoardInputModal() {
   const [open, setOpen] = useState(false);
   const [activeBoxColor, setActiveBoxColor] = useState("blue");
   const classes = useStyles();
+  const dispatch = useDispatch()
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -94,12 +98,12 @@ export default function BoardInputModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const board = {
-    //   id: uuidv4(),
-    //   name: boardValue.name,
-    //   team: boardValue.team,
-    //   color: activeBoxColor
-    // };
+    const board = {
+      name: boardValue.name,
+      team: boardValue.team,
+      color: activeBoxColor
+    };
+    dispatch(addBoard(board))
     setBoardValue({ name: "", team: "rechie", color: "blue" });
     setOpen(false);
   };
