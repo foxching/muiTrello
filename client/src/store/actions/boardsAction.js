@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LOAD_BOARDS, ADD_BOARD } from './types';
+import { LOAD_BOARDS, ADD_BOARD, SET_ACTIVE_BOARD } from './types';
 import { returnErrors } from './errorAction'
 
 //get all boards 
@@ -15,5 +15,16 @@ export const addBoard = (board) => (dispatch, getState) => {
             dispatch({ type: ADD_BOARD, payload: res.data })
         })
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
-
 }
+
+//get specific board detail
+export const setActiveBoard = (boardId) => (dispatch, getState) => {
+    //dispatch(setLoading())
+    axios
+        .get(`/api/boards/${boardId}`)
+        .then(res => {
+            dispatch({ type: SET_ACTIVE_BOARD, payload: res.data })
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+}
+

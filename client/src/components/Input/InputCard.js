@@ -1,4 +1,5 @@
 import React, { useState, } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -6,6 +7,7 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import ClearIcon from "@material-ui/icons/Clear";
+import { addList } from "../../store/actions/listsAction"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 export default function InputCard(props) {
+  const dispatch = useDispatch()
+  const activeBoard = useSelector(state => state.activeBoard)
   const [text, setText] = useState("");
   const { setOpen, type } = props;
   const classes = useStyles();
@@ -41,15 +45,15 @@ export default function InputCard(props) {
   };
 
   const handleAddtoCard = () => {
-    // if (type === "list") {
-    //   addList(text);
-    // } else {
-    //   if (text.length > 0) {
-    //     addCard(text, listId);
-    //   }
-    // }
-    // setOpen(false);
-    // setText("");
+    if (type === "list") {
+      dispatch(addList(text, activeBoard.id))
+    } else {
+      if (text.length > 0) {
+        //addCard(text, listId);
+      }
+    }
+    setOpen(false);
+    setText("");
   };
 
   return (

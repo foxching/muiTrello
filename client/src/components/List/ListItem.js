@@ -7,9 +7,8 @@ import Paper from "@material-ui/core/Paper";
 import ListTitle from "./ListTitle";
 import Card from ".././Card/Card";
 import Input from "../Input/Input";
-import { AppContext } from "../../context/appContext";
 import "simplebar/dist/simplebar.min.css";
-//import SimpleBar from "simplebar-react";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux"
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core/styles";
-//import ListItem from "./ListItem";
+import ListItem from "./ListItem";
 import Input from "../Input/Input";
+import { loadLists } from "../../store/actions/listsAction"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,13 +14,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ListContainer({ boardId }) {
-
-  const classes = useStyles();
-
-  //const board = boards[boardId];
-  //console.log(board);
-
-
+  const boards = useSelector(state => state.boards)
+  const lists = useSelector(state => state.lists)
+  const activeBoard = useSelector(state => state.activeBoard)
+  const classes = useStyles()
+  let board = boards[activeBoard && activeBoard.id]
 
   return (
     <DragDropContext >
@@ -28,17 +29,18 @@ export default function ListContainer({ boardId }) {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {/* {board.listsIds.map((listId, index) => {
+            {board !== undefined && board.listsIds.map((listId, index) => {
               const list = lists[listId];
               return (
-                <ListItem
-                  key={listId}
-                  list={list}
-                  listId={listId}
-                  index={index}
-                />
+                // <ListItem
+                //   key={listId}
+                //   list={list}
+                //   listId={listId}
+                //   index={index}
+                // />
+                console.log(list)
               );
-            })} */}
+            })}
             {provided.placeholder}
             <Input type="list" listId={null} />
           </div>

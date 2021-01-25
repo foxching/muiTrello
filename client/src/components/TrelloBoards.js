@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import axios from 'axios';
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import Icon from "@material-ui/core/Icon";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -9,8 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import BoardThumbnail from "../components/Board/BoardThumbnail";
 import BoardInputModal from "../components/Board/BoardInputModal";
-import { loadBoards } from './../store/actions/boardsAction'
-import { CLEAR_BOARDS } from "../store/actions/types";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,31 +23,6 @@ export default function TrelloBoard() {
   const classes = useStyles();
   const boards = useSelector(state => state.boards);
   const boardOrder = useSelector(state => state.boardOrder)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch({ type: CLEAR_BOARDS })
-    axios
-      .get('/api/boards')
-      .then(res =>
-        res.data.map((d) => {
-          const x = {
-            [d._id]: {
-              id: d._id,
-              name: d.name,
-              color: d.color,
-              team: d.team,
-              listsIds: []
-            }
-          }
-          dispatch(loadBoards(x[d._id]))
-        })
-      )
-      .catch(err => {
-        console.log(err)
-      });
-  }, [dispatch])
-
 
   return (
     <Box className={classes.root}>
