@@ -28,7 +28,7 @@ router.post('/:boardId', async (req, res) => {
     const boardId = req.params.boardId
     const list = new List({
         title: req.body.title,
-        board: boardId
+        board: req.params.boardId
     });
     try {
         const newList = await list.save();
@@ -37,7 +37,7 @@ router.post('/:boardId', async (req, res) => {
                 "listsIds": [newList.id],
             }
         })
-        res.status(201).json(newList.id);
+        res.status(201).json(newList);
     } catch (err) {
         res.status(500).json({ err: err.msg });
     }

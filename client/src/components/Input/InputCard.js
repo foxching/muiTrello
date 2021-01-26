@@ -46,7 +46,11 @@ export default function InputCard(props) {
 
   const handleAddtoCard = () => {
     if (type === "list") {
-      dispatch(addList(text, activeBoard.id))
+      const newList = {
+        title: text,
+        board: activeBoard.id
+      }
+      dispatch(addList(newList))
     } else {
       if (text.length > 0) {
         //addCard(text, listId);

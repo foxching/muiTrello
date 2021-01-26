@@ -29,7 +29,7 @@ const listsReducer = (state = initialState, action) => {
         case LOAD_LISTS:
             return loadLists(action.payload, state)
         case ADD_LIST:
-            console.log(action.payload)
+        //console.log(action.payload)
         //return addList(action.payload, state)
         default:
             return state;

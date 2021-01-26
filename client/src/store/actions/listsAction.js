@@ -9,12 +9,13 @@ export const loadLists = (lists) => async (dispatch, getState) => {
     await dispatch({ type: LOAD_LISTS, payload: lists })
 }
 
-export const addList = (list, boardId) => (dispatch, getState) => {
-    console.log(list)
+//add new  list
+export const addList = (list) => (dispatch, getState) => {
+    const boardId = getState().activeBoard.id;
     axios
         .post(`/api/lists/${boardId}`, list)
         .then(res => {
-            dispatch({ type: ADD_LIST, payload: res.data, payload: boardId })
+            dispatch({ type: ADD_LIST, payload: res.data })
         })
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }

@@ -19,21 +19,25 @@ const loadBoards = (boards, state) => {
     return { ...state, [id]: newBoard };
 }
 
-const addBoard = (newBoard, state) => {
-    const { _id, name, color, team, listsIds } = newBoard
-    const board = {
+const addBoard = (board, state) => {
+    const { _id, name, color, team, listsIds } = board
+    const newBoard = {
         id: _id,
         name,
         color,
         team,
         listsIds
     };
-    return { ...state, [_id]: board };
+    return { ...state, [_id]: newBoard };
 }
 
 const addList = (list, state) => {
-    //const { id, boardId } = list
-    //return { ...state, [boardId]: { state.listsIds: [...listsIds, id] } }
+    const { board, _id } = list
+    const Board = state[board]
+    return {
+        ...state,
+        [board]: { ...Board, listsIds: [...Board.listsIds, _id] }
+    };
 }
 
 
@@ -48,7 +52,7 @@ const boardsReducer = (state = initialState, action) => {
             return addBoard(action.payload, state)
         case ADD_LIST:
             console.log(action.payload)
-        //return addList(action.payload, state)
+            return addList(action.payload, state)
         default:
             return state;
     }

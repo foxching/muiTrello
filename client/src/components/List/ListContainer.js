@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "./ListItem";
 import Input from "../Input/Input";
-import { loadLists } from "../../store/actions/listsAction"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,15 +30,16 @@ export default function ListContainer({ boardId }) {
           >
             {board !== undefined && board.listsIds.map((listId, index) => {
               const list = lists[listId];
-              return (
-                // <ListItem
-                //   key={listId}
-                //   list={list}
-                //   listId={listId}
-                //   index={index}
-                // />
-                console.log(list)
-              );
+              if (list !== undefined) {
+                return (
+                  <ListItem
+                    key={listId}
+                    list={list}
+                    listId={listId}
+                    index={index}
+                  />
+                );
+              }
             })}
             {provided.placeholder}
             <Input type="list" listId={null} />
