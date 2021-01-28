@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Card({ card, listTitle, listId, index }) {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
-  console.log(index);
   return (
     <>
       <Draggable draggableId={card.id} index={index}>

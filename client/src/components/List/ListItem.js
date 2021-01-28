@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux"
 import { Droppable } from "react-beautiful-dnd";
 import { Draggable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ListItem(props) {
   const { list, listId, index } = props;
+  const cards = useSelector(state => state.cards)
   const classes = useStyles();
   return (
     <Draggable draggableId={listId} index={index}>
@@ -37,18 +39,20 @@ export default function ListItem(props) {
             <Droppable droppableId={listId} type="card">
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {/* {list.cards.map((cardId, index) => {
+                  {list.cards.map((cardId, index) => {
                     const card = cards[cardId];
-                    return (
-                      <Card
-                        key={cardId}
-                        listId={listId}
-                        listTitle={list.title}
-                        card={card}
-                        index={index}
-                      />
-                    );
-                  })} */}
+                    if (card !== undefined) {
+                      return (
+                        <Card
+                          key={cardId}
+                          listId={listId}
+                          listTitle={list.title}
+                          card={card}
+                          index={index}
+                        />
+                      );
+                    }
+                  })}
                   {provided.placeholder}
                   <Input type="card" listId={listId} />
                 </div>

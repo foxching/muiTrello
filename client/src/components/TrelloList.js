@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
 import axios from 'axios';
 import { useDispatch } from "react-redux"
+import { useParams } from "react-router"
 import ListContainer from "../components/List/ListContainer";
 import "simplebar/dist/simplebar.min.css";
 import SimpleBar from "simplebar-react";
 import { setActiveBoard } from "../store/actions/boardsAction"
 import { loadLists } from "../store/actions/listsAction"
+import { loadCards } from "../store/actions/cardsAction"
 
 export default function TrelloList(props) {
-  const boardId = props.match.params.boardId
+  const { boardId } = useParams()
+  //const boardId = props.match.params.boardId
   const dispatch = useDispatch()
 
-  
+
 
   useEffect(() => {
-
     async function fetchData() {
       dispatch(setActiveBoard(boardId))
       const res = await axios.get(`/api/lists/${boardId}`)
@@ -28,6 +30,7 @@ export default function TrelloList(props) {
           }
         }
         dispatch(loadLists(x[d._id]))
+        dispatch(loadCards(x[d._id].id))
       })
     }
     fetchData();

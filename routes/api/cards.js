@@ -5,8 +5,14 @@ const Card = require('../../model/Card');
 const List = require('../../model/List');
 
 
-router.get('/', (req, res) => {
-    res.send('ok')
+router.get('/:listId', async (req, res) => {
+    const listId = req.params.listId
+    try {
+        const cards = await Card.find({ list: ObjectId(listId) })
+        res.status(200).json(cards);
+    } catch (err) {
+        res.status(500).json({ err: err.msg });
+    }
 })
 
 /**
@@ -18,6 +24,8 @@ router.post('/:listId', async (req, res) => {
     const listId = req.params.listId
     const card = new Card({
         text: req.body.text,
+        description: "",
+        dueDate: "",
         list: listId
     });
     try {
