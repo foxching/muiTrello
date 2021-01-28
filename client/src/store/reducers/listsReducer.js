@@ -1,4 +1,4 @@
-import { LOAD_LISTS, ADD_LIST } from '../actions/types'
+import { LOAD_LISTS, ADD_LIST, ADD_CARD } from '../actions/types'
 
 const initialState = {};
 
@@ -24,12 +24,24 @@ const addList = (list, state) => {
     return { ...state, [_id]: newList };
 }
 
+
+const addCard = (card, state) => {
+    const { _id, list } = card
+    const List = state[list]
+    return {
+        ...state,
+        [list]: { ...List, cards: [...List.cards, _id] }
+    };
+}
+
 const listsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_LISTS:
             return loadLists(action.payload, state)
         case ADD_LIST:
             return addList(action.payload, state)
+        case ADD_CARD:
+            return addCard(action.payload, state)
         default:
             return state;
     }

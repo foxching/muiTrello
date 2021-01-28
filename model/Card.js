@@ -7,12 +7,10 @@ const CardSchema = mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
     },
-    labels: [],
+    labels: [{ type: String }],
     dueDate: {
         type: String,
-        required: true
     },
     list: {
         type: mongoose.Schema.Types.ObjectId,

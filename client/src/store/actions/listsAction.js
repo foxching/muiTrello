@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { LOAD_LISTS, ADD_LIST } from './types';
-import Axios from 'axios';
 import { returnErrors } from './errorAction'
 
 

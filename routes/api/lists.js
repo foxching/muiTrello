@@ -28,7 +28,7 @@ router.post('/:boardId', async (req, res) => {
     const boardId = req.params.boardId
     const list = new List({
         title: req.body.title,
-        board: req.params.boardId
+        board: boardId
     });
     try {
         const newList = await list.save();

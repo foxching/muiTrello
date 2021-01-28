@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import ClearIcon from "@material-ui/icons/Clear";
 import { addList } from "../../store/actions/listsAction"
+import { addCard } from "../../store/actions/cardsAction"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,9 +36,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function InputCard(props) {
   const dispatch = useDispatch()
-  const activeBoard = useSelector(state => state.activeBoard)
   const [text, setText] = useState("");
-  const { setOpen, type } = props;
+  const { listId, setOpen, type } = props;
   const classes = useStyles();
 
   const handleChange = (e) => {
@@ -47,13 +47,15 @@ export default function InputCard(props) {
   const handleAddtoCard = () => {
     if (type === "list") {
       const newList = {
-        title: text,
-        board: activeBoard.id
+        title: text
       }
       dispatch(addList(newList))
     } else {
+      const newCard = {
+        text,
+      }
       if (text.length > 0) {
-        //addCard(text, listId);
+        dispatch(addCard(newCard, listId));
       }
     }
     setOpen(false);
