@@ -9,9 +9,7 @@ const CardSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    labels: {
-        type: Array
-    },
+    labels: [],
     dueDate: {
         type: String,
         required: true

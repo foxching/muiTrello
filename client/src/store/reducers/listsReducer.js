@@ -14,14 +14,14 @@ const loadLists = (lists, state) => {
 }
 
 const addList = (list, state) => {
-    const { id, title, cards, boardId } = list
+    const { board, _id, title, cards } = list
     const newList = {
-        id,
+        id: _id,
         title,
         cards,
-        board: boardId
+        board
     }
-    return { ...state, [id]: newList };
+    return { ...state, [_id]: newList };
 }
 
 const listsReducer = (state = initialState, action) => {
@@ -29,8 +29,7 @@ const listsReducer = (state = initialState, action) => {
         case LOAD_LISTS:
             return loadLists(action.payload, state)
         case ADD_LIST:
-        //console.log(action.payload)
-        //return addList(action.payload, state)
+            return addList(action.payload, state)
         default:
             return state;
     }

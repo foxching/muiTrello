@@ -41,7 +41,6 @@ const addList = (list, state) => {
 }
 
 
-
 const boardsReducer = (state = initialState, action) => {
     switch (action.type) {
         case CLEAR_BOARDS:

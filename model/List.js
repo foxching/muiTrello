@@ -5,9 +5,7 @@ const ListSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    cards: {
-        type: Array
-    },
+    cards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Card" }],
     board: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Board'
