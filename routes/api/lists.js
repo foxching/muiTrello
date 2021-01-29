@@ -43,6 +43,21 @@ router.post('/:boardId', async (req, res) => {
     }
 });
 
+/**
+ * @route   PUT api/lists
+ * @desc    Update list title
+ */
+
+router.put('/:listId', async (req, res) => {
+    const listId = req.params.listId
+    try {
+        const updatedList = await List.updateOne({ _id: ObjectId(listId) }, { $set: req.body });
+        res.status(200).json(updatedList);
+    } catch (err) {
+        res.status(500).json({ err: err.msg });
+    }
+});
+
 
 
 module.exports = router;

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LOAD_LISTS, ADD_LIST } from './types';
+import { LOAD_LISTS, ADD_LIST, UPDATE_LIST_TITLE } from './types';
 import { returnErrors } from './errorAction'
 
 
@@ -15,6 +15,15 @@ export const addList = (list) => (dispatch, getState) => {
         .post(`/api/lists/${boardId}`, list)
         .then(res => {
             dispatch({ type: ADD_LIST, payload: res.data })
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+}
+
+export const editListTitle = (title, listId) => (dispatch, getState) => {
+    axios
+        .put(`/api/lists/${listId}`, title)
+        .then(res => {
+            dispatch({ type: UPDATE_LIST_TITLE, payload: { title, listId } })
         })
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }

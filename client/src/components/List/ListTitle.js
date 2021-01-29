@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux"
 import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
-import { AppContext } from "../../context/appContext";
 import MenuOption from "../../components/Modal/MenuOption";
+import { editListTitle } from "../../store/actions/listsAction"
 
 const useStyles = makeStyles((theme) => ({
   editableContainer: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ListTitle({ title, listId }) {
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const classes = useStyles();
@@ -38,8 +40,11 @@ export default function ListTitle({ title, listId }) {
   };
 
   const handleOnBlur = () => {
+    const newListTitle = {
+      title: newTitle
+    }
     if (newTitle !== "") {
-      //changeListTitle(newTitle, listId);
+      dispatch(editListTitle(newListTitle, listId))
       setOpen(!open);
     }
   };
