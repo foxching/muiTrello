@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router();
 const ObjectId = require('mongodb').ObjectID
-const List = require('../../model/List');
 const Board = require('../../model/Board');
+const List = require('../../model/List');
+const Card = require('../../model/Card')
 
 
 /**
@@ -74,6 +75,7 @@ router.delete('/:listId/:boardId', async (req, res) => {
     try {
         if (id) {
             await List.deleteOne({ _id: ObjectId(listId) })
+            await Card.deleteMany({ list: ObjectId(listId) })
             await Board.updateOne({ _id: ObjectId(boardId) }, {
                 $pull: { listsIds: listId }
             })
