@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LOAD_LISTS, ADD_LIST, UPDATE_LIST_TITLE } from './types';
+import { LOAD_LISTS, ADD_LIST, DELETE_LIST, UPDATE_LIST_TITLE } from './types';
 import { returnErrors } from './errorAction'
 
 
@@ -19,6 +19,7 @@ export const addList = (list) => (dispatch, getState) => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
+//update list title
 export const editListTitle = (title, listId) => (dispatch, getState) => {
     axios
         .put(`/api/lists/${listId}`, title)
@@ -28,4 +29,15 @@ export const editListTitle = (title, listId) => (dispatch, getState) => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
+//delete list
+export const deleteList = (listId) => (dispatch, getState) => {
+    const boardId = getState().activeBoard.id;
+    axios
+        .delete(`/api/lists/${listId}/${boardId}`)
+        .then(res => {
+            console.log(res.data)
+            dispatch({ type: DELETE_LIST, payload: { listId, boardId } })
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+}
 

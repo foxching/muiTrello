@@ -1,4 +1,4 @@
-import { LOAD_LISTS, ADD_LIST, ADD_CARD, UPDATE_LIST_TITLE } from '../actions/types'
+import { LOAD_LISTS, ADD_LIST, UPDATE_LIST_TITLE, DELETE_LIST, ADD_CARD, DELETE_CARD, } from '../actions/types'
 
 const initialState = {};
 
@@ -44,6 +44,14 @@ const updateListTitle = (list, state) => {
     };
 }
 
+const deleteList = (list, state) => {
+    const { listId } = list;
+    delete state[listId];
+    return {
+        ...state
+    };
+}
+
 const listsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_LISTS:
@@ -53,9 +61,9 @@ const listsReducer = (state = initialState, action) => {
         case ADD_CARD:
             return addCard(action.payload, state)
         case UPDATE_LIST_TITLE:
-            console.log(action.payload.title)
-            console.log(action.payload.listId)
             return updateListTitle(action.payload, state)
+        case DELETE_LIST:
+            return deleteList(action.payload, state)
         default:
             return state;
     }

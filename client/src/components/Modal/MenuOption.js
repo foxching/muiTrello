@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux"
 import IconButton from "@material-ui/core/IconButton";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
@@ -7,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Clear from "@material-ui/icons/Clear";
+import { deleteList } from "../../store/actions/listsAction"
 
 
 const options = ["Add Card...", "Delete this List..", "Move List.."];
@@ -14,6 +16,7 @@ const options = ["Add Card...", "Delete this List..", "Move List.."];
 const ITEM_HEIGHT = 48;
 
 export default function MenuOption({ listId, boardId }) {
+  const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -27,7 +30,7 @@ export default function MenuOption({ listId, boardId }) {
 
   const handleClick = (option) => {
     if (option === "Delete this List..") {
-      // deleteList(listId, boardId);
+      dispatch(deleteList(listId));
     }
     setAnchorEl(null);
   };

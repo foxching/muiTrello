@@ -1,4 +1,4 @@
-import { LOAD_BOARDS, ADD_BOARD, ADD_LIST, CLEAR_BOARDS } from '../actions/types'
+import { LOAD_BOARDS, ADD_BOARD, CLEAR_BOARDS, ADD_LIST, DELETE_LIST } from '../actions/types'
 
 
 const initialState = {};
@@ -40,6 +40,15 @@ const addList = (list, state) => {
     };
 }
 
+const deleteList = (list, state) => {
+    const { listId, boardId } = list
+    const Board = state[boardId]
+    return {
+        ...state,
+        [boardId]: { ...Board, listsIds: [...Board.listsIds.filter((id) => id !== listId)] }
+    }
+}
+
 
 const boardsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -50,8 +59,9 @@ const boardsReducer = (state = initialState, action) => {
         case ADD_BOARD:
             return addBoard(action.payload, state)
         case ADD_LIST:
-            console.log(action.payload)
             return addList(action.payload, state)
+        case DELETE_LIST:
+            return deleteList(action.payload, state)
         default:
             return state;
     }

@@ -33,9 +33,7 @@ router.post('/:boardId', async (req, res) => {
     try {
         const newList = await list.save();
         await Board.updateOne({ _id: ObjectId(boardId) }, {
-            $push: {
-                "listsIds": [newList.id],
-            }
+            $push: { listsIds: newList.id }
         })
         res.status(201).json(newList);
     } catch (err) {
@@ -50,12 +48,43 @@ router.post('/:boardId', async (req, res) => {
 
 router.put('/:listId', async (req, res) => {
     const listId = req.params.listId
+    const id = await List.findById({ _id: ObjectId(listId) })
     try {
-        const updatedList = await List.updateOne({ _id: ObjectId(listId) }, { $set: req.body });
-        res.status(200).json(updatedList);
+        if (id) {
+            await List.updateOne({ _id: ObjectId(listId) }, { $set: req.body });
+            res.status(200).json({ msg: "List Title Updated Successfully" });
+        } else {
+            res.status(404).json({ msg: "List not found" });
+        }
     } catch (err) {
         res.status(500).json({ err: err.msg });
     }
+});
+
+
+/**
+ * @route   DELETE api/lists
+ * @desc    Delete list 
+ */
+
+router.delete('/:listId/:boardId', async (req, res) => {
+    const listId = req.params.listId;
+    const boardId = req.params.boardId;
+    const id = await List.findById({ _id: ObjectId(listId) })
+    try {
+        if (id) {
+            await List.deleteOne({ _id: ObjectId(listId) })
+            await Board.updateOne({ _id: ObjectId(boardId) }, {
+                $pull: { listsIds: listId }
+            })
+            res.status(200).json({ msg: "List deleted successfully" });
+        } else {
+            res.status(404).json({ msg: "List not found" });
+        }
+    } catch (err) {
+        res.status(500).json({ err: err.msg });
+    }
+
 });
 
 
