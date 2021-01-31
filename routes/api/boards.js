@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router();
+const ObjectId = require('mongodb').ObjectID
 const Board = require('../../model/Board');
 
 
@@ -32,6 +33,27 @@ router.post('/', async (req, res) => {
     try {
         const newBoard = await board.save();
         res.status(201).json(newBoard);
+    } catch (err) {
+        res.status(500).json({ err: err.msg });
+    }
+});
+
+
+/**
+ * @route   POST api/boards
+ * @desc    Set Board background
+ */
+
+router.put('/:boardId', async (req, res) => {
+    const boardId = req.params.boardId
+    const id = await Board.findById({ _id: ObjectId(boardId) })
+    try {
+        if (id) {
+            await Board.updateOne({ _id: ObjectId(boardId) }, { $set: req.body });
+            res.status(200).json({ msg: "Board Background updated Successfully" });
+        } else {
+            res.status(404).json({ msg: "Board not found" });
+        }
     } catch (err) {
         res.status(500).json({ err: err.msg });
     }

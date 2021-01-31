@@ -2,6 +2,7 @@ import {
     LOAD_BOARDS,
     ADD_BOARD,
     CLEAR_BOARDS,
+    SET_BOARD_BACKGROUND,
     ADD_LIST,
     DELETE_LIST
 } from '../actions/types'
@@ -37,6 +38,20 @@ const addBoard = (payload, state) => {
     return { ...state, [_id]: newBoard };
 }
 
+const setBoardBackground = (payload, state) => {
+    const { color } = payload.color
+    const { boardId } = payload
+    const Board = state[boardId]
+    return {
+        ...state,
+        [boardId]: {
+            ...Board,
+            color
+        }
+    }
+}
+
+
 const addList = (payload, state) => {
     const { board, _id } = payload
     const Board = state[board]
@@ -64,6 +79,8 @@ const boardsReducer = (state = initialState, action) => {
             return loadBoards(action.payload, state)
         case ADD_BOARD:
             return addBoard(action.payload, state)
+        case SET_BOARD_BACKGROUND:
+            return setBoardBackground(action.payload, state)
         case ADD_LIST:
             return addList(action.payload, state)
         case DELETE_LIST:

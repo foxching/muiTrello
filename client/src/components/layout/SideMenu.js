@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux"
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Divider from "@material-ui/core/Divider";
@@ -7,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Clear from "@material-ui/icons/Clear";
 import colors from "../../utils/colors";
 import { getImages } from "../../utils/imageApi";
+import { setBoardBackground } from "../../store/actions/boardsAction"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 export default function SideMenu({ open, setOpen }) {
+  const dispatch = useDispatch()
   const [optionColor, setOptionColor] = useState(false);
   const [optionImage, setOptionImage] = useState(false);
   const [images, setImages] = useState([]);
@@ -53,6 +56,13 @@ export default function SideMenu({ open, setOpen }) {
     const imagesList = await getImages();
     setImages(imagesList);
   };
+
+  const handleSetBoardColor = (color) => {
+    const newColor = {
+      color
+    }
+    dispatch(setBoardBackground(newColor))
+  }
 
   useEffect(() => {
     getImagesFromApi();
@@ -133,7 +143,7 @@ export default function SideMenu({ open, setOpen }) {
                     className={classes.box}
                     style={{ backgroundColor: color }}
                     onClick={() => {
-                      //setBackground(color);
+                      handleSetBoardColor(color);
                       setOpen(false);
                     }}
                   ></div>
