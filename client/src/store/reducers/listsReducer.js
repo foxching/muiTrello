@@ -1,9 +1,16 @@
-import { LOAD_LISTS, ADD_LIST, UPDATE_LIST_TITLE, DELETE_LIST, ADD_CARD, DELETE_CARD, } from '../actions/types'
+import {
+    LOAD_LISTS,
+    ADD_LIST,
+    UPDATE_LIST_TITLE,
+    DELETE_LIST,
+    ADD_CARD,
+    DELETE_CARD,
+} from '../actions/types'
 
 const initialState = {};
 
-const loadLists = (lists, state) => {
-    const { title, cards, id, board } = lists;
+const loadLists = (payload, state) => {
+    const { title, cards, id, board } = payload;
     const newList = {
         id,
         title,
@@ -13,8 +20,8 @@ const loadLists = (lists, state) => {
     return { ...state, [id]: newList };
 }
 
-const addList = (list, state) => {
-    const { board, _id, title, cards } = list
+const addList = (payload, state) => {
+    const { board, _id, title, cards } = payload
     const newList = {
         id: _id,
         title,
@@ -25,18 +32,9 @@ const addList = (list, state) => {
 }
 
 
-const addCard = (card, state) => {
-    const { _id, list } = card
-    const List = state[list]
-    return {
-        ...state,
-        [list]: { ...List, cards: [...List.cards, _id] }
-    };
-}
-
-const updateListTitle = (list, state) => {
-    const { listId } = list
-    const { title } = list.title
+const updateListTitle = (payload, state) => {
+    const { listId } = payload
+    const { title } = payload.title
     const List = state[listId]
     return {
         ...state,
@@ -44,12 +42,30 @@ const updateListTitle = (list, state) => {
     };
 }
 
-const deleteList = (list, state) => {
-    const { listId } = list;
+const deleteList = (payload, state) => {
+    const { listId } = payload;
     delete state[listId];
     return {
         ...state
     };
+}
+
+const addCard = (payload, state) => {
+    const { _id, list } = payload
+    const List = state[list]
+    return {
+        ...state,
+        [list]: { ...List, cards: [...List.cards, _id] }
+    };
+}
+
+const deleteCard = (payload, state) => {
+    const { cardId, listId } = payload
+    const List = state[listId]
+    return {
+        ...state,
+        [listId]: { ...List, cards: [...List.cards.filter((id) => id !== cardId)] }
+    }
 }
 
 const listsReducer = (state = initialState, action) => {
@@ -58,12 +74,14 @@ const listsReducer = (state = initialState, action) => {
             return loadLists(action.payload, state)
         case ADD_LIST:
             return addList(action.payload, state)
-        case ADD_CARD:
-            return addCard(action.payload, state)
         case UPDATE_LIST_TITLE:
             return updateListTitle(action.payload, state)
         case DELETE_LIST:
             return deleteList(action.payload, state)
+        case ADD_CARD:
+            return addCard(action.payload, state)
+        case DELETE_CARD:
+            return deleteCard(action.payload, state)
         default:
             return state;
     }

@@ -1,4 +1,10 @@
-import { LOAD_BOARDS, ADD_BOARD, CLEAR_BOARDS, ADD_LIST, DELETE_LIST } from '../actions/types'
+import {
+    LOAD_BOARDS,
+    ADD_BOARD,
+    CLEAR_BOARDS,
+    ADD_LIST,
+    DELETE_LIST
+} from '../actions/types'
 
 
 const initialState = {};
@@ -7,8 +13,8 @@ const clearBoard = (state) => {
     return state = initialState
 }
 
-const loadBoards = (boards, state) => {
-    const { name, color, listsIds, id } = boards;
+const loadBoards = (payload, state) => {
+    const { name, color, listsIds, id } = payload;
     const newBoard = {
         id,
         name,
@@ -19,8 +25,8 @@ const loadBoards = (boards, state) => {
     return { ...state, [id]: newBoard };
 }
 
-const addBoard = (board, state) => {
-    const { _id, name, color, team, listsIds } = board
+const addBoard = (payload, state) => {
+    const { _id, name, color, team, listsIds } = payload
     const newBoard = {
         id: _id,
         name,
@@ -31,8 +37,8 @@ const addBoard = (board, state) => {
     return { ...state, [_id]: newBoard };
 }
 
-const addList = (list, state) => {
-    const { board, _id } = list
+const addList = (payload, state) => {
+    const { board, _id } = payload
     const Board = state[board]
     return {
         ...state,
@@ -40,8 +46,8 @@ const addList = (list, state) => {
     };
 }
 
-const deleteList = (list, state) => {
-    const { listId, boardId } = list
+const deleteList = (payload, state) => {
+    const { listId, boardId } = payload
     const Board = state[boardId]
     return {
         ...state,

@@ -12,7 +12,6 @@ import CardModalLabels from "./CardModalLabels";
 import CardModalDescription from "./CardModalDescription";
 import CardModalSideMenu from "./CardModalSideMenu";
 import CardModalActivity from "./CardModalActivity";
-import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {

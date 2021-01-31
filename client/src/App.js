@@ -33,6 +33,7 @@ export default function App() {
             }
           }
           store.dispatch(loadBoards(x[d._id]))
+          return null
         })
       )
       .catch(err => {

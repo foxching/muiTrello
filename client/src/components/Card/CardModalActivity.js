@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CardModalAddDate() {
+export default function CardModalActivity() {
   const classes = useStyles();
   return (
     <>

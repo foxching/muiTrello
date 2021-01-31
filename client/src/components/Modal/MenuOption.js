@@ -59,10 +59,12 @@ export default function MenuOption({ listId, boardId }) {
         }}
         getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: "bottom"
+          vertical: "bottom",
+          horizontal: "center"
         }}
         transformOrigin={{
-          vertical: "top"
+          vertical: "top",
+          horizontal: "top"
         }}
       >
         {" "}

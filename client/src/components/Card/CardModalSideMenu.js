@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux"
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +9,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import CardModalAddLabels from "./CardModalAddLabels";
 import CardModalAddDate from "./CardModalAddDate";
+import { deleteCard } from "../../store/actions/cardsAction"
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -27,9 +29,9 @@ export default function CardModalSideMenu({
   listId,
   cardLabels,
   cardDueDate,
-  handleDeleteCard
 }) {
   const classes = useStyles();
+  const dispatch = useDispatch()
   return (
     <>
       <Box
@@ -89,7 +91,7 @@ export default function CardModalSideMenu({
           startIcon={<DeleteIcon />}
           className={classes.btn}
           fullWidth
-          onClick={handleDeleteCard}
+          onClick={() => dispatch(deleteCard(cardId, listId))}
         >
           Delete
         </Button>

@@ -35,7 +35,6 @@ export const deleteList = (listId) => (dispatch, getState) => {
     axios
         .delete(`/api/lists/${listId}/${boardId}`)
         .then(res => {
-            console.log(res.data)
             dispatch({ type: DELETE_LIST, payload: { listId, boardId } })
         })
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))

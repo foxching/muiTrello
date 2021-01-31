@@ -9,7 +9,6 @@ import Menu from "@material-ui/core/Menu";
 import Clear from "@material-ui/icons/Clear";
 import LabelIcon from "@material-ui/icons/Label";
 import Icon from "@material-ui/core/Icon";
-import { AppContext } from "../../context/appContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {

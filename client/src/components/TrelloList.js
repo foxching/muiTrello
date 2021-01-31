@@ -31,10 +31,11 @@ export default function TrelloList(props) {
         }
         dispatch(loadLists(x[d._id]))
         dispatch(loadCards(x[d._id].id))
+        return null
       })
     }
     fetchData();
-  }, [])
+  }, [dispatch, boardId])
 
   return (
     <>

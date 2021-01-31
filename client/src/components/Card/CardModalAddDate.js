@@ -10,7 +10,6 @@ import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
 import Clear from "@material-ui/icons/Clear";
 import ScheduleIcon from "@material-ui/icons/Schedule";
-import { AppContext } from "../../context/appContext";
 import "react-calendar/dist/Calendar.css";
 
 const useStyles = makeStyles((theme) => ({
