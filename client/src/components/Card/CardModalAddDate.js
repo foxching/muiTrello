@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Calendar from "react-calendar";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
@@ -11,8 +12,9 @@ import Menu from "@material-ui/core/Menu";
 import Clear from "@material-ui/icons/Clear";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import "react-calendar/dist/Calendar.css";
+import { updateCardLabels } from "../../store/actions/cardsAction";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper
   },
@@ -30,29 +32,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [date, setDate] = useState(new Date());
   const [textDate, setTextDate] = useState("");
   const [textTime, setTextTime] = useState("");
 
-
-  const handleClickListItem = (event) => {
+  const handleClickListItem = event => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleChange = (date) => {
+  const handleChange = date => {
     setDate(date);
     setTextDate(
       `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const dueDate = textDate + " " + textTime;
-    //console.log(dueDate);
-    //editCardProps(dueDate, listId, cardId, "date");
+    const cardDate = {
+      dueDate
+    };
+    dispatch(updateCardLabels(cardDate, cardId, "date"));
   };
 
   const handleClose = () => {
@@ -142,7 +146,7 @@ export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
                 style={{ marginBottom: "10px", width: "150px" }}
                 size="small"
                 type="time"
-                onChange={(e) => setTextTime(e.target.value)}
+                onChange={e => setTextTime(e.target.value)}
                 value={textTime}
                 label="Time"
                 InputLabelProps={{
