@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -7,8 +8,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import ClearIcon from "@material-ui/icons/Clear";
+import { updateCardLabels } from "../../store/actions/cardsAction";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   card: {
     margin: theme.spacing(1, 1, 1, 0),
     paddingBottom: theme.spacing(3),
@@ -51,15 +53,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardModalDescription({ description, listId, cardId }) {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [newDescription, setNewDescription] = useState("");
   const classes = useStyles();
 
-  const handleOnChange = (e) => {
+  const handleOnChange = e => {
     setNewDescription(e.target.value);
   };
 
   const handleSave = () => {
+    const cardDescription = {
+      description: newDescription
+    };
+    dispatch(updateCardLabels(cardDescription, cardId, "description"));
     setOpen(false);
   };
 
@@ -102,20 +109,20 @@ export default function CardModalDescription({ description, listId, cardId }) {
           </Box>
         </Box>
       ) : (
-          <Box className={classes.descriptionContainer}>
-            <Typography className={classes.description}>
-              Description
+        <Box className={classes.descriptionContainer}>
+          <Typography className={classes.description}>
+            Description
             <Box
-                component="span"
-                className={classes.edit}
-                onClick={() => setOpen(!open)}
-              >
-                Edit
+              component="span"
+              className={classes.edit}
+              onClick={() => setOpen(!open)}
+            >
+              Edit
             </Box>
-            </Typography>
-            <Typography paragraph>{description}</Typography>
-          </Box>
-        )}
+          </Typography>
+          <Typography paragraph>{description}</Typography>
+        </Box>
+      )}
     </Box>
   );
 }

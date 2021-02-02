@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 
 
 /**
- * @route   POST api/boards
+ * @route   PUT api/boards
  * @desc    Set Board background
  */
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
@@ -9,8 +10,9 @@ import Menu from "@material-ui/core/Menu";
 import Clear from "@material-ui/icons/Clear";
 import LabelIcon from "@material-ui/icons/Label";
 import Icon from "@material-ui/core/Icon";
+import { updateCardLabels } from "../../store/actions/cardsAction";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper
   },
@@ -20,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const labels = [
   { label: "New", color: "green" },
   { label: "Urgent", color: "red" },
@@ -29,16 +30,20 @@ const labels = [
 ];
 
 export default function CardModalAddLabels({ cardId, listId, cardLabels }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-
-  const handleClickListItem = (event) => {
+  const handleClickListItem = event => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuItemClick = (label) => {
-    //editCardProps(label, listId, cardId, "labels");
+  const handleMenuItemClick = label => {
+    const cardLabel = {
+      labels: label
+    };
+    dispatch(updateCardLabels(cardLabel, cardId, "labels"));
+    //dispatch(updateCardLabels(cardDescription, cardId, "description"))
   };
 
   const handleClose = () => {
@@ -96,7 +101,7 @@ export default function CardModalAddLabels({ cardId, listId, cardLabels }) {
         {labels.map((label, index) => (
           <MenuItem
             key={label.color}
-            onClick={(event) => handleMenuItemClick(label)}
+            onClick={event => handleMenuItemClick(label)}
           >
             <Box
               style={{
@@ -111,17 +116,15 @@ export default function CardModalAddLabels({ cardId, listId, cardLabels }) {
               }}
             >
               {label.label}
-              {cardLabels.some(
-                (cardLabel) => cardLabel.label === label.label
-              ) ? (
-                  <Icon
-                    style={{ color: "#fff", fontSize: "16px", cursor: "pointer" }}
-                  >
-                    check
+              {cardLabels.some(cardLabel => cardLabel.label === label.label) ? (
+                <Icon
+                  style={{ color: "#fff", fontSize: "16px", cursor: "pointer" }}
+                >
+                  check
                 </Icon>
-                ) : (
-                  <span></span>
-                )}
+              ) : (
+                <span></span>
+              )}
             </Box>
           </MenuItem>
         ))}

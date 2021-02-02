@@ -1,4 +1,5 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -8,8 +9,9 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ComputerIcon from "@material-ui/icons/Computer";
 import ClearIcon from "@material-ui/icons/Clear";
+import { updateCardLabels } from "../../store/actions/cardsAction";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   card: {
     margin: theme.spacing(1, 1, 1, 0),
     paddingBottom: theme.spacing(3),
@@ -48,15 +50,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardTitle({ text, listId, listTitle, cardId }) {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const classes = useStyles();
 
-  const handleOnChange = (e) => {
+  const handleOnChange = e => {
     setNewTitle(e.target.value);
   };
 
   const handleSave = () => {
+    const cardText = {
+      text: newTitle
+    };
+    dispatch(updateCardLabels(cardText, cardId, "title"));
     setOpen(false);
   };
 
@@ -96,18 +103,18 @@ export default function CardTitle({ text, listId, listTitle, cardId }) {
           </Box>
         </Box>
       ) : (
-          <Box>
-            <Typography
-              className={classes.cardTitle}
-              onClick={() => setOpen(!open)}
-            >
-              {text}
-              <Box component="span" className={classes.listTitle}>
-                in list {listTitle}
-              </Box>
-            </Typography>
-          </Box>
-        )}
+        <Box>
+          <Typography
+            className={classes.cardTitle}
+            onClick={() => setOpen(!open)}
+          >
+            {text}
+            <Box component="span" className={classes.listTitle}>
+              in list {listTitle}
+            </Box>
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 }

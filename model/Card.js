@@ -8,7 +8,7 @@ const CardSchema = mongoose.Schema({
     description: {
         type: String,
     },
-    labels: [{ type: String }],
+    labels: [],
     dueDate: {
         type: String,
     },
