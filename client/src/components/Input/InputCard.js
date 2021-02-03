@@ -1,4 +1,4 @@
-import React, { useState, } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -7,11 +7,10 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import ClearIcon from "@material-ui/icons/Clear";
-import { addList } from "../../store/actions/listsAction"
-import { addCard } from "../../store/actions/cardsAction"
+import { addList } from "../../store/actions/listsAction";
+import { addCard } from "../../store/actions/cardsAction";
 
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   card: {
     padding: theme.spacing(1, 1, 1, 0),
     margin: theme.spacing(1),
@@ -34,13 +33,12 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
-export default function InputCard(props) {
-  const dispatch = useDispatch()
+export default function InputCard({ listId, setOpen, type }) {
+  const dispatch = useDispatch();
   const [text, setText] = useState("");
-  const { listId, setOpen, type } = props;
   const classes = useStyles();
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setText(e.target.value);
   };
 
@@ -48,12 +46,12 @@ export default function InputCard(props) {
     if (type === "list") {
       const newList = {
         title: text
-      }
-      dispatch(addList(newList))
+      };
+      dispatch(addList(newList));
     } else {
       const newCard = {
-        text,
-      }
+        text
+      };
       if (text.length > 0) {
         dispatch(addCard(newCard, listId));
       }

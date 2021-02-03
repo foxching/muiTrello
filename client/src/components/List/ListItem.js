@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 import { Droppable } from "react-beautiful-dnd";
 import { Draggable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,8 +11,7 @@ import Input from "../Input/Input";
 
 import "simplebar/dist/simplebar.min.css";
 
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: "#EBECF0",
     marginLeft: theme.spacing(1),
@@ -27,18 +26,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ListItem(props) {
-  const { list, listId, index } = props;
-  const cards = useSelector(state => state.cards)
+export default function ListItem({ list, listId, index }) {
+  const cards = useSelector(state => state.cards);
   const classes = useStyles();
+  
   return (
     <Draggable draggableId={listId} index={index}>
-      {(provided) => (
+      {provided => (
         <Box ref={provided.innerRef} {...provided.draggableProps}>
           <Paper className={classes.root} {...provided.dragHandleProps}>
             <ListTitle title={list.title} listId={listId} />
             <Droppable droppableId={listId} type="card">
-              {(provided) => (
+              {provided => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   {list.cards.map((cardId, index) => {
                     const card = cards[cardId];

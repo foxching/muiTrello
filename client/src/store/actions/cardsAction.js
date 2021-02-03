@@ -3,7 +3,7 @@ import { ADD_CARD, LOAD_CARDS, DELETE_CARD, EDIT_CARD_PROPS } from "./types";
 import { returnErrors } from "./errorAction";
 
 //get all loaded cards
-export const loadCards = listId => (dispatch, getState) => {
+export const getListCards = listId => (dispatch, getState) => {
   axios
     .get(`/api/cards/${listId}`)
     .then(res => {

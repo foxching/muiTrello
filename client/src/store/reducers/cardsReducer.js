@@ -1,4 +1,5 @@
 import {
+  CLEAR_CARDS,
   ADD_CARD,
   LOAD_CARDS,
   DELETE_CARD,
@@ -7,6 +8,10 @@ import {
 } from "../actions/types";
 
 const initialState = {};
+
+const clearCards = state => {
+  return { ...state };
+};
 
 const deleteList = (payload, state) => {
   const { listId } = payload;
@@ -90,6 +95,8 @@ const editCardProps = (payload, state) => {
 
 const cardsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_CARDS:
+      return clearCards(action.payload, state);
     case LOAD_CARDS:
       return loadCard(action.payload, state);
     case ADD_CARD:

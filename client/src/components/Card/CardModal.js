@@ -13,7 +13,7 @@ import CardModalDescription from "./CardModalDescription";
 import CardModalSideMenu from "./CardModalSideMenu";
 import CardModalActivity from "./CardModalActivity";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   dialog: {
     position: "absolute",
     top: theme.spacing(5),
@@ -43,10 +43,6 @@ export default function CardModal({
 }) {
   const classes = useStyles();
 
-  const handleDeleteCard = () => {
-    // deleteCard(card.id, listId);
-    closeModal();
-  };
   return (
     <Dialog
       open={open}
@@ -88,7 +84,6 @@ export default function CardModal({
           </Grid>
           <Grid item xs={3}>
             <CardModalSideMenu
-              handleDeleteCard={handleDeleteCard}
               cardLabels={card.labels}
               cardDueDate={card.dueDate}
               cardId={card.id}

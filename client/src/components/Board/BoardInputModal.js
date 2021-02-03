@@ -12,9 +12,9 @@ import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import boxColors from "../../utils/boxcolors";
-import { addBoard } from "../../store/actions/boardsAction"
+import { addBoard } from "../../store/actions/boardsAction";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   dialog: {
     position: "absolute",
     top: theme.spacing(5),
@@ -81,8 +81,7 @@ export default function BoardInputModal() {
   const [open, setOpen] = useState(false);
   const [activeBoxColor, setActiveBoxColor] = useState("blue");
   const classes = useStyles();
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -92,18 +91,18 @@ export default function BoardInputModal() {
     setOpen(false);
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setBoardValue({ ...boardValue, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const board = {
       name: boardValue.name,
       team: boardValue.team,
       color: activeBoxColor
     };
-    dispatch(addBoard(board))
+    dispatch(addBoard(board));
     setBoardValue({ name: "", team: "rechie", color: "blue" });
     setOpen(false);
   };
@@ -154,7 +153,7 @@ export default function BoardInputModal() {
                 type="submit"
                 size="small"
                 variant="contained"
-                disabled={boardValue.name === ""}
+                disabled={boardValue.name.trim() === ""}
                 className={classes.submitBtn}
               >
                 Create Board
@@ -164,7 +163,7 @@ export default function BoardInputModal() {
         </div>
         <div className={classes.colorWrapper}>
           <Grid container>
-            {boxColors.map((boxColor) => (
+            {boxColors.map(boxColor => (
               <Grid
                 item
                 key={boxColor}
@@ -183,8 +182,8 @@ export default function BoardInputModal() {
                       check
                     </Icon>
                   ) : (
-                      <span></span>
-                    )}
+                    <span></span>
+                  )}
                 </Box>
               </Grid>
             ))}
