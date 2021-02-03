@@ -24,7 +24,7 @@ export default function BoardThumbnail(props) {
   const classes = useStyles(props.board);
   return (
     <Paper className={classes.root}>
-      <Typography component={Link} to={`/${id}`} className={classes.name}>
+      <Typography component={Link} to={`/board/${id}`} className={classes.name}>
         {name}
       </Typography>
     </Paper>

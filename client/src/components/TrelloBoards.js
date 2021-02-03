@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import BoardThumbnail from "../components/Board/BoardThumbnail";
 import BoardInputModal from "../components/Board/BoardInputModal";
+import Layout from "./layout/Layout";
 
 
 
@@ -25,27 +26,29 @@ export default function TrelloBoard() {
   const boardOrder = useSelector(state => state.boardOrder)
 
   return (
-    <Box className={classes.root}>
-      <Container maxWidth="md">
-        <div style={{ height: "30px" }} />
-        <Box display="flex" justifyContent="flex-start">
-          <Icon>people</Icon>
-          <Typography style={{ marginLeft: "10px" }}>
-            Personal Boards
+    <Layout>
+      <Box className={classes.root}>
+        <Container maxWidth="md">
+          <div style={{ height: "30px" }} />
+          <Box display="flex" justifyContent="flex-start">
+            <Icon>people</Icon>
+            <Typography style={{ marginLeft: "10px" }}>
+              Personal Boards
           </Typography>
-        </Box>
-        <Grid container spacing={1}>
-          {boardOrder.map((boardId) => {
-            const board = boards[boardId];
-            return (
-              <Grid key={boardId} item xs={6} lg={3} md={3}>
-                <BoardThumbnail board={board} />
-              </Grid>
-            );
-          })}
-          <BoardInputModal />
-        </Grid>
-      </Container>
-    </Box>
+          </Box>
+          <Grid container spacing={1}>
+            {boardOrder.map((boardId) => {
+              const board = boards[boardId];
+              return (
+                <Grid key={boardId} item xs={6} lg={3} md={3}>
+                  <BoardThumbnail board={board} />
+                </Grid>
+              );
+            })}
+            <BoardInputModal />
+          </Grid>
+        </Container>
+      </Box>
+    </Layout >
   );
 }

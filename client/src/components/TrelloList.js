@@ -6,6 +6,7 @@ import "simplebar/dist/simplebar.min.css";
 import SimpleBar from "simplebar-react";
 import { setActiveBoard } from "../store/actions/boardsAction";
 import { getBoardListCards } from "../store/actions/listsAction";
+import Layout from "./layout/Layout";
 
 export default function TrelloList(props) {
   const { boardId } = useParams();
@@ -17,7 +18,7 @@ export default function TrelloList(props) {
   }, [dispatch, boardId]);
 
   return (
-    <>
+    <Layout>
       <SimpleBar
         style={{
           overflowY: "auto",
@@ -28,6 +29,6 @@ export default function TrelloList(props) {
       >
         <ListContainer />
       </SimpleBar>
-    </>
+    </Layout>
   );
 }

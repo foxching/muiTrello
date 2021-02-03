@@ -73,14 +73,14 @@ export default function TopBar({ open, setOpen }) {
           </Box>
           <Hidden xsDown>
             <Box className={classes.iconContainer}>
-              <Link to="/">
+              <Link to="/boards">
                 <Icon className={classes.icon}>home</Icon>
               </Link>
             </Box>
           </Hidden>
           <Box className={classes.iconContainer}>
             <Link
-              to="/"
+              to="/boards"
               style={{
                 textDecoration: "none",
                 fontWeight: "bold"

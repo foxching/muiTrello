@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
 import { CssBaseline } from "@material-ui/core";
-import AppHome from "./components/AppHome";
+import AppRouter from "./components/AppRouter";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./theme/theme";
 import { loadUser } from "./store/actions/authAction";
@@ -19,7 +19,7 @@ export default function App() {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <AppHome />
+          <AppRouter />
         </ThemeProvider>
       </Provider>
     </>
