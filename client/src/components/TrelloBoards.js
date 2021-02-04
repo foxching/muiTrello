@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import BoardThumbnail from "../components/Board/BoardThumbnail";
 import BoardInputModal from "../components/Board/BoardInputModal";
-import Layout from "./layout/Layout";
+
 
 
 
@@ -26,7 +26,7 @@ export default function TrelloBoard() {
   const boardOrder = useSelector(state => state.boardOrder)
 
   return (
-    <Layout>
+ 
       <Box className={classes.root}>
         <Container maxWidth="md">
           <div style={{ height: "30px" }} />
@@ -49,6 +49,6 @@ export default function TrelloBoard() {
           </Grid>
         </Container>
       </Box>
-    </Layout >
+ 
   );
 }
