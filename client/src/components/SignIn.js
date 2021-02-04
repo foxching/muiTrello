@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
-import { register } from "../store/actions/authAction";
+import { login } from "../store/actions/authAction";
 
 const useStyles = makeStyles(theme => ({
   paperStyle: {
@@ -27,32 +27,29 @@ const useStyles = makeStyles(theme => ({
   btnstyle: { margin: "8px 0" }
 }));
 
-export default function SignUp() {
+export default function SigIn() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const isLoading = useSelector(state => state.auth.isLoading);
   const error = useSelector(state => state.error);
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const classes = useStyles();
 
-  const handleSignup = e => {
+  const handleSignIn = e => {
     e.preventDefault();
-    const newUser = {
-      name,
+    const user = {
       email,
       password
     };
-    dispatch(register(newUser));
-    setName("");
+    dispatch(login(user));
     setEmail("");
     setPassword("");
   };
 
   useEffect(() => {
-    if (error.id === "REGISTER_FAIL") {
+    if (error.id === "LOGIN_FAIL") {
       setErrorMsg(error.msg.msg);
     } else {
       setErrorMsg(null);
@@ -62,6 +59,7 @@ export default function SignUp() {
   if (!isLoading && isAuthenticated) {
     return <Redirect to="/boards" />;
   }
+
   return (
     <Grid>
       <Paper elevation={10} className={classes.paperStyle}>
@@ -69,39 +67,28 @@ export default function SignUp() {
           <Avatar className={classes.avatarStyle}>
             <LockOutlinedIcon />
           </Avatar>
-          <h2>Sign Up</h2>
+          <h2>Sign In</h2>
         </Grid>
         {errorMsg ? (
           <h4 style={{ color: "red", textAlign: "center" }}>{errorMsg}</h4>
         ) : null}
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleSignIn}>
           <TextField
-            label="Username"
-            name="name"
-            value={name}
-            placeholder="Enter username"
-            fullWidth
-            required
-            onChange={e => setName(e.target.value)}
-          />
-          <TextField
-            label="Email"
-            name="email"
             value={email}
-            placeholder="Email Adress"
+            onChange={e => setEmail(e.target.value)}
+            label="Email Address"
+            placeholder="Enter email..."
             fullWidth
             required
-            onChange={e => setEmail(e.target.value)}
           />
           <TextField
-            label="Password"
-            name="password"
             value={password}
-            placeholder="Enter password"
+            onChange={e => setPassword(e.target.value)}
+            label="Password"
+            placeholder="Enter password..."
             type="password"
             fullWidth
             required
-            onChange={e => setPassword(e.target.value)}
           />
           <Button
             type="submit"
@@ -110,13 +97,13 @@ export default function SignUp() {
             className={classes.btnstyle}
             fullWidth
           >
-            Sign Up
+            Sign in
           </Button>
         </form>
 
         <Typography>
           {" "}
-          Already have an account?<Link to="/signin">Sign In</Link>
+          Do you have an account ?<Link to="/signup">Sign Up</Link>
         </Typography>
       </Paper>
     </Grid>
