@@ -14,23 +14,25 @@ const clearLists = state => {
   return { ...state };
 };
 const loadLists = (payload, state) => {
-  const { title, cards, id, board } = payload;
+  const { title, cards, id, board, author } = payload;
   const newList = {
     id,
     title,
     cards,
-    board
+    board,
+    author
   };
   return { ...state, [id]: newList };
 };
 
 const addList = (payload, state) => {
-  const { board, _id, title, cards } = payload;
+  const { board, _id, title, cards, author } = payload;
   const newList = {
     id: _id,
     title,
     cards,
-    board
+    board,
+    author
   };
   return { ...state, [_id]: newList };
 };

@@ -30,27 +30,29 @@ const deleteList = (payload, state) => {
 };
 
 const loadCard = (payload, state) => {
-  const { id, text, description, labels, dueDate, list } = payload;
+  const { id, text, description, labels, dueDate, list, author } = payload;
   const newCard = {
     id,
     text,
     description,
     labels,
     dueDate,
-    list
+    list,
+    author
   };
   return { ...state, [id]: newCard };
 };
 
 const addCard = (payload, state) => {
-  const { _id, text, description, labels, dueDate, list } = payload;
+  const { _id, text, description, labels, dueDate, list, author } = payload;
   const newCard = {
     id: _id,
     text,
     description,
     labels,
     dueDate,
-    list
+    list,
+    author
   };
   return { ...state, [_id]: newCard };
 };

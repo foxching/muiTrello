@@ -13,7 +13,12 @@ const auth = require("../../middleware/auth");
 router.get("/:listId", auth, async (req, res) => {
   const listId = req.params.listId;
   try {
-    const cards = await Card.find({ list: ObjectId(listId) });
+    const cards = await Card.find({
+      list: ObjectId(listId),
+      author: req.user.id
+    })
+      .populate("author")
+      .exec();
     res.status(200).json(cards);
   } catch (err) {
     res.status(500).json({ err: err.msg });
@@ -29,9 +34,8 @@ router.post("/:listId", auth, async (req, res) => {
   const listId = req.params.listId;
   const card = new Card({
     text: req.body.text,
-    description: "",
-    dueDate: "",
-    list: listId
+    list: listId,
+    author: req.user.id
   });
   try {
     const newCard = await card.save();

@@ -12,7 +12,12 @@ const auth = require("../../middleware/auth");
 
 router.get("/:boardId", auth, async (req, res) => {
   try {
-    const lists = await List.find({ board: ObjectId(req.params.boardId) });
+    const lists = await List.find({
+      board: ObjectId(req.params.boardId),
+      author: req.user.id
+    })
+      .populate("author")
+      .exec();
     res.status(200).json(lists);
   } catch (err) {
     res.status(500).json({ err: err.msg });
@@ -28,7 +33,8 @@ router.post("/:boardId", auth, async (req, res) => {
   const boardId = req.params.boardId;
   const list = new List({
     title: req.body.title,
-    board: boardId
+    board: boardId,
+    author: req.user.id
   });
   try {
     const newList = await list.save();

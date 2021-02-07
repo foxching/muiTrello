@@ -24,7 +24,8 @@ export const getBoardListCards = boardId => async (dispatch, getState) => {
             id: d._id,
             title: d.title,
             cards: d.cards,
-            board: d.board
+            board: d.board,
+            author: d.author.name
           }
         };
         dispatch({ type: LOAD_LISTS, payload: x[d._id] });

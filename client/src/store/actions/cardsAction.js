@@ -64,7 +64,8 @@ export const getCard = card => (dispatch, getState) => {
         description: d.description,
         labels: d.labels,
         dueDate: d.dueDate,
-        list: d.list
+        list: d.list,
+        author: d.author.name
       }
     };
     dispatch({ type: LOAD_CARDS, payload: x[d._id] });

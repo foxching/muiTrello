@@ -6,12 +6,10 @@ import AppRouter from "./components/AppRouter";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./theme/theme";
 import { loadUser } from "./store/actions/authAction";
-import { getBoards } from "./store/actions/boardsAction";
 
 export default function App() {
   useEffect(() => {
     store.dispatch(loadUser());
-    store.dispatch(getBoards());
   }, []);
 
   return (

@@ -14,25 +14,27 @@ const clearBoard = state => {
 };
 
 const loadBoards = (payload, state) => {
-  const { name, color, listsIds, id } = payload;
+  const { name, color, listsIds, author, id } = payload;
   const newBoard = {
     id,
     name,
     color,
     team: "rechie",
-    listsIds
+    listsIds,
+    author
   };
   return { ...state, [id]: newBoard };
 };
 
 const addBoard = (payload, state) => {
-  const { _id, name, color, team, listsIds } = payload;
+  const { _id, name, color, team, author, listsIds } = payload;
   const newBoard = {
     id: _id,
     name,
     color,
     team,
-    listsIds
+    listsIds,
+    author
   };
   return { ...state, [_id]: newBoard };
 };

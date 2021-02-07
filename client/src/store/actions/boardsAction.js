@@ -21,7 +21,8 @@ export const getBoards = () => (dispatch, getState) => {
             name: d.name,
             color: d.color,
             team: d.team,
-            listsIds: d.listsIds
+            listsIds: d.listsIds,
+            author: d.author.name
           }
         };
         dispatch({ type: LOAD_BOARDS, payload: x[d._id] });

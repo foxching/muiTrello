@@ -6,12 +6,14 @@ const auth = require("../../middleware/auth");
 
 /**
  * @route   GET api/boards
- * @desc    Get All board
+ * @desc    Get All board per user authenticated
  */
 
 router.get("/", auth, async (req, res) => {
   try {
-    const boards = await Board.find().sort({ date: "-1" });
+    const boards = await Board.find({ author: req.user.id })
+      .populate("author")
+      .exec();
     res.status(200).json(boards);
   } catch (err) {
     res.status(500).json({ err: err.msg });
@@ -27,7 +29,8 @@ router.post("/", auth, async (req, res) => {
   const board = new Board({
     name: req.body.name,
     color: req.body.color,
-    team: req.body.team
+    team: req.body.team,
+    author: req.user.id
   });
   try {
     const newBoard = await board.save();

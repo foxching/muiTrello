@@ -1,23 +1,27 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const BoardSchema = mongoose.Schema({
+const BoardSchema = mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     color: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     team: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
-    listsIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
-    date: {
-        type: Date,
-        default: Date.now
-    }
-});
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User"
+    },
+    listsIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }]
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('Board', BoardSchema);
+module.exports = mongoose.model("Board", BoardSchema);
