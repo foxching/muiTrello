@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
-  CLEAR_CARDS,
-  CLEAR_LISTS,
+  LOADING_CARDS,
+  LOADING_LISTS,
   LOAD_LISTS,
   ADD_LIST,
   DELETE_LIST,
@@ -13,8 +13,8 @@ import { getListCards } from "./cardsAction";
 
 //load get lists and cards
 export const getBoardListCards = boardId => async (dispatch, getState) => {
-  dispatch({ type: CLEAR_LISTS });
-  dispatch({ type: CLEAR_CARDS });
+  dispatch({ type: LOADING_LISTS });
+  dispatch({ type: LOADING_CARDS });
   axios
     .get(`/api/lists/${boardId}`, tokenConfig(getState))
     .then(res =>

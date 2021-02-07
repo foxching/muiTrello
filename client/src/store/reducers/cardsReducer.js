@@ -1,5 +1,5 @@
 import {
-  CLEAR_CARDS,
+  LOADING_CARDS,
   ADD_CARD,
   LOAD_CARDS,
   DELETE_CARD,
@@ -9,7 +9,7 @@ import {
 
 const initialState = {};
 
-const clearCards = state => {
+const setLoadingCards = state => {
   return { ...state };
 };
 
@@ -97,8 +97,8 @@ const editCardProps = (payload, state) => {
 
 const cardsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CLEAR_CARDS:
-      return clearCards(action.payload, state);
+    case LOADING_CARDS:
+      return setLoadingCards(action.payload, state);
     case LOAD_CARDS:
       return loadCard(action.payload, state);
     case ADD_CARD:

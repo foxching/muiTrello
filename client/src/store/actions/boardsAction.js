@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-  CLEAR_BOARDS,
+  LOADING_BOARDS,
   LOAD_BOARDS,
   ADD_BOARD,
   SET_ACTIVE_BOARD,
@@ -10,7 +10,7 @@ import { returnErrors } from "./errorAction";
 import { tokenConfig } from "./authAction";
 
 export const getBoards = () => (dispatch, getState) => {
-  dispatch({ type: CLEAR_BOARDS });
+  dispatch({ type: LOADING_BOARDS });
   axios
     .get("/api/boards", tokenConfig(getState))
     .then(res =>

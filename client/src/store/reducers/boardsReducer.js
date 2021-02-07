@@ -1,7 +1,7 @@
 import {
   LOAD_BOARDS,
   ADD_BOARD,
-  CLEAR_BOARDS,
+  LOADING_BOARDS,
   SET_BOARD_BACKGROUND,
   ADD_LIST,
   DELETE_LIST
@@ -9,7 +9,7 @@ import {
 
 const initialState = {};
 
-const clearBoard = state => {
+const setBoardLoading = state => {
   return { ...state };
 };
 
@@ -75,8 +75,8 @@ const deleteList = (payload, state) => {
 
 const boardsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CLEAR_BOARDS:
-      return clearBoard(action.payload, state);
+    case LOADING_BOARDS:
+      return setBoardLoading(action.payload, state);
     case LOAD_BOARDS:
       return loadBoards(action.payload, state);
     case ADD_BOARD:

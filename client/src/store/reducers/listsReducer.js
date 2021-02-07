@@ -1,5 +1,5 @@
 import {
-  CLEAR_LISTS,
+  LOADING_LISTS,
   LOAD_LISTS,
   ADD_LIST,
   UPDATE_LIST_TITLE,
@@ -10,7 +10,7 @@ import {
 
 const initialState = {};
 
-const clearLists = state => {
+const setLoadingLists = state => {
   return { ...state };
 };
 const loadLists = (payload, state) => {
@@ -75,8 +75,8 @@ const deleteCard = (payload, state) => {
 
 const listsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CLEAR_LISTS:
-      return clearLists(action.payload, state);
+    case LOADING_LISTS:
+      return setLoadingLists(action.payload, state);
     case LOAD_LISTS:
       return loadLists(action.payload, state);
     case ADD_LIST:
