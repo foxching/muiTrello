@@ -9,7 +9,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   appbar: {
     // minHeight: "6vh",
     height: "44px",

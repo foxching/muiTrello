@@ -2,35 +2,32 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  Grid,
-  Paper,
-  Avatar,
-  TextField,
-  Button,
-  Typography
-} from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
 import { login } from "../store/actions/authAction";
 
 const useStyles = makeStyles(theme => ({
   paperStyle: {
-    padding: 20,
+    padding: 25,
     height: "70vh",
     width: 380,
-    margin: "20px auto"
+    margin: "30px auto"
   },
   avatarStyle: {
     backgroundColor: "#1bbd7e"
   },
-  btnstyle: { margin: "8px 0" }
+  btnstyle: { marginTop: 20, position: "relative" },
+  progress: {
+    position: "absolute"
+  }
 }));
 
 export default function SigIn() {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const isLoading = useSelector(state => state.auth.isLoading);
+  const loading = useSelector(state => state.ui.loading);
+  const { isAuthenticated, isLoading } = useSelector(state => state.auth);
   const error = useSelector(state => state.error);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,15 +59,46 @@ export default function SigIn() {
 
   return (
     <Grid>
+      <Grid
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "1rem"
+        }}
+      >
+        <Icon
+          style={{
+            color: "#1e88e5",
+            fontSize: "2.4rem",
+            cursor: "pointer"
+          }}
+        >
+          dashboard
+        </Icon>
+        <Typography
+          style={{
+            fontFamily: "'Lobster', cursive",
+            fontSize: "2.4rem",
+            color: "#1e88e5",
+            marginTop: "5px"
+          }}
+        >
+          Trello
+        </Typography>
+      </Grid>
       <Paper elevation={10} className={classes.paperStyle}>
-        <Grid align="center">
-          <Avatar className={classes.avatarStyle}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <h2>Sign In</h2>
-        </Grid>
+        <h4
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+            fontWeight: "bold"
+          }}
+        >
+          Login to Trello
+        </h4>
         {errorMsg ? (
-          <h4 style={{ color: "red", textAlign: "center" }}>{errorMsg}</h4>
+          <h4 style={{ color: "crimson", textAlign: "center" }}>{errorMsg}</h4>
         ) : null}
         <form onSubmit={handleSignIn}>
           <TextField
@@ -80,6 +108,9 @@ export default function SigIn() {
             placeholder="Enter email..."
             fullWidth
             required
+            variant="outlined"
+            style={{ marginBottom: "20px" }}
+            size="small"
           />
           <TextField
             value={password}
@@ -89,21 +120,28 @@ export default function SigIn() {
             type="password"
             fullWidth
             required
+            variant="outlined"
+            size="small"
+            style={{ marginBottom: "20px" }}
           />
           <Button
             type="submit"
-            color="primary"
+            color="secondary"
             variant="contained"
             className={classes.btnstyle}
             fullWidth
+            disabled={loading}
           >
             Sign in
+            {loading && (
+              <CircularProgress size={30} className={classes.progress} />
+            )}
           </Button>
         </form>
 
-        <Typography>
+        <Typography style={{ textAlign: "center", fontSize: "14px" }}>
           {" "}
-          Do you have an account ?<Link to="/signup">Sign Up</Link>
+          Do you have an account?.<Link to="/signup">Sign Up</Link>
         </Typography>
       </Paper>
     </Grid>

@@ -1,6 +1,8 @@
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 import {
+  LOADING_UI,
+  CLEAR_ERRORS,
   USER_LOADED,
   USER_LOADING,
   AUTH_ERROR,
@@ -8,7 +10,8 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  SET_ERRORS
 } from "./types";
 
 // load user
@@ -34,6 +37,7 @@ export const loadUser = () => (dispatch, getState) => {
 
 // Register User
 export const register = ({ name, email, password }) => dispatch => {
+  dispatch({ type: LOADING_UI });
   // Headers
   const config = {
     headers: {
@@ -46,12 +50,13 @@ export const register = ({ name, email, password }) => dispatch => {
 
   axios
     .post("/api/auth/register", body, config)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+      dispatch({ type: CLEAR_ERRORS });
+    })
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
@@ -59,11 +64,13 @@ export const register = ({ name, email, password }) => dispatch => {
       dispatch({
         type: REGISTER_FAIL
       });
+      dispatch({ type: SET_ERRORS, payload: err.response.data });
     });
 };
 
 //Login User
 export const login = ({ email, password }) => dispatch => {
+  dispatch({ type: LOADING_UI });
   // Headers
   const config = {
     headers: {
@@ -76,12 +83,13 @@ export const login = ({ email, password }) => dispatch => {
 
   axios
     .post("/api/auth/login", body, config)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+      dispatch({ type: CLEAR_ERRORS });
+    })
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
@@ -89,6 +97,7 @@ export const login = ({ email, password }) => dispatch => {
       dispatch({
         type: LOGIN_FAIL
       });
+      dispatch({ type: SET_ERRORS, payload: err.response.data });
     });
 };
 
