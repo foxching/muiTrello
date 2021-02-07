@@ -8,6 +8,7 @@ import {
   UPDATE_LIST_TITLE
 } from "./types";
 import { returnErrors } from "./errorAction";
+import { tokenConfig } from "./authAction";
 import { getListCards } from "./cardsAction";
 
 //load get lists and cards
@@ -15,7 +16,7 @@ export const getBoardListCards = boardId => async (dispatch, getState) => {
   dispatch({ type: CLEAR_LISTS });
   dispatch({ type: CLEAR_CARDS });
   axios
-    .get(`/api/lists/${boardId}`)
+    .get(`/api/lists/${boardId}`, tokenConfig(getState))
     .then(res =>
       res.data.map(d => {
         const x = {
@@ -40,7 +41,7 @@ export const getBoardListCards = boardId => async (dispatch, getState) => {
 export const addList = list => (dispatch, getState) => {
   const boardId = getState().activeBoard.id;
   axios
-    .post(`/api/lists/${boardId}`, list)
+    .post(`/api/lists/${boardId}`, list, tokenConfig(getState))
     .then(res => {
       dispatch({ type: ADD_LIST, payload: res.data });
     })
@@ -52,7 +53,7 @@ export const addList = list => (dispatch, getState) => {
 //update list title
 export const editListTitle = (title, listId) => (dispatch, getState) => {
   axios
-    .put(`/api/lists/${listId}`, title)
+    .put(`/api/lists/${listId}`, title, tokenConfig(getState))
     .then(res => {
       dispatch({ type: UPDATE_LIST_TITLE, payload: { title, listId } });
     })
@@ -65,7 +66,7 @@ export const editListTitle = (title, listId) => (dispatch, getState) => {
 export const deleteList = listId => (dispatch, getState) => {
   const boardId = getState().activeBoard.id;
   axios
-    .delete(`/api/lists/${listId}/${boardId}`)
+    .delete(`/api/lists/${listId}/${boardId}`, tokenConfig(getState))
     .then(res => {
       dispatch({ type: DELETE_LIST, payload: { listId, boardId } });
     })

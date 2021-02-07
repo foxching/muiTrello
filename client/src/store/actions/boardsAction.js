@@ -7,11 +7,12 @@ import {
   SET_BOARD_BACKGROUND
 } from "./types";
 import { returnErrors } from "./errorAction";
+import { tokenConfig } from "./authAction";
 
 export const getBoards = () => (dispatch, getState) => {
   dispatch({ type: CLEAR_BOARDS });
   axios
-    .get("/api/boards")
+    .get("/api/boards", tokenConfig(getState))
     .then(res =>
       res.data.map(d => {
         const x = {
@@ -35,7 +36,7 @@ export const getBoards = () => (dispatch, getState) => {
 //add new  board
 export const addBoard = board => (dispatch, getState) => {
   axios
-    .post("/api/boards", board)
+    .post("/api/boards", board, tokenConfig(getState))
     .then(res => {
       dispatch({ type: ADD_BOARD, payload: res.data });
     })
@@ -47,7 +48,7 @@ export const addBoard = board => (dispatch, getState) => {
 //get specific board detail
 export const setActiveBoard = boardId => (dispatch, getState) => {
   axios
-    .get(`/api/boards/${boardId}`)
+    .get(`/api/boards/${boardId}`, tokenConfig(getState))
     .then(res => {
       dispatch({ type: SET_ACTIVE_BOARD, payload: res.data });
     })
@@ -60,7 +61,7 @@ export const setActiveBoard = boardId => (dispatch, getState) => {
 export const setBoardBackground = color => (dispatch, getState) => {
   const boardId = getState().activeBoard.id;
   axios
-    .put(`/api/boards/${boardId}`, color)
+    .put(`/api/boards/${boardId}`, color, tokenConfig(getState))
     .then(res => {
       dispatch({ type: SET_BOARD_BACKGROUND, payload: { color, boardId } });
     })

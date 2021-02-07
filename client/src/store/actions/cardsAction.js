@@ -1,11 +1,12 @@
 import axios from "axios";
 import { ADD_CARD, LOAD_CARDS, DELETE_CARD, EDIT_CARD_PROPS } from "./types";
 import { returnErrors } from "./errorAction";
+import { tokenConfig } from "./authAction";
 
 //get all loaded cards
 export const getListCards = listId => (dispatch, getState) => {
   axios
-    .get(`/api/cards/${listId}`)
+    .get(`/api/cards/${listId}`, tokenConfig(getState))
     .then(res => {
       dispatch(getCard(res.data));
     })
@@ -17,7 +18,7 @@ export const getListCards = listId => (dispatch, getState) => {
 //add new  card
 export const addCard = (card, listId) => (dispatch, getState) => {
   axios
-    .post(`/api/cards/${listId}`, card)
+    .post(`/api/cards/${listId}`, card, tokenConfig(getState))
     .then(res => {
       dispatch({ type: ADD_CARD, payload: res.data });
     })
@@ -29,7 +30,7 @@ export const addCard = (card, listId) => (dispatch, getState) => {
 //delete single card
 export const deleteCard = (cardId, listId) => (dispatch, getState) => {
   axios
-    .delete(`/api/cards/${cardId}/${listId}`)
+    .delete(`/api/cards/${cardId}/${listId}`, tokenConfig(getState))
     .then(res => {
       dispatch({ type: DELETE_CARD, payload: { cardId, listId } });
     })
@@ -44,7 +45,7 @@ export const updateCardLabels = (cardVal, cardId, type) => (
   getState
 ) => {
   axios
-    .put(`/api/cards/${cardId}`, cardVal)
+    .put(`/api/cards/${cardId}`, cardVal, tokenConfig(getState))
     .then(res => {
       dispatch({ type: EDIT_CARD_PROPS, payload: { cardVal, cardId, type } });
     })

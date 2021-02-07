@@ -3,13 +3,14 @@ const router = express.Router();
 const ObjectId = require("mongodb").ObjectID;
 const Card = require("../../model/Card");
 const List = require("../../model/List");
+const auth = require("../../middleware/auth");
 
 /**
  * @route   GET api/cards
  * @desc    get all card per list
  */
 
-router.get("/:listId", async (req, res) => {
+router.get("/:listId", auth, async (req, res) => {
   const listId = req.params.listId;
   try {
     const cards = await Card.find({ list: ObjectId(listId) });
@@ -24,7 +25,7 @@ router.get("/:listId", async (req, res) => {
  * @desc    Create a Card
  */
 
-router.post("/:listId", async (req, res) => {
+router.post("/:listId", auth, async (req, res) => {
   const listId = req.params.listId;
   const card = new Card({
     text: req.body.text,
@@ -50,7 +51,7 @@ router.post("/:listId", async (req, res) => {
  * @route   DELETE api/cards
  * @desc    Delete card
  */
-router.delete("/:cardId/:listId", async (req, res) => {
+router.delete("/:cardId/:listId", auth, async (req, res) => {
   const cardId = req.params.cardId;
   const listId = req.params.listId;
   const id = await Card.findById({ _id: ObjectId(cardId) });
@@ -76,7 +77,7 @@ router.delete("/:cardId/:listId", async (req, res) => {
  * @route   PUT api/cards
  * @desc    Update Card Props
  */
-router.put("/:cardId", async (req, res) => {
+router.put("/:cardId", auth, async (req, res) => {
   const cardId = req.params.cardId;
   try {
     const card = await Card.findOne({ _id: ObjectId(cardId) });
