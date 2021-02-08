@@ -6,8 +6,8 @@ import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
-import { login } from "../store/actions/authAction";
-import { useForm } from "./hooks/useForm";
+import { register } from "../store/actions/authAction";
+import { useForm } from "../hooks/useForm";
 
 const useStyles = makeStyles(theme => ({
   paperStyle: {
@@ -25,22 +25,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SigIn() {
+export default function SignUp() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const handleSignin = () => {
-    const user = {
+  const handleSignup = () => {
+    const newUser = {
+      name,
       email,
       password
     };
-    dispatch(login(user));
+    dispatch(register(newUser));
+    setName("");
     setEmail("");
     setPassword("");
   };
 
   const {
     email,
+    name,
+    setName,
     setEmail,
     password,
     setPassword,
@@ -49,12 +53,11 @@ export default function SigIn() {
     isLoading,
     loading,
     handleSubmit
-  } = useForm(handleSignin);
+  } = useForm(handleSignup);
 
   if (!isLoading && isAuthenticated) {
     return <Redirect to="/boards" />;
   }
-
   return (
     <Grid>
       <Grid
@@ -93,34 +96,48 @@ export default function SigIn() {
             fontWeight: "bold"
           }}
         >
-          Login to Trello
+          Signup to Trello
         </h4>
         {errorMsg ? (
           <h4 style={{ color: "crimson", textAlign: "center" }}>{errorMsg}</h4>
         ) : null}
         <form onSubmit={handleSubmit}>
           <TextField
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            label="Email Address"
-            placeholder="Enter email..."
+            label="Username"
+            name="name"
+            value={name}
+            placeholder="Enter username"
             fullWidth
             required
             variant="outlined"
-            style={{ marginBottom: "20px" }}
             size="small"
+            style={{ marginBottom: "20px" }}
+            onChange={e => setName(e.target.value)}
           />
           <TextField
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            label="Email"
+            name="email"
+            value={email}
+            placeholder="Email Adress"
+            fullWidth
+            required
+            variant="outlined"
+            size="small"
+            style={{ marginBottom: "20px" }}
+            onChange={e => setEmail(e.target.value)}
+          />
+          <TextField
             label="Password"
-            placeholder="Enter password..."
+            name="password"
+            value={password}
+            placeholder="Enter password"
             type="password"
             fullWidth
             required
             variant="outlined"
             size="small"
             style={{ marginBottom: "20px" }}
+            onChange={e => setPassword(e.target.value)}
           />
           <Button
             type="submit"
@@ -130,7 +147,7 @@ export default function SigIn() {
             fullWidth
             disabled={loading}
           >
-            Sign in
+            Sign up
             {loading && (
               <CircularProgress size={30} className={classes.progress} />
             )}
@@ -139,7 +156,7 @@ export default function SigIn() {
 
         <Typography style={{ textAlign: "center", fontSize: "14px" }}>
           {" "}
-          Do you have an account?.<Link to="/signup">Sign Up</Link>
+          Already have an account?<Link to="/signin">Sign In</Link>
         </Typography>
       </Paper>
     </Grid>

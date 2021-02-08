@@ -1,13 +1,13 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
-import { register } from "../store/actions/authAction";
-import { useForm } from "./hooks/useForm";
+import { login } from "../store/actions/authAction";
+import { useForm } from "../hooks/useForm";
 
 const useStyles = makeStyles(theme => ({
   paperStyle: {
@@ -25,26 +25,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignUp() {
-  const dispatch = useDispatch(); 
+export default function SigIn() {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
-  const handleSignup = () => {
-    const newUser = {
-      name,
+  const handleSignin = () => {
+    const user = {
       email,
       password
     };
-    dispatch(register(newUser));
-    setName("");
+    dispatch(login(user));
     setEmail("");
     setPassword("");
   };
 
   const {
     email,
-    name,
-    setName,
     setEmail,
     password,
     setPassword,
@@ -53,11 +49,12 @@ export default function SignUp() {
     isLoading,
     loading,
     handleSubmit
-  } = useForm(handleSignup);
+  } = useForm(handleSignin);
 
   if (!isLoading && isAuthenticated) {
     return <Redirect to="/boards" />;
   }
+
   return (
     <Grid>
       <Grid
@@ -96,48 +93,34 @@ export default function SignUp() {
             fontWeight: "bold"
           }}
         >
-          Signup to Trello
+          Login to Trello
         </h4>
         {errorMsg ? (
           <h4 style={{ color: "crimson", textAlign: "center" }}>{errorMsg}</h4>
         ) : null}
         <form onSubmit={handleSubmit}>
           <TextField
-            label="Username"
-            name="name"
-            value={name}
-            placeholder="Enter username"
-            fullWidth
-            required
-            variant="outlined"
-            size="small"
-            style={{ marginBottom: "20px" }}
-            onChange={e => setName(e.target.value)}
-          />
-          <TextField
-            label="Email"
-            name="email"
             value={email}
-            placeholder="Email Adress"
+            onChange={e => setEmail(e.target.value)}
+            label="Email Address"
+            placeholder="Enter email..."
             fullWidth
             required
             variant="outlined"
-            size="small"
             style={{ marginBottom: "20px" }}
-            onChange={e => setEmail(e.target.value)}
+            size="small"
           />
           <TextField
-            label="Password"
-            name="password"
             value={password}
-            placeholder="Enter password"
+            onChange={e => setPassword(e.target.value)}
+            label="Password"
+            placeholder="Enter password..."
             type="password"
             fullWidth
             required
             variant="outlined"
             size="small"
             style={{ marginBottom: "20px" }}
-            onChange={e => setPassword(e.target.value)}
           />
           <Button
             type="submit"
@@ -147,7 +130,7 @@ export default function SignUp() {
             fullWidth
             disabled={loading}
           >
-            Sign up
+            Sign in
             {loading && (
               <CircularProgress size={30} className={classes.progress} />
             )}
@@ -156,7 +139,7 @@ export default function SignUp() {
 
         <Typography style={{ textAlign: "center", fontSize: "14px" }}>
           {" "}
-          Already have an account?<Link to="/signin">Sign In</Link>
+          Do you have an account?.<Link to="/signup">Sign Up</Link>
         </Typography>
       </Paper>
     </Grid>

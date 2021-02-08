@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { clearErrors } from "../store/actions/errorAction";
 
 export const useForm = callback => {
-  const { loading } = useSelector(state => state.ui.loading);
+  const dispatch = useDispatch();
+  const { loading } = useSelector(state => state.ui);
   const { isAuthenticated, isLoading } = useSelector(state => state.auth);
   const error = useSelector(state => state.error);
   const [email, setEmail] = useState("");
@@ -24,6 +27,13 @@ export const useForm = callback => {
       setErrorMsg(null);
     }
   }, [error]);
+
+  //cleanup ui errors
+  useEffect(() => {
+    return () => {
+      dispatch(clearErrors());
+    };
+  }, [dispatch]);
 
   return {
     error,

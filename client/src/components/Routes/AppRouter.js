@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import SignIn from "./SignIn";
-import Signup from "./SignUp";
-import Home from "./Home";
-import TrelloBoards from "./TrelloBoards";
-import TrelloList from "./TrelloList";
-import Navbar from "../components/layout/Navbar";
-import Wrapper from "./layout/Wrapper";
-import { PublicRoute } from "../components/Routes/PublicRoute";
-import { PrivateRoute } from "../components/Routes/PrivateRoute";
+import SignIn from "../../pages/SignIn";
+import Signup from "../../pages/Signup";
+import Home from "../../pages/Home";
+import TrelloBoards from "../../pages/TrelloBoards";
+import TrelloList from "../../pages/TrelloList";
+import Navbar from "../layout/Navbar";
+import Wrapper from "../layout/Wrapper";
+import { PublicRoute } from "./PublicRoute";
+import { PrivateRoute } from "./PrivateRoute";
 
 export default function AppRouter() {
   return (
