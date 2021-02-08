@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Redirect } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
 import { login } from "../store/actions/authAction";
+import { useForm } from "./hooks/useForm";
 
 const useStyles = makeStyles(theme => ({
   paperStyle: {
@@ -26,16 +27,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function SigIn() {
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.ui.loading);
-  const { isAuthenticated, isLoading } = useSelector(state => state.auth);
-  const error = useSelector(state => state.error);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
   const classes = useStyles();
 
-  const handleSignIn = e => {
-    e.preventDefault();
+  const handleSignin = () => {
     const user = {
       email,
       password
@@ -45,13 +39,17 @@ export default function SigIn() {
     setPassword("");
   };
 
-  useEffect(() => {
-    if (error.id === "LOGIN_FAIL") {
-      setErrorMsg(error.msg.msg);
-    } else {
-      setErrorMsg(null);
-    }
-  }, [error]);
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    errorMsg,
+    isAuthenticated,
+    isLoading,
+    loading,
+    handleSubmit
+  } = useForm(handleSignin);
 
   if (!isLoading && isAuthenticated) {
     return <Redirect to="/boards" />;
@@ -100,7 +98,7 @@ export default function SigIn() {
         {errorMsg ? (
           <h4 style={{ color: "crimson", textAlign: "center" }}>{errorMsg}</h4>
         ) : null}
-        <form onSubmit={handleSignIn}>
+        <form onSubmit={handleSubmit}>
           <TextField
             value={email}
             onChange={e => setEmail(e.target.value)}

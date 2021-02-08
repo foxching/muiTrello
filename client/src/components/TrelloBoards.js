@@ -28,7 +28,7 @@ export default function TrelloBoards() {
     if (isAuthenticated && !isLoading) {
       dispatch(getBoards());
     }
-  }, [isAuthenticated, dispatch]);
+  }, [isAuthenticated, isLoading, dispatch]);
 
   return (
     <Box className={classes.root}>

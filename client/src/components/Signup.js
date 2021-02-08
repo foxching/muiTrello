@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Redirect } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
 import { register } from "../store/actions/authAction";
+import { useForm } from "./hooks/useForm";
 
 const useStyles = makeStyles(theme => ({
   paperStyle: {
@@ -25,18 +26,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignUp() {
-  const dispatch = useDispatch();
-  const { loading } = useSelector(state => state.ui);
-  const { isAuthenticated, isLoading } = useSelector(state => state.auth);
-  const error = useSelector(state => state.error);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const dispatch = useDispatch(); 
   const classes = useStyles();
 
-  const handleSignup = e => {
-    e.preventDefault();
+  const handleSignup = () => {
     const newUser = {
       name,
       email,
@@ -48,13 +41,19 @@ export default function SignUp() {
     setPassword("");
   };
 
-  useEffect(() => {
-    if (error.id === "REGISTER_FAIL") {
-      setErrorMsg(error.msg.msg);
-    } else {
-      setErrorMsg(null);
-    }
-  }, [error]);
+  const {
+    email,
+    name,
+    setName,
+    setEmail,
+    password,
+    setPassword,
+    errorMsg,
+    isAuthenticated,
+    isLoading,
+    loading,
+    handleSubmit
+  } = useForm(handleSignup);
 
   if (!isLoading && isAuthenticated) {
     return <Redirect to="/boards" />;
@@ -102,7 +101,7 @@ export default function SignUp() {
         {errorMsg ? (
           <h4 style={{ color: "crimson", textAlign: "center" }}>{errorMsg}</h4>
         ) : null}
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleSubmit}>
           <TextField
             label="Username"
             name="name"
