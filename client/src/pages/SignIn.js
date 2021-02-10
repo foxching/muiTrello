@@ -2,8 +2,20 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
+import {
+  Grid,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  IconButton
+} from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
 import { login } from "../store/actions/authAction";
@@ -31,25 +43,25 @@ export default function SigIn() {
 
   const handleSignin = () => {
     const user = {
-      email,
-      password
+      email: values.email,
+      password: values.password
     };
     dispatch(login(user));
-    setEmail("");
-    setPassword("");
+    setValues({ email: "", password: "" });
   };
 
   const {
-    email,
-    setEmail,
-    password,
-    setPassword,
+    values,
+    setValues,
+    hidePassword,
+    setHidePassword,
+    onChange,
     errorMsg,
     isAuthenticated,
     isLoading,
     loading,
     handleSubmit
-  } = useForm(handleSignin);
+  } = useForm(handleSignin, { email: "", password: "" });
 
   if (!isLoading && isAuthenticated) {
     return <Redirect to="/boards" />;
@@ -100,35 +112,52 @@ export default function SigIn() {
         ) : null}
         <form onSubmit={handleSubmit}>
           <TextField
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            value={values.email}
+            name="email"
+            onChange={onChange}
             label="Email Address"
             placeholder="Enter email..."
-            fullWidth
             required
-            variant="outlined"
-            style={{ marginBottom: "20px" }}
-            size="small"
-          />
-          <TextField
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            label="Password"
-            placeholder="Enter password..."
-            type="password"
             fullWidth
-            required
             variant="outlined"
             size="small"
             style={{ marginBottom: "20px" }}
           />
+          <FormControl fullWidth size="small" style={{ marginBottom: "20px" }}>
+            <InputLabel
+              htmlFor="password"
+              style={{ marginLeft: "10px", marginTop: "-10px" }}
+            >
+              Password
+            </InputLabel>
+            <OutlinedInput
+              type={hidePassword ? "password" : "text"}
+              name="password"
+              size="small"
+              label="Password"
+              value={values.password}
+              onChange={onChange}
+              placeholder="Enter Password..."
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => {
+                      setHidePassword(!hidePassword);
+                    }}
+                  >
+                    {hidePassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
           <Button
             type="submit"
             color="secondary"
             variant="contained"
-            className={classes.btnstyle}
             fullWidth
             disabled={loading}
+            className={classes.btnstyle}
           >
             Sign in
             {loading && (

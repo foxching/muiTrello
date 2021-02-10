@@ -3,15 +3,18 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { clearErrors } from "../store/actions/errorAction";
 
-export const useForm = callback => {
+export const useForm = (callback, initialState = {}) => {
   const dispatch = useDispatch();
   const { loading } = useSelector(state => state.ui);
   const { isAuthenticated, isLoading } = useSelector(state => state.auth);
   const error = useSelector(state => state.error);
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [values, setValues] = useState(initialState);
+  const [hidePassword, setHidePassword] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+
+  const onChange = event => {
+    setValues({ ...values, [event.target.name]: event.target.value });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -37,12 +40,11 @@ export const useForm = callback => {
 
   return {
     error,
-    name,
-    setName,
-    email,
-    setEmail,
-    password,
-    setPassword,
+    values,
+    setValues,
+    hidePassword,
+    setHidePassword,
+    onChange,
     errorMsg,
     setErrorMsg,
     isAuthenticated,

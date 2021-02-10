@@ -2,9 +2,21 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
+import {
+  Grid,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  IconButton
+} from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Icon from "@material-ui/core/Icon";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { register } from "../store/actions/authAction";
 import { useForm } from "../hooks/useForm";
@@ -31,29 +43,26 @@ export default function SignUp() {
 
   const handleSignup = () => {
     const newUser = {
-      name,
-      email,
-      password
+      name: values.name,
+      email: values.email,
+      password: values.password
     };
     dispatch(register(newUser));
-    setName("");
-    setEmail("");
-    setPassword("");
+    setValues({ name: "", email: "", password: "" });
   };
 
   const {
-    email,
-    name,
-    setName,
-    setEmail,
-    password,
-    setPassword,
+    values,
+    setValues,
+    hidePassword,
+    setHidePassword,
+    onChange,
     errorMsg,
     isAuthenticated,
     isLoading,
     loading,
     handleSubmit
-  } = useForm(handleSignup);
+  } = useForm(handleSignup, { name: "", email: "", password: "" });
 
   if (!isLoading && isAuthenticated) {
     return <Redirect to="/boards" />;
@@ -105,40 +114,55 @@ export default function SignUp() {
           <TextField
             label="Username"
             name="name"
-            value={name}
+            value={values.name}
+            onChange={onChange}
             placeholder="Enter username"
             fullWidth
             required
             variant="outlined"
             size="small"
             style={{ marginBottom: "20px" }}
-            onChange={e => setName(e.target.value)}
           />
           <TextField
             label="Email"
             name="email"
-            value={email}
+            value={values.email}
+            onChange={onChange}
             placeholder="Email Adress"
             fullWidth
             required
             variant="outlined"
             size="small"
             style={{ marginBottom: "20px" }}
-            onChange={e => setEmail(e.target.value)}
           />
-          <TextField
-            label="Password"
-            name="password"
-            value={password}
-            placeholder="Enter password"
-            type="password"
-            fullWidth
-            required
-            variant="outlined"
-            size="small"
-            style={{ marginBottom: "20px" }}
-            onChange={e => setPassword(e.target.value)}
-          />
+          <FormControl fullWidth size="small" style={{ marginBottom: "20px" }}>
+            <InputLabel
+              htmlFor="password"
+              style={{ marginLeft: "10px", marginTop: "-10px" }}
+            >
+              Password
+            </InputLabel>
+            <OutlinedInput
+              type={hidePassword ? "password" : "text"}
+              name="password"
+              size="small"
+              label="Password"
+              value={values.password}
+              onChange={onChange}
+              placeholder="Enter Password..."
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => {
+                      setHidePassword(!hidePassword);
+                    }}
+                  >
+                    {hidePassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
           <Button
             type="submit"
             color="secondary"
