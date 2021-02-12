@@ -1,4 +1,4 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+.react-calendar {
+  width: 550px;
+  max-width: 100%;
 }

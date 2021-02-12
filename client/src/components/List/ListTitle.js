@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
-import MenuOption from "../../components/Modal/MenuOption";
+import ListTitleAction from "./ListTitleAction"
 import { editListTitle } from "../../store/actions/listsAction"
 
 const useStyles = makeStyles((theme) => ({
@@ -75,7 +75,7 @@ export default function ListTitle({ title, listId }) {
             >
               {title}
             </Typography>
-            <MenuOption listId={listId} />
+            <ListTitleAction listId={listId} />
           </div>
         )}
     </>

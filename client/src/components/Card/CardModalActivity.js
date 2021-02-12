@@ -7,7 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TimelineIcon from "@material-ui/icons/Timeline";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   icon: {
     marginRight: "15px",
     color: "#9e9e9e"
@@ -24,12 +24,14 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "15px"
   },
   input: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: "100%",
+    fontSize: "1em"
   },
   card: {
     margin: theme.spacing(0, 0, 0, -1),
     paddingBottom: theme.spacing(3),
-    width: "38vw"
+    width: "350px"
   }
 }));
 

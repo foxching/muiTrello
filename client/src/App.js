@@ -6,6 +6,7 @@ import AppRouter from "./components/Routes/AppRouter";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./theme/theme";
 import { loadUser } from "./store/actions/authAction";
+import styles from "./styles.css";
 
 export default function App() {
   useEffect(() => {

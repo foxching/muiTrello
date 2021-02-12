@@ -16,12 +16,13 @@ import CardModalActivity from "./CardModalActivity";
 const useStyles = makeStyles(theme => ({
   dialog: {
     position: "absolute",
-    top: theme.spacing(5),
+    top: theme.spacing(1),
     backgroundColor: "#EBECF0",
-    minWidth: "50vw",
-    maxWidth: "60vw",
-    minHeight: "80vh",
-    maxHeight: "80vh"
+    overflow: "hidden"
+    // minWidth: "50vw",
+    // maxWidth: "60vw",
+    // minHeight: "80vh",
+    // maxHeight: "80vh"
   },
   closeButton: {
     position: "absolute",
@@ -48,7 +49,9 @@ export default function CardModal({
       open={open}
       onClose={closeModal}
       fullWidth
+      maxWidth="md"
       classes={{ paper: classes.dialog }}
+      scroll="paper"
     >
       <DialogTitle style={{ width: "90%", position: "relative" }}>
         <Box

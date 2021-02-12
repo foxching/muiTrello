@@ -11,17 +11,6 @@ import ClearIcon from "@material-ui/icons/Clear";
 import { updateCardLabels } from "../../store/actions/cardsAction";
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    margin: theme.spacing(1, 1, 1, 0),
-    paddingBottom: theme.spacing(3),
-    background: fade("#424242", 0.25),
-    width: "38vw"
-  },
-  input: {
-    fontSize: "18px",
-    fontWeight: "400",
-    margin: theme.spacing(1)
-  },
   confirmBtn: {
     background: "#5AAC44",
     color: "$fff",
@@ -29,8 +18,9 @@ const useStyles = makeStyles(theme => ({
       background: fade("#5AAC44", 0.25)
     }
   },
-  description: {
-    color: theme.palette.grey[500]
+  label: {
+    color: theme.palette.grey[500],
+    fontSize: "1em"
   },
   icon: {
     marginRight: "10px",
@@ -42,6 +32,18 @@ const useStyles = makeStyles(theme => ({
   descriptionContainer: {
     marginLeft: "40px",
     marginTop: "20px",
+    width: "100%"
+  },
+  card: {
+    margin: theme.spacing(1, 1, 1, 0),
+    paddingBottom: theme.spacing(3),
+    background: fade("#424242", 0.25),
+    width: "350px"
+  },
+  input: {
+    fontSize: "1em",
+    fontWeight: "400",
+    margin: theme.spacing(1),
     width: "100%"
   },
   edit: {
@@ -109,8 +111,12 @@ export default function CardModalDescription({ description, listId, cardId }) {
           </Box>
         </Box>
       ) : (
-        <Box className={classes.descriptionContainer}>
-          <Typography className={classes.description}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          className={classes.descriptionContainer}
+        >
+          <Typography className={classes.label}>
             Description
             <Box
               component="span"
@@ -120,7 +126,11 @@ export default function CardModalDescription({ description, listId, cardId }) {
               Edit
             </Box>
           </Typography>
-          <Typography paragraph>{description}</Typography>
+          <Box display="flex" flexWrap="wrap">
+            <Typography variant="caption" style={{ fontSize: "0.875em" }}>
+              {description}
+            </Typography>
+          </Box>
         </Box>
       )}
     </Box>

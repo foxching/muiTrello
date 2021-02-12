@@ -4,15 +4,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { fontSize } from "@material-ui/system";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: "40px",
     marginTop: "10px",
     marginBottom: "10px"
   },
   label: {
-    color: theme.palette.grey[500]
+    color: theme.palette.grey[500],
+    fontSize: "1em"
   },
   chip: {
     color: "white",
@@ -57,7 +59,7 @@ export default function CardModalLabels({ cardLabels, cardDueDate }) {
                 justifyContent: "space-between"
               }}
             >
-              {cardLabels.map((label) => (
+              {cardLabels.map(label => (
                 <Box
                   key={label.label}
                   className={classes.chip}
