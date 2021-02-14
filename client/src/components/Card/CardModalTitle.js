@@ -12,21 +12,27 @@ import ClearIcon from "@material-ui/icons/Clear";
 import { updateCardLabels } from "../../store/actions/cardsAction";
 
 const useStyles = makeStyles(theme => ({
+  icon: {
+    marginRight: "15px",
+    color: "#9e9e9e"
+  },
   card: {
     margin: theme.spacing(1, 1, 1, 0),
     paddingBottom: theme.spacing(3),
     background: fade("#424242", 0.25),
-    width: "50vw"
-  },
-  cardTitle: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    color: "#000"
+    width: "600px",
+    [theme.breakpoints.down("sm")]: {
+      width: "250px"
+    }
   },
   input: {
     fontSize: "18px",
     fontWeight: "400",
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      width: "80%"
+    }
   },
   confirmBtn: {
     background: "#5AAC44",
@@ -35,13 +41,15 @@ const useStyles = makeStyles(theme => ({
       background: fade("#5AAC44", 0.25)
     }
   },
-  icon: {
-    marginRight: "15px",
-    color: "#9e9e9e"
-  },
   closeBtn: {
     marginLeft: "10px"
   },
+  cardTitle: {
+    fontSize: "18px",
+    fontWeight: "bold",
+    color: "#000"
+  },
+
   listTitle: {
     fontSize: "10px",
     marginLeft: "12px",

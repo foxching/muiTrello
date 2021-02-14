@@ -14,9 +14,9 @@ const useStyles = makeStyles(theme => ({
   card: {
     padding: theme.spacing(1, 1, 1, 0),
     margin: theme.spacing(1),
-    alignItems: "center",
-    display: "flex",
     width: "300px",
+    display: "flex",
+    alignItems: "center",
     justifyContent: "space-between"
   },
   input: {

@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, fade } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme, props) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(1, 1, 1, 1),
     margin: theme.spacing(1),
@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme, props) => ({
     alignItems: "center",
     cursor: "pointer"
   },
-  name: {
+  label: {
     fontWeight: "bold",
-    fontSize: "12px",
+    fontSize: "0.85em",
     color: "#000"
   }
 }));
@@ -29,7 +29,7 @@ export default function BoardInput(props) {
     <Paper className={classes.root}>
       <div />
       <Typography
-        className={classes.name}
+        className={classes.label}
         onClick={() => props.handleClickOpen(true)}
       >
         Create new Board

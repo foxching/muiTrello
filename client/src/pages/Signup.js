@@ -2,39 +2,30 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  Grid,
-  Paper,
-  TextField,
-  Button,
-  Typography,
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  IconButton
-} from "@material-ui/core";
+
+//mui
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import FormControl from "@material-ui/core/FormControl";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import InputLabel from "@material-ui/core/InputLabel";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import IconButton from "@material-ui/core/IconButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Icon from "@material-ui/core/Icon";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
+
+//components
 import { register } from "../store/actions/authAction";
 import { useForm } from "../hooks/useForm";
 
 const useStyles = makeStyles(theme => ({
-  paperStyle: {
-    padding: 25,
-    height: "70vh",
-    width: 380,
-    margin: "30px auto"
-  },
-  avatarStyle: {
-    backgroundColor: "#1bbd7e"
-  },
-  btnstyle: { marginTop: 20, position: "relative" },
-  progress: {
-    position: "absolute"
-  }
+  ...theme.spreadThis
 }));
 
 export default function SignUp() {

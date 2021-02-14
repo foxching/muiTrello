@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     justifyContent: "space-between",
     alignItems: "center",
-    position: "relative"
   },
   editableTitle: {
     flexGrow: 1,

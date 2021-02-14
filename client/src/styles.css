@@ -1,4 +1,7 @@
+body {
+  position: relative;
+}
 .react-calendar {
-  width: 550px;
+  width: 500px;
   max-width: 100%;
 }

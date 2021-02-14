@@ -9,8 +9,7 @@ import { fontSize } from "@material-ui/system";
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: "40px",
-    marginTop: "10px",
-    marginBottom: "10px"
+    marginRight: "20px"
   },
   label: {
     color: theme.palette.grey[500],
@@ -36,11 +35,9 @@ export default function CardModalLabels({ cardLabels, cardDueDate }) {
         className={classes.root}
         display="flex"
         flexWrap="wrap"
-        justifyContent={
-          cardDueDate && cardLabels.length > 0 ? "space-between" : "flex-start"
-        }
+        justifyContent="flex-start"
       >
-        <Box style={{ marginRight: "30px" }}>
+        <Box mr={3}>
           <Typography className={classes.label}>Members</Typography>
           <Box className={classes.avatarRoot}>
             <Avatar alt="Remy Sharp" src="/images/1.jpg" />
@@ -50,7 +47,7 @@ export default function CardModalLabels({ cardLabels, cardDueDate }) {
         </Box>
 
         {cardLabels.length > 0 && (
-          <Box>
+          <Box mr={3}>
             <Typography className={classes.label}>Labels</Typography>
             <Box
               style={{
@@ -73,7 +70,7 @@ export default function CardModalLabels({ cardLabels, cardDueDate }) {
         )}
 
         {cardDueDate && (
-          <Box>
+          <Box ml={2}>
             <Typography className={classes.label}>Due Date</Typography>
             <Box className={classes.chip} bgcolor="gray">
               {format(new Date(cardDueDate), "MMM dd 'at' h:m aaaa")}

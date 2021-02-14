@@ -11,6 +11,28 @@ import ClearIcon from "@material-ui/icons/Clear";
 import { updateCardLabels } from "../../store/actions/cardsAction";
 
 const useStyles = makeStyles(theme => ({
+  descriptionContainer: {
+    marginLeft: "40px",
+    marginTop: "20px",
+    marginRight: "20px"
+  },
+  card: {
+    margin: theme.spacing(1, 1, 1, 0),
+    paddingBottom: theme.spacing(3),
+    background: fade("#424242", 0.25),
+    width: "600px",
+    [theme.breakpoints.down("sm")]: {
+      width: "250px"
+    }
+  },
+  input: {
+    fontSize: "1em",
+    fontWeight: "400",
+    margin: theme.spacing(1),
+    [theme.breakpoints.down("sm")]: {
+      width: "80%"
+    }
+  },
   confirmBtn: {
     background: "#5AAC44",
     color: "$fff",
@@ -18,39 +40,22 @@ const useStyles = makeStyles(theme => ({
       background: fade("#5AAC44", 0.25)
     }
   },
-  label: {
-    color: theme.palette.grey[500],
-    fontSize: "1em"
-  },
-  icon: {
-    marginRight: "10px",
-    color: "#9e9e9e"
-  },
   closeBtn: {
     marginLeft: "10px"
   },
-  descriptionContainer: {
-    marginLeft: "40px",
-    marginTop: "20px",
-    width: "100%"
-  },
-  card: {
-    margin: theme.spacing(1, 1, 1, 0),
-    paddingBottom: theme.spacing(3),
-    background: fade("#424242", 0.25),
-    width: "350px"
-  },
-  input: {
-    fontSize: "1em",
-    fontWeight: "400",
-    margin: theme.spacing(1),
-    width: "100%"
+  label: {
+    color: theme.palette.grey[500],
+    fontSize: "1em"
   },
   edit: {
     marginLeft: "12px",
     fontSize: "12px",
     borderBottom: "1px solid grey",
     cursor: "pointer"
+  },
+  icon: {
+    marginRight: "10px",
+    color: "#9e9e9e"
   }
 }));
 

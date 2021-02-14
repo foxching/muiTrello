@@ -3,21 +3,11 @@ import { useDispatch } from "react-redux";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import ScheduleIcon from "@material-ui/icons/Schedule";
-
 import { updateCardLabels } from "../../store/actions/cardsAction";
 import CardDateDialog from "../Modal/CardDateDialog";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.background.paper
-  },
-  confirmBtn: {
-    background: "#5AAC44",
-    color: "$fff",
-    "&:hover": {
-      background: fade("#5AAC44", 0.25)
-    }
-  }
+  ...theme.spreadThis
 }));
 
 export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
@@ -27,7 +17,7 @@ export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
   const [date, setDate] = useState(new Date());
   const [textDate, setTextDate] = useState("");
   const [textTime, setTextTime] = useState("");
-
+  const classes = useStyles();
 
   const handleSetAnchor = event => {
     setAnchorEl(event.currentTarget);
@@ -65,9 +55,7 @@ export default function CardModalAddDate({ cardId, listId, cardDueDate }) {
         color="default"
         variant="contained"
         startIcon={<ScheduleIcon />}
-        style={{ marginBottom: "10px", fontSize: "13px" }}
-        fullWidth
-        fullWidth
+        className={classes.modalMenubtn}
         onClick={handleSetAnchor}
       >
         Due Date

@@ -19,19 +19,12 @@ const useStyles = makeStyles(theme => ({
     top: theme.spacing(1),
     backgroundColor: "#EBECF0",
     overflow: "hidden"
-    // minWidth: "50vw",
-    // maxWidth: "60vw",
-    // minHeight: "80vh",
-    // maxHeight: "80vh"
   },
   closeButton: {
     position: "absolute",
-    right: "-100px",
-    top: "-20px",
-    color: theme.palette.grey[500],
-    [theme.breakpoints.down("md")]: {
-      right: "-40px"
-    }
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500]
   }
 }));
 
@@ -53,12 +46,12 @@ export default function CardModal({
       classes={{ paper: classes.dialog }}
       scroll="paper"
     >
-      <DialogTitle style={{ width: "90%", position: "relative" }}>
+      <DialogTitle>
         <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          style={{ position: "relative" }}
+        // display="flex"
+        // justifyContent="flex-start"
+        // alignItems="center"
+        // style={{ position: "relative" }}
         >
           <CardModalTitle
             listTitle={listTitle}
@@ -71,9 +64,9 @@ export default function CardModal({
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent style={{ marginTop: "-10px" }}>
-        <Grid container justify="space-between">
-          <Grid item xs={8}>
+      <DialogContent>
+        <Grid container justify="space-between" spacing={1}>
+          <Grid item xs={12} md={9}>
             <CardModalLabels
               cardLabels={card.labels}
               cardDueDate={card.dueDate}
@@ -85,7 +78,7 @@ export default function CardModal({
             />
             <CardModalActivity />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <CardModalSideMenu
               cardLabels={card.labels}
               cardDueDate={card.dueDate}

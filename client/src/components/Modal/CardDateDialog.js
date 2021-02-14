@@ -50,7 +50,7 @@ export default function CardDateDialog({
         horizontal: "left"
       }}
     >
-      <Box style={{ width: "400px" }} p={1}>
+      <Box style={{ width: "350px" }} p={1}>
         {/* dialog heading here */}
         <Box
           style={{

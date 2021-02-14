@@ -14,5 +14,29 @@ export const theme = createMuiTheme({
     action: {
       disabledBackground: "#EBECF0"
     }
+  },
+  spreadThis: {
+    paperStyle: {
+      padding: 25,
+      height: "70vh",
+      width: 380,
+      margin: "30px auto"
+    },
+    btnstyle: { marginTop: 20, position: "relative" },
+    progress: {
+      position: "absolute"
+    },
+    modalSideMenuHead: {
+      color: "grey",
+      fontWeight: "900",
+      fontSize: "12px",
+      marginBottom: "10px"
+    },
+    modalMenubtn: {
+      marginBottom: "10px",
+      fontSize: "1em",
+      textTransform: "none",
+      boxShadow: "none"
+    }
   }
 });
