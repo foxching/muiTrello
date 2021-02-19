@@ -6,7 +6,6 @@ import {
   Typography,
   Box,
   Button,
-  Paper,
   TextField
 } from "@material-ui/core";
 import Clear from "@material-ui/icons/Clear";

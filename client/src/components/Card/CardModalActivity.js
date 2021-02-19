@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
   card: {
     margin: theme.spacing(0, 0, 0, -1),
     paddingBottom: theme.spacing(3),
-    width: "350px",
     width: "600px",
     [theme.breakpoints.down("sm")]: {
       width: "250px"
@@ -36,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     width: "100%",
     fontSize: "1em",
-    width: "100%",
     [theme.breakpoints.down("sm")]: {
       width: "80%"
     }

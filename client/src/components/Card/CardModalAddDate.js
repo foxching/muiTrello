@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { makeStyles, fade } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import { updateCardLabels } from "../../store/actions/cardsAction";

@@ -4,7 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import { fontSize } from "@material-ui/system";
+import Grid from "@material-ui/core/Grid";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,25 +31,28 @@ const useStyles = makeStyles(theme => ({
 
 export default function CardModalLabels({ cardLabels, cardDueDate }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <>
-      <Box
-        className={classes.root}
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="flex-start"
+      <Grid
+        container
+        flexDirection={matches ? "column" : "row"}
+        alignItems="center"
+        justify="center"
       >
-        <Box mr={3}>
+        <Grid item>
           <Typography className={classes.label}>Members</Typography>
-          <Box className={classes.avatarRoot}>
+          <div className={classes.avatarRoot}>
             <Avatar alt="Remy Sharp" src="/images/1.jpg" />
             <Avatar alt="Travis Howard" src="/images/2.jpg" />
             <Avatar alt="Remy Sharp" src="/images/3.jpg" />
-          </Box>
-        </Box>
+          </div>
+        </Grid>
 
         {cardLabels.length > 0 && (
-          <Box mr={3}>
+          <Grid item>
             <Typography className={classes.label}>Labels</Typography>
             <Box
               style={{
@@ -66,18 +71,18 @@ export default function CardModalLabels({ cardLabels, cardDueDate }) {
                 </Box>
               ))}
             </Box>
-          </Box>
+          </Grid>
         )}
 
         {cardDueDate && (
-          <Box ml={2}>
+          <Grid item>
             <Typography className={classes.label}>Due Date</Typography>
             <Box className={classes.chip} bgcolor="gray">
               {format(new Date(cardDueDate), "MMM dd 'at' h:m aaaa")}
             </Box>
-          </Box>
+          </Grid>
         )}
-      </Box>
+      </Grid>
     </>
   );
 }
