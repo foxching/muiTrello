@@ -12,14 +12,12 @@ import CardModalLabels from "./CardModalLabels";
 import CardModalDescription from "./CardModalDescription";
 import CardModalSideMenu from "./CardModalSideMenu";
 import CardModalActivity from "./CardModalActivity";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   dialog: {
-    position: "absolute",
-    top: 0,
-    right: "30%",
-    left: "30%",
-    backgroundColor: "#EBECF0"
+    backgroundColor: "#EBECF0",
   },
   closeButton: {
     position: "absolute",
@@ -37,23 +35,18 @@ export default function CardModal({
   open
 }) {
   const classes = useStyles();
-
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("xs"));
   return (
     <Dialog
       open={open}
       onClose={closeModal}
-      fullWidth
-      maxWidth="md"
+      maxWidth={matches ? "xs" : "md"}
       classes={{ paper: classes.dialog }}
       scroll="body"
     >
       <DialogTitle>
-        <Box
-        // display="flex"
-        // justifyContent="flex-start"
-        // alignItems="center"
-        // style={{ position: "relative" }}
-        >
+        <Box>
           <CardModalTitle
             listTitle={listTitle}
             text={card.text}
@@ -65,9 +58,9 @@ export default function CardModal({
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent>
-        <Grid container justify="space-between" spacing={1}>
-          <Grid item xs={12} md={9}>
+      <DialogContent style={{ overflow: "hidden" }}>
+        <Grid container justify="space-between" spacing={3}>
+          <Grid item xs={12} sm={9} md={9}>
             <CardModalLabels
               cardLabels={card.labels}
               cardDueDate={card.dueDate}
@@ -79,7 +72,7 @@ export default function CardModal({
             />
             <CardModalActivity />
           </Grid>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={12} sm={3} md={3}>
             <CardModalSideMenu
               cardLabels={card.labels}
               cardDueDate={card.dueDate}

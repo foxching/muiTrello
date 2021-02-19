@@ -137,10 +137,10 @@ export default function SigIn() {
                     }}
                   >
                     {hidePassword ? (
-                      <VisibilityOff fontSize="smal" />
+                      <VisibilityOff fontSize="small" />
                     ) : (
-                      <Visibility fontSize="smal" />
-                    )}
+                        <Visibility fontSize="small" />
+                      )}
                   </IconButton>
                 </InputAdornment>
               }

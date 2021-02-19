@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     background: fade("#424242", 0.25),
     width: "600px",
     [theme.breakpoints.down("sm")]: {
-      width: "250px"
+      width: "320px"
     }
   },
   input: {
@@ -116,28 +116,28 @@ export default function CardModalDescription({ description, listId, cardId }) {
           </Box>
         </Box>
       ) : (
-        <Box
-          display="flex"
-          flexDirection="column"
-          className={classes.descriptionContainer}
-        >
-          <Typography className={classes.label}>
-            Description
+          <Box
+            display="flex"
+            flexDirection="column"
+            className={classes.descriptionContainer}
+          >
+            <Typography className={classes.label}>
+              Description
             <Box
-              component="span"
-              className={classes.edit}
-              onClick={() => setOpen(!open)}
-            >
-              Edit
+                component="span"
+                className={classes.edit}
+                onClick={() => setOpen(!open)}
+              >
+                Edit
             </Box>
-          </Typography>
-          <Box display="flex" flexWrap="wrap">
-            <Typography variant="caption" style={{ fontSize: "0.875em" }}>
-              {description}
             </Typography>
+            <Box display="flex" flexWrap="wrap">
+              <Typography variant="caption" style={{ fontSize: "0.875em" }}>
+                {description}
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-      )}
+        )}
     </Box>
   );
 }

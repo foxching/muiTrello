@@ -32,15 +32,16 @@ const useStyles = makeStyles(theme => ({
 export default function CardModalLabels({ cardLabels, cardDueDate }) {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("sm"));
+  const matches = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
-    <>
+    <Box>
       <Grid
+        style={{ marginLeft: "30px" }}
         container
-        flexDirection={matches ? "column" : "row"}
-        alignItems="center"
-        justify="center"
+        direction={matches ? "column" : "row"}
+        alignItems={matches ? "flex-start" : "center"}
+        spacing={matches ? 1 : 3}
       >
         <Grid item>
           <Typography className={classes.label}>Members</Typography>
@@ -83,6 +84,6 @@ export default function CardModalLabels({ cardLabels, cardDueDate }) {
           </Grid>
         )}
       </Grid>
-    </>
+    </Box>
   );
 }

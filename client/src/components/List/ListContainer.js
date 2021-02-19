@@ -30,16 +30,15 @@ export default function ListContainer() {
             {board !== undefined &&
               board.listsIds.map((listId, index) => {
                 const list = lists[listId];
-                if (list !== undefined) {
-                  return (
-                    <ListItem
-                      key={listId}
-                      list={list}
-                      listId={listId}
-                      index={index}
-                    />
-                  );
-                }
+                if (list === undefined) return null
+                return (
+                  <ListItem
+                    key={listId}
+                    list={list}
+                    listId={listId}
+                    index={index}
+                  />
+                );
               })}
             {provided.placeholder}
             <Input type="list" listId={null} />

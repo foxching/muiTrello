@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(3),
     width: "600px",
     [theme.breakpoints.down("sm")]: {
-      width: "250px"
+      width: "320px"
     }
   },
   input: {

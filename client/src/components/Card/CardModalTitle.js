@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     background: fade("#424242", 0.25),
     width: "600px",
     [theme.breakpoints.down("sm")]: {
-      width: "250px"
+      width: "320px"
     }
   },
   input: {
@@ -111,18 +111,18 @@ export default function CardTitle({ text, listId, listTitle, cardId }) {
           </Box>
         </Box>
       ) : (
-        <Box>
-          <Typography
-            className={classes.cardTitle}
-            onClick={() => setOpen(!open)}
-          >
-            {text}
-            <Box component="span" className={classes.listTitle}>
-              in list {listTitle}
-            </Box>
-          </Typography>
-        </Box>
-      )}
+          <Box>
+            <Typography
+              className={classes.cardTitle}
+              onClick={() => setOpen(!open)}
+            >
+              {text}
+              <Box component="span" className={classes.listTitle}>
+                in list {listTitle}
+              </Box>
+            </Typography>
+          </Box>
+        )}
     </Box>
   );
 }

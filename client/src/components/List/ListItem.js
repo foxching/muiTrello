@@ -8,15 +8,16 @@ import Paper from "@material-ui/core/Paper";
 import ListTitle from "./ListTitle";
 import Card from ".././Card/Card";
 import Input from "../Input/Input";
-
 import "simplebar/dist/simplebar.min.css";
+import SimpleBarReact from "simplebar-react";
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: "#EBECF0",
     marginLeft: theme.spacing(1),
     marginTop: theme.spacing(1),
-    overflowX: "auto"
+    overflowX: "auto",
+    //width: "300px",
   },
   mainroot: {
     maxHeight: "340px",
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 export default function ListItem({ list, listId, index }) {
   const cards = useSelector(state => state.cards);
   const classes = useStyles();
-  
+
   return (
     <Draggable draggableId={listId} index={index}>
       {provided => (
@@ -38,10 +39,11 @@ export default function ListItem({ list, listId, index }) {
             <ListTitle title={list.title} listId={listId} />
             <Droppable droppableId={listId} type="card">
               {provided => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {list.cards.map((cardId, index) => {
-                    const card = cards[cardId];
-                    if (card !== undefined) {
+                <SimpleBarReact forceVisible="y" autoHide={false} style={{ maxHeight: "80vh", height: "auto", width: 300 }}>
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {list.cards.map((cardId, index) => {
+                      const card = cards[cardId];
+                      if (card === undefined) return null
                       return (
                         <Card
                           key={cardId}
@@ -51,11 +53,13 @@ export default function ListItem({ list, listId, index }) {
                           index={index}
                         />
                       );
-                    }
-                  })}
-                  {provided.placeholder}
+                    })}
+                    {provided.placeholder}
+
+                  </div>
                   <Input type="card" listId={listId} />
-                </div>
+                </SimpleBarReact>
+
               )}
             </Droppable>
           </Paper>

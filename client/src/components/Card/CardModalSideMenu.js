@@ -31,7 +31,7 @@ export default function CardModalSideMenu({
           ADD TO CARD
         </Typography>
         <Grid container>
-          <Grid item xs={6} md={12}>
+          <Grid item xs={6} sm={12} md={12}>
             <Button
               color="inherit"
               variant="contained"
@@ -41,14 +41,14 @@ export default function CardModalSideMenu({
               Members
             </Button>
           </Grid>
-          <Grid item xs={6} md={12}>
+          <Grid item xs={6} sm={12} md={12}>
             <CardModalAddLabels
               cardId={cardId}
               listId={listId}
               cardLabels={cardLabels}
             />
           </Grid>
-          <Grid item xs={6} md={12}>
+          <Grid item xs={6} sm={12} md={12}>
             <CardModalAddDate
               cardId={cardId}
               listId={listId}
@@ -63,7 +63,7 @@ export default function CardModalSideMenu({
           ACTIONS
         </Typography>
         <Grid container>
-          <Grid item xs={6} md={12}>
+          <Grid item xs={6} sm={12} md={12}>
             <Button
               color="inherit"
               variant="contained"
@@ -73,7 +73,7 @@ export default function CardModalSideMenu({
               Move
             </Button>
           </Grid>
-          <Grid item xs={6} md={12}>
+          <Grid item xs={6} sm={12} md={12}>
             <Button
               color="inherit"
               variant="contained"

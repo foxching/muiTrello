@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   card: {
     padding: theme.spacing(1, 1, 1, 0),
     margin: theme.spacing(1),
-    width: "300px",
+    width: (props) => props.type === "list" ? "300px" : "",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between"
@@ -33,11 +33,11 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-export default function InputCard({ listId, setOpen, type }) {
+export default function InputCard(props) {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-  const classes = useStyles();
-
+  const classes = useStyles(props);
+  const { listId, setOpen, type } = props
   const handleChange = e => {
     setText(e.target.value);
   };

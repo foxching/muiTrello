@@ -148,7 +148,7 @@ export default function SignUp() {
                       setHidePassword(!hidePassword);
                     }}
                   >
-                    {hidePassword ? <VisibilityOff /> : <Visibility />}
+                    {hidePassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
                   </IconButton>
                 </InputAdornment>
               }
